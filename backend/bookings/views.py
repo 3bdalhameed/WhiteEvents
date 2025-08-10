@@ -10,41 +10,42 @@ REQUIRED_FIELDS = {"name", "phoneNumber", "date", "time"}
 
 def _validate(payload):
     errors = {}
-
-    # Required fields
     for f in REQUIRED_FIELDS:
         if not str(payload.get(f, "")).strip():
             errors[f] = f"{f} is required"
-
-    # Phone format (simple)
     phone = str(payload.get("phoneNumber", "")).strip()
     if phone and not __import__("re").match(r"^[0-9+\-()\s]{7,15}$", phone):
         errors["phoneNumber"] = "Enter a valid phone number"
-
-    # Datetime not in past
     try:
         d = payload.get("date")
         t = payload.get("time")
         if d and t:
             tz = get_current_timezone()
             aware_selected = make_aware(datetime.fromisoformat(f"{d}T{t}:00"), tz)
-            now = datetime.now(tz)
-            if aware_selected < now:
+            if aware_selected < datetime.now(tz):
                 errors["time"] = "Selected date/time is in the past"
     except Exception:
         errors["time"] = "Invalid date/time"
-
     return errors
 
-@csrf_exempt  # if your frontend is a different origin and you’re not sending CSRF token
+@csrf_exempt
 def create_appointment(request):
+    # Allow health checks / quick introspection
+    if request.method == "GET":
+        return JsonResponse(
+            {"ok": True, "detail": "POST to create an appointment at this endpoint."},
+            status=200
+        )
+
+    # Let CORS preflight succeed (if applicable)
     if request.method == "OPTIONS":
-        # Let preflight succeed for CORS
+        # You can also add CORS headers here if not using django-cors-headers
         return JsonResponse({"ok": True})
 
     if request.method != "POST":
-        return HttpResponseNotAllowed(["POST"])
+        return HttpResponseNotAllowed(["GET", "POST", "OPTIONS"])
 
+    # ---- POST path ----
     try:
         payload = json.loads(request.body.decode("utf-8"))
     except Exception:
@@ -81,11 +82,7 @@ def create_appointment(request):
             fail_silently=False,
         )
     except Exception as e:
-        import traceback, sys
-        traceback.print_exc(file=sys.stderr)   # prints full stack trace in runserver
-        return JsonResponse({"ok": False, "error": f"Email send failed: {e}"}, status=502)
-        
-    except Exception as e:
+        # Keep only one except-block
         return JsonResponse({"ok": False, "error": f"Email send failed: {e}"}, status=502)
 
     return JsonResponse({"ok": True, "message": "Appointment submitted successfully."}, status=201)
