@@ -48,6 +48,16 @@ const NavBar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-90 text-white flex flex-col items-center justify-center z-[60]">
+          {/* Exit / Close button */}
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-6 right-6 text-3xl hover:text-gray-400 focus:outline-none"
+            aria-label="Close menu"
+          >
+            ✖
+          </button>
+
+          {/* Menu Links */}
           <a
             href="/"
             className="py-4 text-xl hover:text-gray-400 transition"
@@ -92,6 +102,7 @@ const NavBar = () => {
           </a>
         </div>
       )}
+
 
       {/* Logo */}
       <div
