@@ -16,7 +16,7 @@ export default function Appointment({ endpoint }) {
 
     // ✅ define it once, memoized
     const resolvedEndpoint = useMemo(
-      () => endpoint || "http://localhost:8000/appointments/",
+      () => endpoint || "https://whiteevents.onrender.com/appointments/",
       [endpoint]
     );
 
