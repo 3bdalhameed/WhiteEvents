@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../pages/newimg/logo1.png";
-import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for small screen menu toggle
-  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // small screen menu toggle
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -31,6 +24,7 @@ const NavBar = () => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-white text-2xl focus:outline-none"
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? "✖" : "☰"}
           </button>
@@ -38,34 +32,22 @@ const NavBar = () => {
 
         {/* Left Navigation */}
         <div className="hidden md:flex gap-8 text-white pl-36">
-          <a href="/" className="hover:text-gray-400 transition">
-            Home
-          </a>
-          <a href="/about" className="hover:text-gray-400 transition">
-            About
-          </a>
-          <a href="/services" className="hover:text-gray-400 transition">
-            Services
-          </a>
+          <a href="/" className="hover:text-gray-400 transition">Home</a>
+          <a href="/about" className="hover:text-gray-400 transition">About</a>
+          <a href="/services" className="hover:text-gray-400 transition">Services</a>
         </div>
 
         {/* Right Navigation */}
         <div className="hidden md:flex gap-8 text-white pr-36">
-          <a href="/gallery" className="hover:text-gray-400 transition">
-            Gallery
-          </a>
-          <a href="/testimonials" className="hover:text-gray-400 transition">
-            Testimonials
-          </a>
-          <a href="#appointment" className="hover:text-gray-400 transition">
-            Book
-          </a>
+          <a href="/gallery" className="hover:text-gray-400 transition">Gallery</a>
+          <a href="/#testimonials" className="hover:text-gray-400 transition">Testimonials</a>
+          <a href="/#appointment" className="hover:text-gray-400 transition">Book</a>
         </div>
       </nav>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 text-white flex flex-col items-center justify-center z-40">
+        <div className="fixed inset-0 bg-black bg-opacity-90 text-white flex flex-col items-center justify-center z-[60]">
           <a
             href="/"
             className="py-4 text-xl hover:text-gray-400 transition"
@@ -95,14 +77,14 @@ const NavBar = () => {
             Gallery
           </a>
           <a
-            href="/testimonials"
+            href="/#testimonials"
             className="py-4 text-xl hover:text-gray-400 transition"
             onClick={() => setIsMenuOpen(false)}
           >
             Testimonials
           </a>
           <a
-            href="#appointment"
+            href="/#appointment"
             className="py-4 text-xl hover:text-gray-400 transition"
             onClick={() => setIsMenuOpen(false)}
           >
@@ -115,7 +97,7 @@ const NavBar = () => {
       <div
         className={`fixed transition-all duration-500 transform z-50 ${
           isScrolled
-            ? "top-4 left-1/2 -translate-x-1/2 w-28" // Small logo size
+            ? "top-4 left-1/2 -translate-x-1/2 w-32" // Small logo size
             : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2" // Large centered logo
         }`}
       >

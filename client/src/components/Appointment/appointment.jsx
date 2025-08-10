@@ -17,7 +17,7 @@ export default function Appointment({ endpoint }) {
     // ✅ define it once, memoized
     const resolvedEndpoint = useMemo(
       () => endpoint || "https://whiteevents.onrender.com/appointments/",
-      
+
       [endpoint]
     );
 
@@ -119,7 +119,7 @@ export default function Appointment({ endpoint }) {
   }
 
   return (
-    <section className="bg-white py-12 text-center">
+    <section id="appointment" className="bg-white py-12 text-center">
       <div className="max-w-4xl mx-auto px-4">
         <h3 className="text-2xl font-bold text-gray-800 mb-6">
           Book Your Appointment
@@ -246,10 +246,6 @@ export default function Appointment({ endpoint }) {
           >
             {submitting ? "Submitting..." : "Submit"}
           </button>
-
-          <p className="mt-2 text-xs text-gray-400">
-            POST → {resolvedEndpoint || "<no endpoint configured>"}
-          </p>
         </form>
       </div>
     </section>

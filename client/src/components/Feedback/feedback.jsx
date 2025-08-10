@@ -43,7 +43,7 @@ function Feedback() {
   };
 
   return (
-    <section className="bg-black text-white flex items-center justify-center px-4 py-16 h-[70vh] relative">
+    <section id="testimonials" className="bg-black text-white flex items-center justify-center px-4 py-16 h-[70vh] relative">
       <div className="flex items-center justify-center gap-8 w-full max-w-4xl">
         {/* Left Arrow */}
         <div
