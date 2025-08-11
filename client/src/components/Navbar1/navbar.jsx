@@ -40,8 +40,8 @@ const NavBar = () => {
         {/* Right Navigation */}
         <div className="hidden md:flex gap-8 text-white pr-36">
           <a href="/gallery" className="hover:text-gray-400 transition">Gallery</a>
-          <a href="/#testimonials" className="hover:text-gray-400 transition">Testimonials</a>
-          <a href="/#appointment" className="hover:text-gray-400 transition">Book</a>
+          <a href="./#testimonials" className="hover:text-gray-400 transition">Testimonials</a>
+          <a href="./#appointment" className="hover:text-gray-400 transition">Book</a>
         </div>
       </nav>
 
