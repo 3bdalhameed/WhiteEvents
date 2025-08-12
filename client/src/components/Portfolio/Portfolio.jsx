@@ -1,9 +1,9 @@
 import React from "react";
-import m1 from "../../pages/newenglish/img/15.jpg";
+import m1 from "../../pages/newenglish/albums/someone & someone/15.jpg";
 
 function Portfolio() {
   return (
-    <section className="text-center py-64 bg-white" id="portfolio">
+    <section className="text-center py-24 bg-white" id="portfolio">
       {/* Portfolio Header */}
       <div className="mb-12">
         <h2 className="text-4xl font-serif font-bold mb-4 text-gray-800">
@@ -15,7 +15,9 @@ function Portfolio() {
           of the events we design, ensuring no two weddings will ever look the
           same.
         </p>
-        <a>
+        <a
+        href="/gallery"
+        >
           <button
             class="border-b border-black py-6 px-6 text-center text-sm transition-all shadow-sm hover:shadow-lg text-black hover:text-white hover:bg-black hover:border-b-black focus:text-white focus:bg-black focus:border-b-black active:border-b-black active:text-white active:bg-black disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="button"

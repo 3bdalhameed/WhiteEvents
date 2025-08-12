@@ -1,5 +1,6 @@
 import React from "react";
-import m1 from "../../pages/newenglish/img/15.jpg";
+import { Link } from "react-router-dom";
+import m1 from "../../pages/newenglish/albums/someone & someone/15.jpg";
 
 
 function Services() {
@@ -20,28 +21,28 @@ function Services() {
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
             OUR SERVICES
           </h2>
-          <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6 px-6">
             As a specialised event design studio we offer a selection of wedding
             planning, styling & management services, designed to suit the
             couples that still want to be a little hands on, and those that just
             want to leave it all in the hands of the experts.
           </p>
           <div className="flex flex-col gap-4 mt-6">
-          <button className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
+            <Link to="/services" className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
               Styling
-            </button>
-            <button className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
+            </Link>
+            <Link to="/services" className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
               Styling & Management
-            </button>
-            <button className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
+            </Link>
+            <Link to="/services" className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
               Planning, Styling & Management
-            </button>
-            <button className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
+            </Link>
+            <Link to="/services" className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
               Destination Weddings
-            </button>
-            <button className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
+            </Link>
+            <Link to="/services" className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
               Private & Social Events
-            </button>
+            </Link>
           </div>
         </div>
 
