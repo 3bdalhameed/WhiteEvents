@@ -1,57 +1,79 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import m1 from "../../pages/newenglish/albums/someone & someone/15.jpg";
-
+import m1 from "../../pages/Gallery/albums/someone & someone/1.jpg";
+import m2 from "../../pages/Gallery/albums/Haya & Mustafa - La Plage Beach Club, Aqaba/1.jpg";
 
 function Services() {
+  const services = [
+    "Styling",
+    "Styling & Management",
+    "Planning, Styling & Management",
+    "Destination Weddings",
+  ];
+
   return (
-    <section className="py-8 bg-white flex justify-center items-center">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center px-2">
+    <section className="bg-white" id="services">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 pt-16 pb-32 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
         {/* Left Image */}
-        <div className="w-full">
+        <div>
           <img
-            src={m1} /* Replace with actual left image URL */
+            src={m1}
             alt="Bride and Groom Holding Hands"
-            className="w-full h-auto object-cover"
+            className="rounded-2xl w-full h-full object-cover shadow-md"
+            loading="lazy"
           />
         </div>
 
-        {/* Text Content */}
+        {/* Center Text & Buttons */}
         <div className="text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-            OUR SERVICES
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
+            Our Services
           </h2>
-          <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6 px-6">
-            As a specialised event design studio we offer a selection of wedding
-            planning, styling & management services, designed to suit the
-            couples that still want to be a little hands on, and those that just
-            want to leave it all in the hands of the experts.
+          <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-10 px-4">
+            As a specialised event design studio, we offer a selection of
+            wedding planning, styling & management services — perfect for couples
+            who still want to be hands-on, and those who prefer to leave it all
+            to the experts.
           </p>
-          <div className="flex flex-col gap-4 mt-6">
-            <Link to="/services" className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
-              Styling
-            </Link>
-            <Link to="/services" className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
-              Styling & Management
-            </Link>
-            <Link to="/services" className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
-              Planning, Styling & Management
-            </Link>
-            <Link to="/services" className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
-              Destination Weddings
-            </Link>
-            <Link to="/services" className="bg-transparent text-gray-800 border-b border-l border-gray-700 px-6 py-3 font-medium text-sm md:text-base uppercase transition duration-500 hover:bg-black hover:text-white">
-              Private & Social Events
-            </Link>
+
+          {/* Elegant Buttons */}
+          <div className="flex flex-col gap-4 items-center">
+            {services.map((service, i) => (
+              <Link
+                key={i}
+                to="/services"
+                className="
+                  group relative w-full max-w-xs
+                  border border-gray-300
+                  px-6 py-3
+                  rounded-full
+                  text-gray-800 text-sm md:text-base font-medium tracking-wide
+                  transition-all duration-300 ease-out
+                  hover:bg-black hover:text-white hover:border-black
+                  focus:outline-none focus:ring-2 focus:ring-black/40
+                "
+              >
+                {service}
+                {/* Underline Animation */}
+                <span
+                  className="
+                    absolute bottom-0 left-1/2 -translate-x-1/2
+                    w-0 h-[1px] bg-white
+                    group-hover:w-3/4 transition-all duration-300
+                  "
+                />
+              </Link>
+            ))}
           </div>
         </div>
 
         {/* Right Image */}
-        <div className="w-full">
+        <div>
           <img
-            src={m1}
+            src={m2}
             alt="Elegant Wedding Table Setup"
-            className="w-full h-auto object-cover"
+            className="rounded-2xl w-full h-full object-cover shadow-md"
+            loading="lazy"
           />
         </div>
       </div>

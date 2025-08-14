@@ -2,8 +2,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MyTest from "./pages/main.jsx";
-import Galary from "./pages/newenglish/imagegallery.jsx";
-import GalleryAlbumPage from "./pages/newenglish/galleryimges.jsx"
+import Galary from "./pages/Gallery/WeddingGallery.jsx";
+import GalleryAlbumPage from "./pages/Gallery/GalleryAlbum.jsx"
 import About from "./pages/about/about.jsx";
 import Service from "./pages/service/service.jsx";
 import "./App.css";
