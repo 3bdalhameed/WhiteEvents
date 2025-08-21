@@ -47,7 +47,7 @@ export default function Beginning() {
               SUCH A MEMORABLE DAY FOR US.
             </p>
             <strong className="mt-4 block font-serif text-xl font-bold tracking-wide text-gray-900 md:text-2xl">
-              DEMI & MARKO
+              DIMA & AHMAD
             </strong>
           </div>
         </motion.div>

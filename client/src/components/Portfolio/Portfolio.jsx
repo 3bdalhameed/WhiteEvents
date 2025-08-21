@@ -63,10 +63,10 @@ function Portfolio() {
             <img
               src={item.src}
               alt={`${item.title} — wedding highlight`}
-              className="h-80 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05] motion-reduce:transition-none"
+              className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05] motion-reduce:transition-none"
               loading="lazy"
               decoding="async"
-              sizes="(min-width: 768px) 33vw, 100vw"
+              sizes="(min-width: 768px) 35vw, 100vw"
             />
 
             {/* Soft inner vignette for readability */}

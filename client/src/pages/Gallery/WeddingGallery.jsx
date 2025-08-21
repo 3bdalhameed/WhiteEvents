@@ -8,36 +8,30 @@ function Galleries() {
   return (
     <>
       <Navbar />
-      <main className="relative min-h-screen overflow-hidden">
-        {/* Enhanced layered background */}
+      <main className="relative min-h-screen overflow-hidden bg-black text-gray-100">
+        {/* Background */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          {/* Base animated gradient */}
-          <div className="h-full w-full bg-gradient-to-br from-pink-100 via-white to-blue-100 motion-safe:animate-gradient-slow" />
-
-          {/* Light blobs (very soft) */}
-          <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl opacity-30 bg-[radial-gradient(circle_at_center,rgba(255,182,193,0.45),transparent_60%)]" />
-          <div className="absolute top-40 -right-24 h-96 w-96 rounded-full blur-3xl opacity-30 bg-[radial-gradient(circle_at_center,rgba(173,216,230,0.45),transparent_60%)]" />
-
-          {/* Subtle paper texture */}
+          <div className="h-full w-full bg-gradient-to-br from-black via-neutral-950 to-black" />
+          {/* Subtle glow accents */}
+          <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full blur-3xl opacity-15 bg-purple-700/40" />
+          <div className="absolute top-40 -right-24 h-96 w-96 rounded-full blur-3xl opacity-15 bg-pink-600/40" />
+          {/* Noise/texture overlay */}
           <div
-            className="absolute inset-0 opacity-15 mix-blend-overlay"
+            className="absolute inset-0 opacity-10 mix-blend-overlay"
             style={{
               backgroundImage:
-                "url('https://www.transparenttextures.com/patterns/white-wall.png')",
+                "url('https://www.transparenttextures.com/patterns/asfalt-light.png')",
             }}
             aria-hidden="true"
           />
-
-          {/* Gentle vignette to keep eyes on content */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.06))]" />
         </div>
 
         <div className="relative mx-auto max-w-7xl py-24 px-6 sm:px-10 md:px-12 lg:px-18 xl:px-20 2xl:px-24 pt-28 pb-16">
-          <div className="text-center bg-white border border-white/40 shadow-sm rounded-2xl py-12 px-8 max-w-3xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+          <div className="text-center bg-neutral-900/80 border border-neutral-800 shadow-lg rounded-2xl py-12 px-8 max-w-3xl mx-auto backdrop-blur">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
               Wedding Galleries
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-400">
               Explore our curated albums. Hover a card to reveal the wedding name.
             </p>
           </div>
@@ -54,36 +48,63 @@ function Galleries() {
                   key={album.slug}
                   to={`/gallery/${album.slug}`}
                   aria-label={`Open album ${ariaName}`}
-                  className="group block"
                   title={ariaName}
+                  className="group relative block rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-purple-800/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 bg-neutral-900"
                 >
-                  <div className="relative rounded-xl overflow-hidden shadow-md bg-white">
-                    {/* Cover Image */}
-                    <div className="aspect-[4/5] w-full">
-                      <img
-                        src={album.cover}
-                        alt={ariaName}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
+                  {/* Image */}
+                  <div className="aspect-[4/5] w-full">
+                    <img
+                      src={album.cover}
+                      alt={ariaName}
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.08]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
 
-                    {/* Hover gradient + centered text */}
-                    <div className="rounded-xl z-10 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out cursor-pointer absolute inset-0 from-black/80 to-transparent bg-gradient-to-t text-white flex items-center justify-center">
-                      <div className="p-4 space-y-3 text-center text-3xl translate-y-2 group-hover:translate-y-0 transition duration-300 ease-in-out">
-                        <div className="font-bold drop-shadow-md">{album.nameFirstLine}</div>
+                  {/* Strong vignette */}
+                  <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_100px_30px_rgba(0,0,0,0.8)]" />
+
+                  {/* Caption overlay */}
+                  <div
+                    className="
+                      absolute inset-0 flex items-end
+                      bg-gradient-to-t from-black/90 via-black/50 to-transparent
+                      opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100
+                      transition-opacity duration-300
+                    "
+                  >
+                    <div className="absolute inset-0 z-20 flex items-center justify-center text-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                      <div className="px-4">
+                        <h3 className="text-white text-3xl font-semibold drop-shadow-sm">
+                          {album.nameFirstLine}
+                        </h3>
                         {album.nameSecondLine && (
-                          <div className="opacity-80 text-base drop-shadow">
+                          <p className="text-gray-300 text-lg mt-1 max-w-[36ch] mx-auto">
                             {album.nameSecondLine}
-                          </div>
+                          </p>
                         )}
                       </div>
                     </div>
+                  </div>
 
-                    {/* Subtle inner highlight on hover */}
-                    <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition duration-300"
-                         style={{ boxShadow: "inset 0 0 120px rgba(255,255,255,0.25)" }} />
+                  {/* Always-on minimal label */}
+                  <div
+                    className="
+                      absolute bottom-3 left-3 right-3
+                      translate-y-0 group-hover:translate-y-2 transition-transform duration-300
+                    "
+                  >
+                    <span
+                      className="
+                        inline-block rounded-full bg-black/70 backdrop-blur px-3 py-1
+                        text-gray-200 text-xs font-medium shadow
+                        opacity-100 group-hover:opacity-0 group-focus-visible:opacity-0 transition-opacity duration-300
+                      "
+                    >
+                      {album.nameFirstLine}
+                      {album.nameSecondLine ? ` — ${album.nameSecondLine}` : ""}
+                    </span>
                   </div>
                 </Link>
               );
