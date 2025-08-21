@@ -17,10 +17,8 @@ const PlanStyleManageSection = () => {
           When you just want to leave it up to the experts, our full-service planning allows you to do exactly that. 
           From initial brief through to final creation, we simply take care of everything.
         </p>
-        <button className="px-8 py-3 text-black border-b border-black hover:bg-black hover:text-white transition duration-300">
-          Learn More</button>
       </div>
-      <div className="w-full md:w-2/6 flex justify-center">
+      <div className="w-full md:w-3/6 flex justify-center relative left-24">
         <img
           src={ss2}
           alt="Plan, Style & Manage"
@@ -31,10 +29,10 @@ const PlanStyleManageSection = () => {
   );
 };
 
-const ServiceSection = ({ title, subtitle, description, leftImage, rightImageUrl, leftImageUrl }) => {
+const ServiceSection = ({ title, subtitle, description, leftImage }) => {
   return (
-    <div className="flex flex-col md:flex-row items-center my-16 py-12 gap-12 md:gap-24">
-      <div className="w-full md:w-1/6 flex justify-center relative">
+    <div className="flex flex-col md:flex-row items-center my-16 py-12 gap-8 md:gap-4">
+      <div className="w-full md:w-2/6 flex justify-center relative right-24">
         {leftImage && (
           <img
             src={s2}
@@ -44,16 +42,13 @@ const ServiceSection = ({ title, subtitle, description, leftImage, rightImageUrl
         )}
       </div>
   
-      <div className="w-full md:w-1/2 text-center">
+      <div className="w-full md:w-9/12 text-center">
         <h2 className="text-4xl font-bold my-4 text-gray-800">{title}</h2>
         <h3 className="text-2xl italic text-gray-500 mb-4">{subtitle}</h3>
         <p className="text-base text-gray-600 mb-6 leading-relaxed">{description}</p>
-        <button className="px-8 py-3 bg-white text-black border-b border-black hover:bg-black hover:text-white transition duration-300">
-          Learn More
-        </button>
       </div>
   
-      <div className="w-full md:w-1/6 flex justify-center relative">
+      <div className="w-full md:w-2/6 flex justify-center relative left-24">
         <img
           src={s3}
           alt={title}
@@ -67,7 +62,7 @@ const ServiceSection = ({ title, subtitle, description, leftImage, rightImageUrl
 const StyleSection = () => {
   return (
     <div className="flex flex-col md:flex-row items-center my-16 py-12 gap-12 md:gap-36">
-      <div className="w-full md:w-1/4 flex justify-center">
+      <div className="w-full md:w-1/4 flex justify-center relative right-24">
         <img
           src={s4}
           alt="Style"
@@ -81,11 +76,8 @@ const StyleSection = () => {
           For the look and feel of your day
         </h3>
         <p className="text-base text-gray-600 mb-6 leading-relaxed">
-          Our design service focuses on the aesthetics to create cohesive, detail-oriented wedding designs, that flow from invitation to reception and everything in between.
+        Our design service focuses on beauty and details, creating weddings that feel connected from the invitation to the reception.
         </p>
-        <button className="px-8 py-3 bg-white border-b border-black text-black hover:bg-black hover:text-white transition duration-300">
-          Learn More
-        </button>
       </div>
     </div>
   );

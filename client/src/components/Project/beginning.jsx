@@ -70,20 +70,20 @@ export default function Beginning() {
                 CREATORS OF EXCEPTIONAL EVENTS
               </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-gray-700 md:text-base">
-                White Events is a creative event design and management studio,
-                based in Perth and available for weddings and events throughout
-                Western Australia.
+                White Events is an events and weddings design and planning company in Amman. 
+                We create beautiful weddings and special events that reflect each client’s style. 
+                With creativity and attention to detail, we make every celebration unforgettable.
               </p>
               <p className="mt-3 text-[15px] leading-relaxed text-gray-700 md:text-base">
-                Established in 2005, White Events has earned a reputation as
-                Western Australia&#39;s leading wedding planning studio, led by
+                Established in 2015, White Events has earned a reputation as
+                Jordan&#39;s leading wedding planning studio, led by
                 industry expert,
                 {" "}
                 <a
                   href="#"
                   className="font-medium text-gray-900 underline decoration-gray-300 underline-offset-4 transition hover:decoration-gray-700"
                 >
-                  Lara White
+                  Farah Daradkeh
                 </a>
                 .
               </p>

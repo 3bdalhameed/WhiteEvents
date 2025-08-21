@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import m1 from "../../pages/Gallery/albums/someone & someone/1.jpg";
+import m1 from "../../pages/Gallery/albums/Ahmad & Dana - St.Regis/1.jpg";
 import m2 from "../../pages/Gallery/albums/Haya & Mustafa - La Plage Beach Club, Aqaba/1.jpg";
 
 function Services() {
