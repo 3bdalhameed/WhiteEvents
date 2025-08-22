@@ -17,14 +17,15 @@ function GalleryAlbumPage() {
 
   const [cols, setCols] = useState(getCols);
 
+  // Lightbox state
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const [intrinsic, setIntrinsic] = useState(null);
+  const [intrinsic, setIntrinsic] = useState(null); // {w,h} natural size of current image
   const [viewport, setViewport] = useState(() => ({
     w: typeof window !== "undefined" ? window.innerWidth : 0,
     h: typeof window !== "undefined" ? window.innerHeight : 0,
   }));
 
-  // swipe tracking
+  // Swipe state
   const [touchStartX, setTouchStartX] = useState(null);
   const [touchEndX, setTouchEndX] = useState(null);
 
@@ -38,6 +39,7 @@ function GalleryAlbumPage() {
     return () => window.removeEventListener("resize", handler);
   }, []);
 
+  // Lock background scroll when lightbox open
   useEffect(() => {
     if (lightboxIndex !== null) {
       const prev = document.body.style.overflow;
@@ -46,6 +48,25 @@ function GalleryAlbumPage() {
     }
   }, [lightboxIndex]);
 
+  // Keyboard controls
+  const prevImage = useCallback(() => {
+    setLightboxIndex((i) => {
+      if (i === null) return i;
+      const next = i > 0 ? i - 1 : album.images.length - 1;
+      setIntrinsic(null);
+      return next;
+    });
+  }, [album?.images.length]);
+
+  const nextImage = useCallback(() => {
+    setLightboxIndex((i) => {
+      if (i === null) return i;
+      const next = i < album.images.length - 1 ? i + 1 : 0;
+      setIntrinsic(null);
+      return next;
+    });
+  }, [album?.images.length]);
+
   const onKeyDown = useCallback(
     (e) => {
       if (lightboxIndex === null) return;
@@ -53,7 +74,7 @@ function GalleryAlbumPage() {
       if (e.key === "ArrowLeft") prevImage();
       if (e.key === "ArrowRight") nextImage();
     },
-    [lightboxIndex]
+    [lightboxIndex, prevImage, nextImage]
   );
 
   useEffect(() => {
@@ -82,57 +103,30 @@ function GalleryAlbumPage() {
     }
   };
   const closeLightbox = () => setLightboxIndex(null);
-  const prevImage = () => {
-    setLightboxIndex((i) => {
-      const next = i > 0 ? i - 1 : album.images.length - 1;
-      setIntrinsic(null);
-      return next;
-    });
-  };
-  const nextImage = () => {
-    setLightboxIndex((i) => {
-      const next = i < album.images.length - 1 ? i + 1 : 0;
-      setIntrinsic(null);
-      return next;
-    });
-  };
 
+  // Compute size: fit inside viewport (with padding) and NEVER upscale beyond intrinsic
   const computeDisplaySize = () => {
-    if (!intrinsic) return { width: "auto", height: "auto" };
+    if (!intrinsic) return undefined;
     const padX = Math.max(16, viewport.w * 0.02);
     const padY = Math.max(16, viewport.h * 0.02);
-
-    const maxW = viewport.w - padX * 2;
-    const maxH = viewport.h - padY * 2;
+    const maxW = Math.max(0, viewport.w - padX * 2);
+    const maxH = Math.max(0, viewport.h - padY * 2);
 
     const { w: iw, h: ih } = intrinsic;
-    const scale = Math.min(maxW / iw, maxH / ih, 1);
+    const scale = Math.min(maxW / iw, maxH / ih, 1); // <=1 avoids upscaling
     const dispW = Math.floor(iw * scale);
     const dispH = Math.floor(ih * scale);
 
     return { width: dispW + "px", height: dispH + "px" };
   };
 
-  const handleTouchStart = (e) => {
-    setTouchStartX(e.changedTouches[0].screenX);
-  };
-
-  const handleTouchMove = (e) => {
-    setTouchEndX(e.changedTouches[0].screenX);
-  };
-
+  // Swipe handlers
+  const handleTouchStart = (e) => setTouchStartX(e.changedTouches[0].screenX);
+  const handleTouchMove = (e) => setTouchEndX(e.changedTouches[0].screenX);
   const handleTouchEnd = () => {
     if (touchStartX === null || touchEndX === null) return;
     const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        // swipe left
-        nextImage();
-      } else {
-        // swipe right
-        prevImage();
-      }
-    }
+    if (Math.abs(diff) > 50) diff > 0 ? nextImage() : prevImage();
     setTouchStartX(null);
     setTouchEndX(null);
   };
@@ -147,6 +141,7 @@ function GalleryAlbumPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800">{album.name}</h1>
           <p className="text-gray-600 mt-2">A selection from {album.name}.</p>
 
+          {/* Masonry via CSS columns */}
           <div className="mt-8" style={{ columnCount: cols, columnGap: "16px" }}>
             {album.images.map((src, idx) => (
               <div
@@ -167,27 +162,29 @@ function GalleryAlbumPage() {
         </div>
       </main>
 
+      {/* Lightbox */}
       {lightboxIndex !== null && (
         <div
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4"
           role="dialog"
           aria-modal="true"
-          onClick={closeLightbox}
-          onTouchStart={handleTouchStart}
+          onClick={closeLightbox}               // click anywhere outside image closes
+          onTouchStart={handleTouchStart}       // swipe to change
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
           <img
             src={album.images[lightboxIndex]}
             alt={`enlarged ${album.name} ${lightboxIndex + 1}`}
-            className="block object-contain rounded-lg shadow-xl select-none"
-            style={displaySize}
+            className="block object-contain select-none"
+            // Ensures: fits viewport, preserves aspect, NEVER upscales
+            style={displaySize || { maxWidth: "96vw", maxHeight: "90svh" }}
             draggable={false}
             onLoad={(e) => {
               const img = e.currentTarget;
               setIntrinsic({ w: img.naturalWidth, h: img.naturalHeight });
             }}
-            onClick={(e) => e.stopPropagation()} // prevent close when clicking on image itself
+            onClick={(e) => e.stopPropagation()} // clicking image itself won't close
           />
         </div>
       )}
