@@ -8,10 +8,12 @@ function GalleryAlbumPage() {
   const { slug } = useParams();
   const album = albums.find((a) => a.slug === slug);
 
+  // ── responsive columns: 2 (mobile), 3 (md), 4 (lg+)
   const getCols = () => {
     if (typeof window === "undefined") return 4;
-    if (window.innerWidth < 640) return 1;
-    if (window.innerWidth < 1024) return 2;
+    const w = window.innerWidth;
+    if (w < 640) return 2;
+    if (w < 1024) return 3;
     return 4;
   };
 
@@ -44,7 +46,9 @@ function GalleryAlbumPage() {
     if (lightboxIndex !== null) {
       const prev = document.body.style.overflow;
       document.body.style.overflow = "hidden";
-      return () => { document.body.style.overflow = prev; };
+      return () => {
+        document.body.style.overflow = prev;
+      };
     }
   }, [lightboxIndex]);
 
@@ -86,9 +90,9 @@ function GalleryAlbumPage() {
     return (
       <>
         <Navbar />
-        <main className="bg-gray-100 min-h-screen">
+        <main className="min-h-screen bg-[#0b0b10] text-neutral-100">
           <div className="mx-auto max-w-5xl px-4 pt-28 pb-16">
-            <h1 className="text-2xl font-semibold text-gray-800">Album not found</h1>
+            <h1 className="text-2xl font-semibold">Album not found</h1>
           </div>
         </main>
       </>
@@ -113,7 +117,7 @@ function GalleryAlbumPage() {
     const maxH = Math.max(0, viewport.h - padY * 2);
 
     const { w: iw, h: ih } = intrinsic;
-    const scale = Math.min(maxW / iw, maxH / ih, 1); // <=1 avoids upscaling
+    const scale = Math.min(maxW / iw, maxH / ih, 1);
     const dispW = Math.floor(iw * scale);
     const dispH = Math.floor(ih * scale);
 
@@ -136,10 +140,22 @@ function GalleryAlbumPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-gray-100 min-h-screen">
-        <div className="mx-auto max-w-7xl py-24 px-4 pt-28 pb-16">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800">{album.name}</h1>
-          <p className="text-gray-600 mt-2">A selection from {album.name}.</p>
+
+      {/* backdrop with subtle glow to match theme */}
+      <main className="relative min-h-screen overflow-hidden bg-[#0b0b10] text-neutral-100">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[radial-gradient(1100px_500px_at_10%_-10%,rgba(255,220,185,0.06),transparent_60%),radial-gradient(900px_480px_at_100%_130%,rgba(255,154,158,0.06),transparent_60%)]" />
+          <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-white/5 shadow-[inset_0_0_140px_40px_rgba(0,0,0,0.65)]" />
+          <div className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px]" />
+        </div>
+
+        <div className="mx-auto max-w-7xl px-4 pt-28 pb-16">
+          <h1 className="text-3xl font-bold md:text-4xl">
+            <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
+              {album.name}
+            </span>
+          </h1>
+          <p className="mt-2 text-sm text-neutral-300">A selection from {album.name}.</p>
 
           {/* Masonry via CSS columns */}
           <div className="mt-8" style={{ columnCount: cols, columnGap: "16px" }}>
@@ -147,13 +163,15 @@ function GalleryAlbumPage() {
               <div
                 key={idx}
                 style={{ breakInside: "avoid" }}
-                className="mb-4 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg"
+                className="mb-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
               >
                 <img
                   src={src}
                   alt={`${album.name} ${idx + 1}`}
-                  className="w-full h-auto block cursor-pointer"
+                  className="block h-auto w-full cursor-pointer"
                   loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                   onClick={() => openLightbox(idx)}
                 />
               </div>
@@ -165,19 +183,52 @@ function GalleryAlbumPage() {
       {/* Lightbox */}
       {lightboxIndex !== null && (
         <div
-          className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
           role="dialog"
           aria-modal="true"
-          onClick={closeLightbox}               // click anywhere outside image closes
+          onClick={closeLightbox}               // click outside image closes
           onTouchStart={handleTouchStart}       // swipe to change
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
+          {/* controls */}
+          <button
+            aria-label="Close"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeLightbox();
+            }}
+            className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          >
+            Close
+          </button>
+
+          <button
+            aria-label="Previous image"
+            onClick={(e) => {
+              e.stopPropagation();
+              prevImage();
+            }}
+            className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-white/10 p-3 text-white backdrop-blur hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          >
+            ‹
+          </button>
+
+          <button
+            aria-label="Next image"
+            onClick={(e) => {
+              e.stopPropagation();
+              nextImage();
+            }}
+            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-white/10 p-3 text-white backdrop-blur hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          >
+            ›
+          </button>
+
           <img
             src={album.images[lightboxIndex]}
             alt={`enlarged ${album.name} ${lightboxIndex + 1}`}
-            className="block object-contain select-none"
-            // Ensures: fits viewport, preserves aspect, NEVER upscales
+            className="block select-none object-contain"
             style={displaySize || { maxWidth: "96vw", maxHeight: "90svh" }}
             draggable={false}
             onLoad={(e) => {
@@ -186,6 +237,10 @@ function GalleryAlbumPage() {
             }}
             onClick={(e) => e.stopPropagation()} // clicking image itself won't close
           />
+
+          <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs text-white backdrop-blur">
+            {lightboxIndex + 1} / {album.images.length}
+          </div>
         </div>
       )}
 

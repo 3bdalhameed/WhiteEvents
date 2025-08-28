@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbargallery/navbar";
 import { albums } from "./albumsdata";
 import Footer from "../../components/Footer/footer";
 
-// Animated word-by-word reveal for names on hover
+// Animated word-by-word reveal for names on hover (unused but kept)
 function RevealWords({ text = "", className = "", delay = 60 }) {
   const words = (text || "").split(" ");
   return (
@@ -68,15 +68,19 @@ function Galleries() {
   return (
     <>
       <Navbar />
-      <main ref={heroRef} className="relative min-h-screen overflow-hidden bg-black text-white">
-        {/* ===== Enhanced Hero Background ===== */}
+      <main ref={heroRef} className="relative min-h-screen overflow-hidden bg-[#0b0b10] text-neutral-100">
+        {/* ===== THEME BACKGROUND LAYERS ===== */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="h-full w-full bg-black" />
+          {/* soft rose/amber glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(1100px_500px_at_10%_-10%,rgba(255,220,185,0.06),transparent_60%),radial-gradient(900px_480px_at_100%_130%,rgba(255,154,158,0.06),transparent_60%)]" />
+          {/* vignette frame */}
+          <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-white/5 shadow-[inset_0_0_140px_40px_rgba(0,0,0,0.65)]" />
+          {/* subtle bokeh movers (use --mx/--my) */}
           <div
-            className="absolute -top-1/3 -left-1/4 h-[140%] w-[140%] opacity-20 will-change-transform"
+            className="absolute -top-1/3 -left-1/4 h-[140%] w-[140%] opacity-15 will-change-transform"
             style={{
               background:
-                "radial-gradient(60% 60% at 40% 30%, rgba(255,255,255,0.06) 0%, transparent 60%), radial-gradient(50% 50% at 70% 60%, rgba(168,85,247,0.18) 0%, transparent 60%)",
+                "radial-gradient(60% 60% at 40% 30%, rgba(255,255,255,0.06) 0%, transparent 60%), radial-gradient(50% 50% at 70% 60%, rgba(251,191,36,0.14) 0%, transparent 60%)",
               mixBlendMode: "screen",
               animation: "drift 26s ease-in-out infinite alternate",
               transform:
@@ -84,49 +88,36 @@ function Galleries() {
             }}
           />
           <div
-            className="absolute -bottom-1/3 -right-1/4 h-[140%] w-[140%] opacity-20 will-change-transform"
+            className="absolute -bottom-1/3 -right-1/4 h-[140%] w-[140%] opacity-15 will-change-transform"
             style={{
               background:
-                "radial-gradient(60% 60% at 60% 70%, rgba(59,130,246,0.18) 0%, transparent 60%), radial-gradient(50% 50% at 30% 40%, rgba(236,72,153,0.16) 0%, transparent 60%)",
+                "radial-gradient(60% 60% at 60% 70%, rgba(244,114,182,0.14) 0%, transparent 60%), radial-gradient(50% 50% at 30% 40%, rgba(255,255,255,0.06) 0%, transparent 60%)",
               mixBlendMode: "screen",
               animation: "drift 32s ease-in-out infinite alternate-reverse",
               transform:
                 "translate3d(calc(var(--mx,0)*-24px), calc(var(--my,0)*-24px), 0) rotate(0.001deg)",
             }}
           />
-          <div
-            className="absolute inset-0 opacity-40 will-change-transform"
-            style={{
-              background:
-                "radial-gradient(600px 600px at calc(50% + calc(var(--mx,0)*120px)) calc(25% + calc(var(--my,0)*80px)), rgba(255,255,255,0.06), transparent 70%)",
-            }}
-          />
-          <div
-            className="absolute inset-0 opacity-[0.06]"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 40px)",
-              maskImage:
-                "radial-gradient(ellipse at center, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0) 100%)",
-            }}
-          />
-          <div
-            className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
-            style={{
-              backgroundImage: "url('https://www.transparenttextures.com/patterns/asfalt-dark.png')",
-            }}
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_70%,rgba(0,0,0,0.9))]" />
+          {/* fine grain */}
+          <div className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px]" />
         </div>
 
         <div className="relative mx-auto max-w-8xl px-6 pt-28 pb-16 sm:px-10 md:px-12 lg:px-18 xl:px-20 2xl:px-24">
-          <div className="mx-auto max-w-3xl rounded-2xl border border-gray-800 bg-black/70 px-8 py-12 text-center shadow-md backdrop-blur">
-            <h1 className="mb-2 text-3xl font-bold text-white md:text-4xl">Wedding Galleries</h1>
-            <p className="text-gray-400">Explore our curated albums. Tap a card to see the wedding name.</p>
+          {/* Header card (glass) */}
+          <div className="mx-auto max-w-3xl rounded-3xl bg-white/5 p-10 text-center shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md">
+            <h1 className="mb-2 text-3xl font-bold md:text-4xl">
+              <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
+                Wedding Galleries
+              </span>
+            </h1>
+            <p className="text-neutral-300">
+              Explore our curated albums. Tap a card to see the wedding name.
+            </p>
+            <div className="mx-auto mt-6 h-px w-24 bg-gradient-to-r from-transparent via-amber-300/70 to-transparent" />
           </div>
 
-          {/* Album Cards — now 2 cols on mobile */}
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
+          {/* Album Cards — 2 cols (sm), 3 (md), 4 (lg) */}
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
             {albums.map((album) => {
               const ariaName = album.nameSecondLine
                 ? `${album.nameFirstLine} - ${album.nameSecondLine}`
@@ -137,23 +128,23 @@ function Galleries() {
                   key={album.slug}
                   to={`/gallery/${album.slug}`}
                   aria-label={`Open album ${ariaName}`}
-                  className="group block focus:outline-none"
+                  className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40 rounded-2xl"
                   title={ariaName}
                 >
                   <div
                     onMouseMove={handleCardMove}
                     onMouseLeave={handleCardLeave}
-                    className="relative overflow-hidden rounded-2xl border border-gray-800 bg-gradient-to-br from-zinc-950 to-black
-                               shadow-xl transition-transform duration-300 will-change-transform
+                    className="relative overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur-md
+                               shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition-transform duration-300 will-change-transform
                                [transform:perspective(900px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))_translate3d(var(--tx,0),var(--ty,0),0)_scale(var(--s,1))]
                                group-hover:[--s:1.02] group-hover:shadow-2xl"
                   >
-                    {/* Decorative border glow */}
+                    {/* Decorative border glow (amber/rose) */}
                     <div
                       className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-500 group-hover:opacity-100"
                       style={{
                         boxShadow:
-                          "0 0 30px rgba(168,85,247,0.25), 0 0 60px rgba(59,130,246,0.15) inset",
+                          "0 0 30px rgba(251,191,36,0.20), 0 0 60px rgba(244,114,182,0.12) inset",
                       }}
                     />
 
@@ -179,30 +170,30 @@ function Galleries() {
                       className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       style={{
                         background:
-                          "radial-gradient(220px 220px at var(--px,50%) var(--py,50%), rgba(255,255,255,0.06), transparent 60%)",
+                          "radial-gradient(220px_220px_at_var(--px,50%)_var(--py,50%), rgba(255,255,255,0.06), transparent 60%)",
                       }}
                     />
 
-                    {/* Magnetic highlight ring */}
+                    {/* Magnetic highlight ring (amber/rose) */}
                     <div
                       className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       style={{
                         background:
-                          "radial-gradient(180px 180px at var(--px,50%) var(--py,50%), rgba(168,85,247,0.18), transparent 60%), radial-gradient(110px 110px at var(--px,50%) var(--py,50%), rgba(59,130,246,0.18), transparent 60%)",
+                          "radial-gradient(180px_180px_at_var(--px,50%)_var(--py,50%), rgba(251,191,36,0.18), transparent_60%), radial-gradient(110px_110px_at_var(--px,50%)_var(--py,50%), rgba(244,114,182,0.18), transparent_60%)",
                       }}
                     />
 
                     {/* Shine sweep */}
                     <span className="pointer-events-none absolute -left-1/3 top-0 z-10 h-full w-1/2 translate-x-[-120%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[220%]" />
 
-                    {/* Hover gradient + text */}
-                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/70 text-white opacity-0 transition duration-500 backdrop-blur-sm group-hover:opacity-100">
+                    {/* Hover overlay + names */}
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/65 text-white opacity-0 transition duration-500 backdrop-blur-sm group-hover:opacity-100">
                       <div className="p-4 text-center">
                         <h3 className="text-lg font-bold drop-shadow sm:text-xl">
                           {album.nameFirstLine}
                         </h3>
                         {album.nameSecondLine && (
-                          <p className="text-sm text-gray-300 drop-shadow sm:text-base">
+                          <p className="text-sm text-neutral-200 drop-shadow sm:text-base">
                             {album.nameSecondLine}
                           </p>
                         )}

@@ -5,7 +5,9 @@ export default {
     "./index.html"
   ],
   theme: {
-    extend: {},
+    extend: {
+      maxWidth: { '8xl': '100rem' }
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),
