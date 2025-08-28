@@ -74,14 +74,13 @@ export default function AppointmentCalendar({
     return map[js];
   };
 
-  const parseRanges = (ranges) => {
-    return (ranges || []).map((r) => {
+  const parseRanges = (ranges) =>
+    (ranges || []).map((r) => {
       const [a, b] = r.split("-");
       const [ah, am] = a.split(":").map(Number);
       const [bh, bm] = b.split(":").map(Number);
       return [ah * 60 + am, bh * 60 + bm];
     });
-  };
 
   const generateSlots = (isoDate) => {
     if (!isoDate) return [];
@@ -182,9 +181,35 @@ export default function AppointmentCalendar({
     });
     return (
       <div className="flex items-center justify-between">
-        <button type="button" onClick={() => { const d = new Date(viewYear, viewMonth - 1, 1); setViewYear(d.getFullYear()); setViewMonth(d.getMonth()); }} className="rounded-full p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black/10" aria-label="Previous month"><svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <h4 className="select-none font-serif text-lg font-semibold text-gray-900">{monthName}</h4>
-        <button type="button" onClick={() => { const d = new Date(viewYear, viewMonth + 1, 1); setViewYear(d.getFullYear()); setViewMonth(d.getMonth()); }} className="rounded-full p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black/10" aria-label="Next month"><svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button
+          type="button"
+          onClick={() => {
+            const d = new Date(viewYear, viewMonth - 1, 1);
+            setViewYear(d.getFullYear());
+            setViewMonth(d.getMonth());
+          }}
+          className="rounded-full p-2 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
+          aria-label="Previous month"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+        <h4 className="select-none font-serif text-lg font-semibold text-neutral-100">{monthName}</h4>
+        <button
+          type="button"
+          onClick={() => {
+            const d = new Date(viewYear, viewMonth + 1, 1);
+            setViewYear(d.getFullYear());
+            setViewMonth(d.getMonth());
+          }}
+          className="rounded-full p-2 hover:bg:white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
+          aria-label="Next month"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </div>
     );
   }
@@ -195,46 +220,202 @@ export default function AppointmentCalendar({
     const isSelected = isSameDay(selectedDate, iso);
     const inMonth = info.inMonth;
     return (
-      <button type="button" onClick={() => !disabled && setSelectedDate(iso)} disabled={disabled} className={["h-10 w-full rounded-lg text-sm transition focus:outline-none focus:ring-2 focus:ring-black/20", disabled ? "text-gray-300" : "text-gray-800 hover:bg-gray-100", isSelected ? "bg-black text-white hover:bg-black" : "", !inMonth ? "opacity-50" : ""].join(" ")} aria-pressed={isSelected} aria-label={iso} title={iso}>{info.date.getDate()}</button>
+      <button
+        type="button"
+        onClick={() => !disabled && setSelectedDate(iso)}
+        disabled={disabled}
+        className={[
+          "h-10 w-full rounded-lg text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40",
+          disabled ? "text-white/25" : "text-neutral-100 hover:bg-white/10",
+          isSelected ? "bg-amber-300 text-black hover:bg-amber-300" : "",
+          !inMonth ? "opacity-50" : "",
+        ].join(" ")}
+        aria-pressed={isSelected}
+        aria-label={iso}
+        title={iso}
+      >
+        {info.date.getDate()}
+      </button>
     );
   }
 
   function TimeSlot({ t }) {
     const selected = selectedTime === t;
     return (
-      <button type="button" onClick={() => setSelectedTime(t)} className={["rounded-full border px-4 py-2 text-sm transition", selected ? "border-black bg-black text-white" : "border-gray-300 bg-white text-gray-800 hover:bg-gray-50"].join(" ")}>{t}</button>
+      <button
+        type="button"
+        onClick={() => setSelectedTime(t)}
+        className={[
+          "rounded-full px-4 py-2 text-sm transition",
+          selected
+            ? "bg-amber-300 text-black ring-1 ring-amber-300"
+            : "bg-white/5 text-neutral-100 ring-1 ring-white/10 hover:bg-white/10",
+        ].join(" ")}
+      >
+        {t}
+      </button>
     );
   }
 
   return (
-    <section id="appointment" className="bg-white py-12">
-      <div className="mx-auto mb-6 max-w-6xl px-4 text-sm text-gray-500">Please note: submitting may take a few seconds, do not close this page.</div>
+    <section
+      id="appointment"
+      className="relative overflow-hidden bg-[#0b0b10] text-neutral-100 py-12"
+      aria-busy={submitting}
+    >
+      {/* background layers */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_12%_-10%,rgba(255,220,185,0.06),transparent_60%),radial-gradient(900px_500px_at_100%_120%,rgba(255,154,158,0.06),transparent_60%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_50%)]" />
+        <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-white/5 shadow-[inset_0_0_140px_40px_rgba(0,0,0,0.65)]" />
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-rose-300/10 blur-3xl" />
+        <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px]" />
+      </div>
+
+      <div className="mx-auto mb-6 max-w-6xl px-4 text-sm text-neutral-300">
+        Please note: submitting may take a few seconds, do not close this page.
+      </div>
+
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 md:grid-cols-5 md:gap-12">
-        <div className="md:col-span-3 rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+        {/* Calendar */}
+        <div className="md:col-span-3 rounded-3xl bg-white/5 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md">
           <MonthHeader />
-          <div className="mt-4 grid grid-cols-7 gap-2 text-center text-xs font-medium text-gray-500">{weekdayLabels.map((w) => (<div key={w} className="py-1">{w}</div>))}</div>
-          <div className="mt-1 grid grid-cols-7 gap-2">{gridDates.map((d, i) => (<DayCell key={i} info={d} />))}</div>
+          <div className="mt-4 grid grid-cols-7 gap-2 text-center text-xs font-medium text-neutral-400">
+            {weekdayLabels.map((w) => (
+              <div key={w} className="py-1 select-none">
+                {w}
+              </div>
+            ))}
+          </div>
+          <div className="mt-1 grid grid-cols-7 gap-2">
+            {gridDates.map((d, i) => (
+              <DayCell key={i} info={d} />
+            ))}
+          </div>
+
           {selectedDate && (
             <div className="mt-6">
-              <h5 className="mb-3 font-medium text-gray-900">Available times on <span className="font-semibold">{selectedDate}</span></h5>
+              <h5 className="mb-3 font-medium text-neutral-100">
+                Available times on <span className="font-semibold">{selectedDate}</span>
+              </h5>
               {availableSlots.length > 0 ? (
-                <div className="flex flex-wrap gap-2">{availableSlots.map((t) => (<TimeSlot key={t} t={t} />))}</div>
+                <div className="flex flex-wrap gap-2">{availableSlots.map((t) => <TimeSlot key={t} t={t} />)}</div>
               ) : (
-                <p className="text-sm text-gray-500">No time slots available for this day.</p>
+                <p className="text-sm text-neutral-400">No time slots available for this day.</p>
               )}
             </div>
           )}
         </div>
-        <form onSubmit={handleSubmit} noValidate className="md:col-span-2 space-y-5 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h3 className="text-xl font-bold text-gray-900">Book Your Appointment</h3>
-          {serverMessage && (<div className={`rounded-lg p-3 text-sm ${serverMessage.startsWith("✅") ? "bg-green-50 text-green-800 border border-green-200" : serverMessage.startsWith("Submitting") ? "bg-blue-50 text-blue-800 border border-blue-200" : "bg-amber-50 text-amber-800 border border-amber-200"}`}>{serverMessage}</div>)}
-          <div><label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">Full Name</label><input id="name" type="text" className={`w-full rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-black/20 ${errors.name && !submitted ? "border-red-400" : "border-gray-300"}`} placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} />{errors.name && !submitted && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}</div>
-          <div><label htmlFor="phone" className="mb-1 block text-sm font-medium text-gray-700">Phone Number</label><input id="phone" type="tel" className={`w-full rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-black/20 ${errors.phone && !submitted ? "border-red-400" : "border-gray-300"}`} placeholder="e.g. +61 4xx xxx xxx" value={phone} onChange={(e) => setPhone(e.target.value)} />{errors.phone && !submitted && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}</div>
-          <div><label className="mb-1 block text-sm font-medium text-gray-700">Selected Date</label><input readOnly value={selectedDate || "—"} className={`w-full cursor-not-allowed rounded-lg border bg-gray-50 p-3 text-gray-700 ${errors.date && !submitted ? "border-red-400" : "border-gray-200"}`} />{errors.date && !submitted && <p className="mt-1 text-xs text-red-600">{errors.date}</p>}</div>
-          <div><label className="mb-1 block text-sm font-medium text-gray-700">Selected Time</label><input readOnly value={selectedTime || "—"} className={`w-full cursor-not-allowed rounded-lg border bg-gray-50 p-3 text-gray-700 ${errors.time && !submitted ? "border-red-400" : "border-gray-200"}`} />{errors.time && !submitted && <p className="mt-1 text-xs text-red-600">{errors.time}</p>}</div>
-          <div><label htmlFor="details" className="mb-1 block text-sm font-medium text-gray-700">Additional Details</label><textarea id="details" rows={4} className="w-full resize-none rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-black/20" placeholder="Any specific requirements" value={details} onChange={(e) => setDetails(e.target.value)} /></div>
-          <button type="submit" disabled={submitting} className={`w-full rounded-lg bg-black py-3 text-center text-sm font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-black/30 ${submitting ? "opacity-70" : "hover:bg-gray-900"}`}>{submitting ? "Submitting…" : "Confirm Appointment"}</button>
-          <p className="text-xs text-gray-500">By confirming, you agree to be contacted about your booking.</p>
+
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className="md:col-span-2 space-y-5 rounded-3xl bg-white/5 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md"
+        >
+          <h3 className="text-xl font-bold text-neutral-100">Book Your Appointment</h3>
+
+          {serverMessage && (
+            <div
+              className={`rounded-lg border p-3 text-sm ${
+                serverMessage.startsWith("✅")
+                  ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-200"
+                  : serverMessage.startsWith("Submitting")
+                  ? "border-sky-400/30 bg-sky-400/10 text-sky-200"
+                  : "border-amber-400/30 bg-amber-400/10 text-amber-200"
+              }`}
+            >
+              {serverMessage}
+            </div>
+          )}
+
+          <div>
+            <label htmlFor="name" className="mb-1 block text-sm font-medium text-neutral-200">
+              Full Name
+            </label>
+            <input
+              id="name"
+              type="text"
+              className={`w-full rounded-lg border bg-white/5 p-3 text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40 ${
+                errors.name && !submitted ? "border-red-400/50" : "border-white/10"
+              }`}
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            {errors.name && !submitted && <p className="mt-1 text-xs text-red-300">{errors.name}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="mb-1 block text-sm font-medium text-neutral-200">
+              Phone Number
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              className={`w-full rounded-lg border bg白/5 p-3 text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40 ${
+                errors.phone && !submitted ? "border-red-400/50" : "border-white/10"
+              }`.replace("bg白/5","bg-white/5")}
+              placeholder="e.g. +962 7x xxx xxxx"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            {errors.phone && !submitted && <p className="mt-1 text-xs text-red-300">{errors.phone}</p>}
+          </div>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium text-neutral-200">Selected Date</label>
+            <input
+              readOnly
+              value={selectedDate || "—"}
+              className={`w-full cursor-not-allowed rounded-lg border bg-white/5 p-3 text-neutral-200 ${
+                errors.date && !submitted ? "border-red-400/50" : "border-white/10"
+              }`}
+            />
+            {errors.date && !submitted && <p className="mt-1 text-xs text-red-300">{errors.date}</p>}
+          </div>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium text-neutral-200">Selected Time</label>
+            <input
+              readOnly
+              value={selectedTime || "—"}
+              className={`w-full cursor-not-allowed rounded-lg border bg-white/5 p-3 text-neutral-200 ${
+                errors.time && !submitted ? "border-red-400/50" : "border-white/10"
+              }`}
+            />
+            {errors.time && !submitted && <p className="mt-1 text-xs text-red-300">{errors.time}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="details" className="mb-1 block text-sm font-medium text-neutral-200">
+              Additional Details
+            </label>
+            <textarea
+              id="details"
+              rows={4}
+              className="w-full resize-none rounded-lg border border-white/10 bg-white/5 p-3 text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
+              placeholder="Any specific requirements"
+              value={details}
+              onChange={(e) => setDetails(e.target.value)}
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className={`w-full rounded-full py-3 text-center text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40 ${
+              submitting
+                ? "opacity-70 bg-amber-300 text-black"
+                : "bg-gradient-to-b from-amber-300 to-amber-200 text-black hover:from-amber-200 hover:to-amber-300"
+            }`}
+          >
+            {submitting ? "Submitting…" : "Confirm Appointment"}
+          </button>
+
+          <p className="text-xs text-neutral-400">
+            By confirming, you agree to be contacted about your booking.
+          </p>
         </form>
       </div>
     </section>

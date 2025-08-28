@@ -6,9 +6,10 @@ function FooterLink({ href, children }) {
   return (
     <a
       href={href}
-      className="block text-sm text-zinc-300 hover:text-white transition-colors py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded"
+      className="group relative block rounded py-1 text-sm text-zinc-300 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
     >
       {children}
+      <span className="pointer-events-none absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-amber-300 via-rose-300 to-amber-200 transition-all duration-300 group-hover:w-10" />
     </a>
   );
 }
@@ -17,53 +18,75 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-zinc-950 text-zinc-300 border-t border-white/10" aria-labelledby="footer-heading">
+    <footer
+      className="relative overflow-hidden border-t border-white/10 bg-[#0b0b10] text-zinc-300"
+      aria-labelledby="footer-heading"
+    >
+      {/* background layers */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(1100px_500px_at_10%_-10%,rgba(255,220,185,0.06),transparent_60%),radial-gradient(900px_480px_at_100%_130%,rgba(255,154,158,0.06),transparent_60%)]" />
+        <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-white/5 shadow-[inset_0_0_140px_40px_rgba(0,0,0,0.65)]" />
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-rose-300/10 blur-3xl" />
+        <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px]" />
+      </div>
+
       <h2 id="footer-heading" className="sr-only">Footer</h2>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
           {/* Contact */}
           <div className="space-y-4">
-            <h3 className="text-white text-lg font-semibold">Contact Details</h3>
+            <h3 className="text-lg font-semibold text-white">Contact Details</h3>
             <p className="text-sm text-zinc-400">We’d love to hear about your event.</p>
-            <ul className="mt-4 space-y-2 text-sm">
+
+            <ul className="mt-4 space-y-3 text-sm">
               <li className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 mt-0.5 text-zinc-400" />
-                <span>1st Floor, 142 Northwood St, West Leederville<br />(by appointment)</span>
+                <MapPin className="mt-0.5 h-4 w-4 text-zinc-400" />
+                <span>
+                  1st Floor, 142 Northwood St, West Leederville
+                  <br />(by appointment)
+                </span>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 mt-0.5 text-zinc-400" />
+                <MapPin className="mt-0.5 h-4 w-4 text-zinc-400" />
                 <span>PO Box 101, Mount Hawthorn WA 6915</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-zinc-400" />
-                <a href="mailto:farah@whiteevents.com" className="hover:text-white">farah@whiteevents.com</a>
+                <a href="mailto:farah@whiteevents.com" className="transition-colors hover:text-white">
+                  farah@whiteevents.com
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-zinc-400" />
-                <a href="tel:0414184341" className="hover:text-white">0414 184 341</a>
+                <a href="tel:0414184341" className="transition-colors hover:text-white">
+                  0414 184 341
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Logo & mini blurb */}
-          <div className="flex flex-col items-center text-center gap-4">
-            <img src={logo} alt="White Events Logo" className="w-28 sm:w-36 drop-shadow" />
+          <div className="flex flex-col items-center gap-4 text-center">
+            <img src={logo} alt="White Events Logo" className="w-28 drop-shadow sm:w-36" />
             <p className="max-w-sm text-sm text-zinc-400">
               Bespoke weddings and events crafted with care. From concept to last dance.
             </p>
+
             <a
               href="/#appointment"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/0 px-4 py-2 text-sm text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
             >
-              Book a Consultation <ArrowRight className="h-4 w-4" />
+              Book a Consultation
+              <ArrowRight className="h-4 w-4" />
             </a>
           </div>
 
           {/* Menu */}
           <div className="lg:text-right">
-            <h3 className="text-white text-lg font-semibold">Menu</h3>
-            <div className="mt-4 grid grid-cols-2 lg:grid-cols-1 gap-y-1 gap-x-8">
+            <h3 className="text-lg font-semibold text-white">Menu</h3>
+            <div className="mt-4 grid grid-cols-2 gap-x-8 gap-y-1 lg:grid-cols-1">
               <FooterLink href="/">Home</FooterLink>
               <FooterLink href="/about">About</FooterLink>
               <FooterLink href="/services">Services</FooterLink>
@@ -74,7 +97,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* thin divider */}
+        {/* Divider + bottom row */}
         <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-zinc-400">
           <p>© {year} White Events · Designed by Abdalhameed Aldaradkeh</p>
         </div>
