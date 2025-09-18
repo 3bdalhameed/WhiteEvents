@@ -1,20 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import heroSplit from "../../pages/newimg/beginning.png";
 
-/**
- * Dark, luxurious hero for "White Events JO"
- * - Velvet-black background with vignette & grain
- * - Soft bokeh & glow accents (rose/gold)
- * - Glassmorphism cards for copy
- * - Accessible motion (reduced-motion friendly)
- * TailwindCSS + Framer Motion
- */
 export default function Beginning() {
   return (
     <section
       id="projects"
       aria-labelledby="projects-title"
-      className="relative min-h-[92vh] w-full overflow-hidden bg-[#0b0b10] text-neutral-100"
+      className="relative min-h-[20vh] w-full overflow-hidden bg-[#0b0b10] text-neutral-100"
     >
       {/* ===== BACKGROUND LAYERS ===== */}
       <div className="absolute inset-0 -z-10">
@@ -28,7 +21,7 @@ export default function Beginning() {
         <div className="absolute -top-20 -left-24 h-80 w-80 rounded-full bg-rose-300/10 blur-3xl" />
         <div className="absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-yellow-300/10 blur-3xl" />
 
-        {/* subtle moving bokeh (reduced-motion safe) */}
+        {/* subtle moving bokeh */}
         <motion.div
           aria-hidden="true"
           initial={{ opacity: 0 }}
@@ -54,54 +47,42 @@ export default function Beginning() {
           />
         </motion.div>
 
-        {/* fine grain for texture */}
+        {/* fine grain */}
         <div className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:radial-gradient(black_1px,transparent_1px)] [background-size:6px_6px]" />
+
+        {/* ===== PHOTO PANEL (right side on lg+, full on mobile) ===== */}
+        <div className="absolute inset-y-0 right-0 w-full lg:w-1/2">
+          <motion.img
+            src={heroSplit}
+            alt="Bride and groom outside a grand estate"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+            initial={{ scale: 1.05, opacity: 0.9 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.1, ease: "easeOut" }}
+            className="absolute inset-0 h-full w-full object-cover object-[60%_50%] grayscale contrast-110"
+          />
+          {/* left fade for readability */}
+          <div className="absolute inset-0 bg-gradient-to-l from-black/45 via-black/25 to-[#0b0b10]" />
+          {/* rounded inner edge on desktop like the screenshot */}
+          <div className="absolute inset-y-8 left-0 hidden w-2 rounded-r-3xl bg-white/10 mix-blend-overlay lg:block" />
+        </div>
       </div>
 
       {/* ===== CONTENT WRAPPER ===== */}
       <div className="mx-auto flex max-w-7xl flex-col items-center px-6 py-16 md:px-10 lg:px-12 lg:py-24">
-
-        {/* Thank-you / testimonial card */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative z-10 mb-10 w-full max-w-3xl text-center md:mb-16"
-        >
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.45)] md:p-10">
-            <p className="font-serif text-base leading-relaxed text-neutral-200 md:text-lg">
-              FROM THE BOTTOM OF OUR HEARTS THANK YOU FOR
-              <br />
-              CREATING THE WEDDING OF OUR DREAMS AND MAKING IT
-              <br />
-              SUCH A MEMORABLE DAY FOR US.
-            </p>
-            <strong className="mt-4 block font-serif text-xl font-bold tracking-wide text-white md:text-2xl">
-              DIMA & AHMAD
-            </strong>
-
-            {/* elegant divider */}
-            <div className="mx-auto mt-6 h-px w-24 bg-gradient-to-r from-transparent via-amber-300/70 to-transparent" />
-          </div>
-        </motion.div>
-
-        {/* Right-side content panel */}
         <div className="relative z-10 grid w-full items-stretch gap-6">
-
-
           <motion.aside
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-            className="relative lg:col-span-6"
+            className="relative max-w-3xl lg:max-w-[100%]"
           >
             <div className="group rounded-3xl bg-white/5 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md md:p-8 lg:p-10">
-              <h2
-                id="projects-title"
-                className="font-serif text-2xl font-bold leading-tight tracking-tight md:text-3xl"
-              >
+              <h2 id="projects-title" className="font-serif text-2xl font-bold leading-tight tracking-tight md:text-3xl">
                 <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
                   CREATORS OF EXCEPTIONAL EVENTS
                 </span>
@@ -166,11 +147,9 @@ export default function Beginning() {
                 </a>
               </div>
 
-              {/* subtle hover glow */}
               <div className="pointer-events-none absolute -inset-x-6 -inset-y-6 -z-10 hidden rounded-3xl bg-amber-300/5 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100 md:block" />
             </div>
 
-            {/* decorative offset shadow panel for depth */}
             <div className="absolute -inset-x-6 -inset-y-6 -z-10 hidden rounded-3xl bg-white/0 ring-1 ring-white/5 blur-xl md:block" />
           </motion.aside>
         </div>

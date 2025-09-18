@@ -17,7 +17,7 @@ function Portfolio() {
     <section
       id="portfolio"
       aria-labelledby="portfolio-title"
-      className="relative overflow-hidden py-24 text-center bg-[#0b0b10] text-neutral-100"
+      className="relative overflow-hidden pb-24 text-center bg-[#0b0b10] text-neutral-100"
     >
       {/* background texture + vignette */}
       <div className="pointer-events-none absolute inset-0 -z-10">
