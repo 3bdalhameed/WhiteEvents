@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // Import your three images
 import m1 from "../../pages/Gallery/albums/Maya & Anas - S.t Regis/1.jpg";
 import m2 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/1.JPG";
-import m3 from "../../pages/Gallery/albums/Tala & Alaa - Grand Hyatt Amman/1.jpg";
+import m3 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5134.jpg";
 
 function Portfolio() {
   const galleryItems = [
