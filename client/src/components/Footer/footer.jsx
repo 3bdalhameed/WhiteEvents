@@ -44,13 +44,8 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 text-zinc-400" />
                 <span>
-                  1st Floor, 142 Northwood St, West Leederville
-                  <br />(by appointment)
+                  1 st floor, Abu Rumman Plaza
                 </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 text-zinc-400" />
-                <span>PO Box 101, Mount Hawthorn WA 6915</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-zinc-400" />
@@ -61,7 +56,7 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-zinc-400" />
                 <a href="tel:0414184341" className="transition-colors hover:text-white">
-                  0414 184 341
+                  +962 7 9638 9580
                 </a>
               </li>
             </ul>

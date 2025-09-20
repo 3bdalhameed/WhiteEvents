@@ -7,7 +7,6 @@ import backgroundImage from "../newimg/background.png";
 import farahd from "../newimg/farah.png";
 import tameemd from "../newimg/tameem.png";
 
-
 function TeamCard({ img, name, role, bio, chips = [], ctaHref = "#", ctaLabel = "Learn more" }) {
   return (
     <article
@@ -15,7 +14,6 @@ function TeamCard({ img, name, role, bio, chips = [], ctaHref = "#", ctaLabel = 
       tabIndex={-1}
       aria-labelledby={`${name.replace(/\s+/g, "-").toLowerCase()}-title`}
     >
-      {/* Image */}
       <img
         src={img}
         alt={name}
@@ -23,18 +21,12 @@ function TeamCard({ img, name, role, bio, chips = [], ctaHref = "#", ctaLabel = 
         loading="lazy"
         decoding="async"
       />
-
-      {/* Base vignette */}
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
-
-      {/* Always-visible footer */}
       <div className="absolute inset-x-0 bottom-0 p-6">
         <h3 id={`${name.replace(/\s+/g, "-").toLowerCase()}-title`} className="text-xl font-semibold text-white">
           {name}
         </h3>
         <p className="text-[11px] uppercase tracking-widest text-neutral-300">{role}</p>
-
-        {/* Chips */}
         {chips.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
             {chips.map((c, i) => (
@@ -48,14 +40,11 @@ function TeamCard({ img, name, role, bio, chips = [], ctaHref = "#", ctaLabel = 
           </div>
         )}
       </div>
-
-      {/* Reveal panel on hover/focus */}
       <div
         className="absolute inset-x-0 bottom-0 translate-y-full bg-black/55 backdrop-blur-md p-6 transition-transform duration-300 ease-out
                    group-hover:translate-y-0 group-focus-within:translate-y-0"
       >
         <p className="text-sm text-neutral-200/95">{bio}</p>
-
         <div className="mt-4">
           <a
             href={ctaHref}
@@ -70,8 +59,6 @@ function TeamCard({ img, name, role, bio, chips = [], ctaHref = "#", ctaLabel = 
           </a>
         </div>
       </div>
-
-      {/* Soft sweep highlight */}
       <span
         aria-hidden
         className="pointer-events-none absolute -left-1/3 top-0 h-full w-1/2 -translate-x-[120%] skew-x-[-20deg]
@@ -83,6 +70,21 @@ function TeamCard({ img, name, role, bio, chips = [], ctaHref = "#", ctaLabel = 
 }
 
 export default function About() {
+  // ⬇️ Force scroll to top when this page mounts; also disable browser scroll restoration while here
+  React.useEffect(() => {
+    let prev = "auto";
+    if ("scrollRestoration" in window.history) {
+      prev = window.history.scrollRestoration;
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+    return () => {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = prev;
+      }
+    };
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -92,7 +94,6 @@ export default function About() {
         aria-labelledby="about-title"
         className="relative isolate overflow-hidden bg-[#0b0b10] text-neutral-100"
       >
-        {/* background image + washes */}
         <img
           src={backgroundImage}
           alt=""
@@ -107,15 +108,11 @@ export default function About() {
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl" />
 
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 py-24 md:grid-cols-[1.1fr,0.9fr] md:py-32 lg:px-12">
-          {/* copy */}
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs tracking-widest text-neutral-300">
               EST. 2015 • AMMAN, JO
             </span>
-            <h1
-              id="about-title"
-              className="mt-4 font-serif text-4xl font-bold tracking-tight md:text-5xl"
-            >
+            <h1 id="about-title" className="mt-4 font-serif text-4xl font-bold tracking-tight md:text-5xl">
               <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
                 Who We Are
               </span>
@@ -125,8 +122,6 @@ export default function About() {
               unforgettable celebrations—blending creativity and precision to bring
               your vision to life, beautifully and calmly.
             </p>
-
-            {/* stats chips */}
             <div className="mt-6 flex flex-wrap gap-2">
               {["150+ Events", "Design-Led", "White-Glove"].map((t) => (
                 <span
@@ -139,11 +134,8 @@ export default function About() {
             </div>
           </div>
 
-          {/* portrait stack */}
           <div className="relative mx-auto w-full max-w-md">
-            {/* back card */}
             <div className="absolute -left-6 -top-6 hidden h-[84%] w-[88%] -rotate-3 rounded-3xl border border-white/10 bg-white/5 opacity-70 blur-[0.5px] md:block" />
-            {/* main image */}
             <div className="relative overflow-hidden rounded-3xl ring-1 ring-white/10 shadow-[0_10px_50px_rgba(0,0,0,0.55)]">
               <img
                 src={farahd}
@@ -154,17 +146,18 @@ export default function About() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
             </div>
-            {/* glow */}
             <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[2rem] bg-amber-300/10 blur-2xl" />
           </div>
         </div>
       </section>
 
-      {/* ===== DIRECTOR LETTER + APPROACH ===== */}
+      {/* ===== DIRECTOR LETTER ===== */}
       <section className="relative bg-[#0b0b10]">
         <div className="mx-auto max-w-4xl gap-8 px-6 py-16 lg:px-12">
-          {/* Letter */}
-          <article className="rounded-3xl bg-white/5 p-7 ring-1 ring-white/10 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.45)]">
+          <article
+            id="director-letter" // 🔗 anchor target for the CTA
+            className="rounded-3xl bg-white/5 p-7 ring-1 ring-white/10 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.45)]"
+          >
             <h2 className="text-sm font-semibold tracking-widest text-amber-100">
               FROM THE CREATIVE DIRECTOR
             </h2>
@@ -191,35 +184,62 @@ export default function About() {
         </div>
       </section>
 
-{/* ===== TEAM (enhanced) ===== */}
-<section className="relative bg-[#0b0b10]" id="team">
-  <div className="mx-auto max-w-7xl px-6 py-8 md:py-16 lg:px-12">
-    <h2 className="text-center text-3xl font-serif font-bold text-white md:text-4xl">Meet the Team</h2>
+      {/* ===== TEAM (enhanced) ===== */}
+      <section className="relative bg-[#0b0b10]" id="team">
+        <div className="mx-auto max-w-7xl px-6 py-8 md:py-16 lg:px-12">
+          <h2 className="text-center text-3xl font-serif font-bold text-white md:text-4xl">Meet the Team</h2>
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <TeamCard
+              img={farahd}
+              name="FARAH DARADKEH"
+              role="Creative Director"
+              chips={["Design-Led", "White-Glove", "10+ Yrs"]}
+              bio="Oversees every celebration—from bespoke creative direction to calm, on-the-day management—turning a couple’s story into a refined, timeless experience."
+              ctaHref="#director-letter"
+              ctaLabel="From the Director"
+            />
+            <TeamCard
+              img={tameemd}
+              name="TAMEM DARADKEH"
+              role="Events & Operations Manager"
+              chips={["Logistics", "Vendors", "Timelines"]}
+              bio="Runs the engine room: production schedules, suppliers, and seamless logistics—so everything flows flawlessly on the day."
+              ctaHref="/appointment"
+              ctaLabel="Work with us"
+            />
+          </div>
+        </div>
+      </section>
 
-    <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
-      <TeamCard
-        img={farahd}
-        name="FARAH DARADKEH"
-        role="Creative Director"
-        chips={["Design-Led", "White-Glove", "10+ Yrs"]}
-        bio="Oversees every celebration—from bespoke creative direction to calm, on-the-day management—turning a couple’s story into a refined, timeless experience."
-        ctaHref="#director-letter"
-        ctaLabel="From the Director"
-      />
-
-      <TeamCard
-        img={tameemd}
-        name="TAMEM DARADKEH"
-        role="Events & Operations Manager"
-        chips={["Logistics", "Vendors", "Timelines"]}
-        bio="Runs the engine room: production schedules, suppliers, and seamless logistics—so everything flows flawlessly on the day."
-        ctaHref="/appointment"
-        ctaLabel="Work with us"
-      />
-    </div>
-  </div>
-</section>
-
+      {/* ===== CTA ===== */}
+      <section className="relative overflow-hidden bg-[#0b0b10] pb-20 pt-8 md:pt-0">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(800px_400px_at_20%_-10%,rgba(255,220,185,0.08),transparent_60%),radial-gradient(800px_400px_at_100%_120%,rgba(255,154,158,0.08),transparent_60%)]" />
+        <div className="mx-auto max-w-7xl px-6 text-center lg:px-12">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs tracking-widest text-neutral-300">
+            BESPOKE • DETAIL-LED • SEAMLESS
+          </div>
+          <h3 className="mt-5 font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
+            Ready to begin?
+          </h3>
+          <p className="mx-auto mt-3 max-w-prose text-neutral-300">
+            Share your vision and we’ll curate the perfect path—venues, design, and a seamless plan.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="/contact"
+              className="rounded-full border border-amber-300/60 bg-white/5 px-6 py-3 text-sm font-semibold text-amber-100 transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
+            >
+              Enquire Now
+            </a>
+            <a
+              href="/gallery"
+              className="rounded-full border border-white/10 px-6 py-3 text-sm text-neutral-200 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+            >
+              View Gallery
+            </a>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </>

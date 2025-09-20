@@ -10,7 +10,7 @@ function Portfolio() {
   const galleryItems = [
     { src: m1, title: "Maya & Anas", desc: "A glimpse into their special day. Explore more of their story.", href: "/gallery" },
     { src: m2, title: "Yasmin & Ammar", desc: "A timeless celebration of love and joy.", href: "/gallery" },
-    { src: m3, title: "Tala & Alaa", desc: "Capturing moments that last a lifetime.", href: "/gallery" },
+    { src: m3, title: "Zeina & Hussam", desc: "Capturing moments that last a lifetime.", href: "/gallery" },
   ];
 
   return (
