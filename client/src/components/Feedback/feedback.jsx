@@ -5,29 +5,26 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
     () => [
       {
         message:
-          "From the minute we first spoke to Farah, she put both of us at ease—which was hard to do planning a Perth wedding from Melbourne! She brought our vision to life and made the day effortless.",
-        author: "Ahmad & Lana",
-        date: "Apr 2024",
-        location: "Amman, JO",
-        services: ["Planning", "Styling"],
+          "Thank you from the bottom of our hearts for bringing our vision to life so beautifully. The night was beyond perfect-every detail, big and small, was thoughtful.",
+        author: "Dana & fares",
         rating: 5,
       },
       {
         message:
-          "Working with Farah was a dream. Every detail was cared for and the process was stress-free. Our wedding day felt magical from start to finish.",
-        author: "Sara & Dana",
-        date: "Sep 2023",
-        location: "Aqaba, JO",
-        services: ["Styling", "Management"],
+          '"Thank you" feels far too small for what you did for us. Our wedding was truly everything we dreamed of and more, and we are so deeply grateful to you for making it all possible.',
+        author: "Diala and Yazan",
         rating: 5,
       },
       {
         message:
-          "Farah and her team exceeded our expectations. The entire day was flawless, and our guests couldn’t stop talking about how beautiful everything looked.",
-        author: "Rami & Layan",
-        date: "Jan 2025",
-        location: "Amman, JO",
-        services: ["Destination", "Full Service"],
+          "Thank you for the incredible work you put into our wedding. The setup was absolutely beautiful!! The dance floor with the catwalk wooowww especially with the fountain fireworks.",
+        author: "Dina and Ahmad",
+        rating: 5,
+      },
+      {
+        message:
+          "Thank you for your professionalism, good taste, and making this full wedding come together better than expected. You listened to every request and detail and made it a reality.",
+        author: "Ridad & Abdalrahman",
         rating: 5,
       },
     ],
@@ -198,10 +195,6 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
             }`}
           >
             {t.author}
-          </p>
-
-          <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-neutral-300">
-            {t.date} <span className="mx-2">•</span> {t.location}
           </p>
 
           <div className="mt-3 flex flex-wrap justify-center gap-2">
