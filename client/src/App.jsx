@@ -6,6 +6,7 @@ import Galary from "./pages/Gallery/WeddingGallery.jsx";
 import GalleryAlbumPage from "./pages/Gallery/GalleryAlbum.jsx"
 import About from "./pages/about/about.jsx";
 import Service from "./pages/service/service.jsx";
+import Blog from "./components/Blog";
 import "./App.css";
 
 

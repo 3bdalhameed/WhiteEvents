@@ -4,9 +4,17 @@ import Navbar from "../../components/Navbargallery/navbar";
 import { albums } from "./albumsdata";
 import Footer from "../../components/Footer/footer";
 
+
 function GalleryAlbumPage() {
+  const [visibleCount, setVisibleCount] = useState(24);
+  const loadMoreRef = React.useRef(null);
   const { slug } = useParams();
   const album = albums.find((a) => a.slug === slug);
+
+  useEffect(() => {
+    setVisibleCount(24);
+  }, [slug]);
+  
 
   // ── responsive columns: 2 (mobile), 3 (md), 4 (lg+)
   const getCols = () => {
@@ -40,6 +48,7 @@ function GalleryAlbumPage() {
     window.addEventListener("resize", handler);
     return () => window.removeEventListener("resize", handler);
   }, []);
+  
 
   // Lock background scroll when lightbox open
   useEffect(() => {
@@ -51,6 +60,24 @@ function GalleryAlbumPage() {
       };
     }
   }, [lightboxIndex]);
+
+  useEffect(() => {
+    const el = loadMoreRef.current;
+    if (!el) return;
+  
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleCount((c) => Math.min(c + 24, album.images.length));
+        }
+      },
+      { rootMargin: "600px" } // loads before reaching bottom
+    );
+  
+    io.observe(el);
+    return () => io.disconnect();
+  }, [album.images.length]);
+  
 
   // Keyboard controls
   const prevImage = useCallback(() => {
@@ -137,6 +164,8 @@ function GalleryAlbumPage() {
 
   const displaySize = computeDisplaySize();
 
+  const shown = album.images.slice(0, visibleCount);
+
   return (
     <>
       <Navbar />
@@ -159,7 +188,7 @@ function GalleryAlbumPage() {
 
           {/* Masonry via CSS columns */}
           <div className="mt-8" style={{ columnCount: cols, columnGap: "16px" }}>
-            {album.images.map((src, idx) => (
+            {shown.map((src, idx) => (
               <div
                 key={idx}
                 style={{ breakInside: "avoid" }}
@@ -177,6 +206,7 @@ function GalleryAlbumPage() {
               </div>
             ))}
           </div>
+          <div ref={loadMoreRef} className="h-10" />
         </div>
       </main>
 
