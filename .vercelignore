@@ -1,0 +1,14 @@
+node_modules
+.vite
+dist
+build
+.next
+out
+coverage
+.cache
+.DS_Store
+*.log
+
+# env files (optional)
+.env
+.env.*
