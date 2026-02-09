@@ -1,7 +1,7 @@
 // src/pages/Gallery/albumsdata.jsx
 
 // Global globs (must be static strings)
-const ALL_FULL = import.meta.glob("./albums/*/*.{jpg,jpeg,png,webp,JPG}", { eager: false });
+const ALL_FULL = import.meta.glob("./albums/*/*.{jpg,jpeg,png,PNG,webp,JPG}", { eager: false });
 const ALL_THUMBS = import.meta.glob("./albums_thumbs/*/*.{webp,jpg,jpeg,png}", { eager: false });
 
 const parse = (path) => {
