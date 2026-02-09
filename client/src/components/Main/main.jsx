@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import background from "../../pages/newimg/background.mp4";
+import background from "../../pages/Gallery/albums/Destination weddings/yellow-06.PNG";
 
 export default function Main() {
   const vidRef = useRef(null);
@@ -27,18 +27,7 @@ export default function Main() {
     <section className="relative w-full h-screen flex justify-center items-center">
       {/* Video Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <video
-          ref={vidRef}
-          src={background}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute w-full h-full object-cover"
-          aria-hidden="true"
-          tabIndex={-1}
-        />
+        <img src={background} className="w-full" />
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
