@@ -1,8 +1,9 @@
 // src/pages/Gallery/albumsdata.jsx
 
-// Lazy loaders (FAST)
-const fullFiles = import.meta.glob("./albums/*/*.{jpg,jpeg,png,PNG,webp,JPG}", { eager: false });
-const thumbFiles = import.meta.glob("./albums_thumbs/*/*.{webp,jpg,jpeg,png}", { eager: false });
+// Used for gallery grid (list of albums)
+// We keep these global globs for discovering album slugs + covers
+const ALL_FULL = import.meta.glob("./albums/*/*.{jpg,jpeg,png,webp,JPG}", { eager: false });
+const ALL_THUMBS = import.meta.glob("./albums_thumbs/*/*.{webp,jpg,jpeg,png}", { eager: false });
 
 const parse = (path) => {
   const parts = path.split("/");
@@ -12,62 +13,18 @@ const parse = (path) => {
   };
 };
 
-// Album slugs (no image loading)
+// Slugs list (no image loading here)
 export const albumSlugs = Array.from(
-  new Set(Object.keys(fullFiles).map((p) => parse(p).folder))
+  new Set(Object.keys(ALL_FULL).map((p) => parse(p).folder))
 ).sort();
 
 /**
- * ✅ getAlbum(slug)
- * Returns:
- * { slug, name, cover, images: [{name, thumb, full}] }
+ * ✅ FAST getAlbum(slug)
+ * Loads ONLY the files inside that album folder (no scanning all albums).
+ * Returns: { slug, name, cover, images: [{name, thumb, full}] }
  */
 export async function getAlbum(slug) {
-  const thumbs = [];
-  const full = [];
-
-  for (const [path, loader] of Object.entries(thumbFiles)) {
-    const { folder, name } = parse(path);
-    if (folder !== slug) continue;
-    const mod = await loader();
-    thumbs.push({ name, url: mod.default });
-  }
-
-  for (const [path, loader] of Object.entries(fullFiles)) {
-    const { folder, name } = parse(path);
-    if (folder !== slug) continue;
-    const mod = await loader();
-    full.push({ name, url: mod.default });
-  }
-
-  thumbs.sort((a, b) => a.name.localeCompare(b.name));
-  full.sort((a, b) => a.name.localeCompare(b.name));
-
-  const thumbByName = Object.fromEntries(thumbs.map((t) => [t.name, t.url]));
-
-  const images = full.map((f) => ({
-    name: f.name,
-    full: f.url,
-    thumb: thumbByName[f.name] || f.url,
-  }));
-
-  return {
-    slug,
-    name: slug,
-    cover: images[0]?.thumb || null,
-    images,
-  };
-}
-
-/**
- * ✅ getAlbums()
- * Returns fast list for grid:
- * [{slug, name, cover}]
- * cover uses first thumb, else first full image
- */
-// albumsdata.jsx
-export async function getAlbum(slug) {
-  // IMPORTANT: slug comes from folder name, safe to use in a path
+  // slug-specific globs (fast)
   const fullFiles = import.meta.glob(`./albums/${slug}/*.{jpg,jpeg,png,webp,JPG}`, { eager: false });
   const thumbFiles = import.meta.glob(`./albums_thumbs/${slug}/*.{webp,jpg,jpeg,png}`, { eager: false });
 
@@ -89,10 +46,11 @@ export async function getAlbum(slug) {
   full.sort((a, b) => a.name.localeCompare(b.name));
 
   const thumbByName = Object.fromEntries(thumbs.map((t) => [t.name, t.url]));
+
   const images = full.map((f) => ({
     name: f.name,
     full: f.url,
-    thumb: thumbByName[f.name] || f.url,
+    thumb: thumbByName[f.name] || f.url, // fallback if missing thumb
   }));
 
   return {
@@ -103,11 +61,55 @@ export async function getAlbum(slug) {
   };
 }
 
-
 /**
- * ✅ Backwards compatibility:
- * Some of your pages still import { albums }.
- * We keep it exported, but as an EMPTY array (so build won't fail).
- * You should migrate those pages to use getAlbums().
+ * ✅ getAlbums()
+ * For the albums grid page:
+ * returns [{slug, name, cover}]
+ * cover = first thumb, else first full
  */
+export async function getAlbums() {
+  const thumbsByFolder = {};
+  const fullByFolder = {};
+
+  // group thumbs by folder
+  for (const [path, loader] of Object.entries(ALL_THUMBS)) {
+    const { folder, name } = parse(path);
+    (thumbsByFolder[folder] ||= []).push({ name, loader });
+  }
+
+  // group full by folder (fallback cover)
+  for (const [path, loader] of Object.entries(ALL_FULL)) {
+    const { folder, name } = parse(path);
+    (fullByFolder[folder] ||= []).push({ name, loader });
+  }
+
+  const list = await Promise.all(
+    albumSlugs.map(async (slug) => {
+      const thumbCandidates = (thumbsByFolder[slug] || []).sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+
+      let cover = null;
+
+      if (thumbCandidates[0]) {
+        const mod = await thumbCandidates[0].loader();
+        cover = mod.default;
+      } else {
+        const fullCandidates = (fullByFolder[slug] || []).sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        if (fullCandidates[0]) {
+          const mod = await fullCandidates[0].loader();
+          cover = mod.default;
+        }
+      }
+
+      return { slug, name: slug, cover };
+    })
+  );
+
+  return list;
+}
+
+// Backward compatibility (if any file still imports { albums }, it won’t crash build)
 export const albums = [];
