@@ -89,9 +89,8 @@ export default function Beginning() {
               </h2>
 
               <p className="mt-4 text-[15px] leading-relaxed text-neutral-300 md:text-base">
-                White Events is an events and weddings design and planning company in Amman.
-                We craft elevated celebrations that reflect your story—with impeccable detail,
-                refined taste, and calm, expert coordination.
+              White Events is a luxury, high-end wedding planning and design studio specializing in destination and worldwide weddings.
+              We create elegant, heartfelt celebrations that reflect each couple’s love story, with thoughtful design and seamless planning.
               </p>
 
               <p className="mt-3 text-[15px] leading-relaxed text-neutral-300 md:text-base">

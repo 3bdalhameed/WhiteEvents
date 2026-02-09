@@ -65,48 +65,44 @@ export async function getAlbum(slug) {
  * [{slug, name, cover}]
  * cover uses first thumb, else first full image
  */
-export async function getAlbums() {
-  const thumbsByFolder = {};
-  const fullByFolder = {};
+// albumsdata.jsx
+export async function getAlbum(slug) {
+  // IMPORTANT: slug comes from folder name, safe to use in a path
+  const fullFiles = import.meta.glob(`./albums/${slug}/*.{jpg,jpeg,png,webp,JPG}`, { eager: false });
+  const thumbFiles = import.meta.glob(`./albums_thumbs/${slug}/*.{webp,jpg,jpeg,png}`, { eager: false });
 
+  const parseName = (path) => (path.split("/").pop() || "").toLowerCase();
+
+  const thumbs = [];
   for (const [path, loader] of Object.entries(thumbFiles)) {
-    const { folder, name } = parse(path);
-    (thumbsByFolder[folder] ||= []).push({ name, loader });
+    const mod = await loader();
+    thumbs.push({ name: parseName(path), url: mod.default });
   }
 
+  const full = [];
   for (const [path, loader] of Object.entries(fullFiles)) {
-    const { folder, name } = parse(path);
-    (fullByFolder[folder] ||= []).push({ name, loader });
+    const mod = await loader();
+    full.push({ name: parseName(path), url: mod.default });
   }
 
-  const list = await Promise.all(
-    albumSlugs.map(async (slug) => {
-      const thumbCandidates = (thumbsByFolder[slug] || []).sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
+  thumbs.sort((a, b) => a.name.localeCompare(b.name));
+  full.sort((a, b) => a.name.localeCompare(b.name));
 
-      let cover = null;
+  const thumbByName = Object.fromEntries(thumbs.map((t) => [t.name, t.url]));
+  const images = full.map((f) => ({
+    name: f.name,
+    full: f.url,
+    thumb: thumbByName[f.name] || f.url,
+  }));
 
-      if (thumbCandidates[0]) {
-        const mod = await thumbCandidates[0].loader();
-        cover = mod.default;
-      } else {
-        // fallback to first full
-        const fullCandidates = (fullByFolder[slug] || []).sort((a, b) =>
-          a.name.localeCompare(b.name)
-        );
-        if (fullCandidates[0]) {
-          const mod = await fullCandidates[0].loader();
-          cover = mod.default;
-        }
-      }
-
-      return { slug, name: slug, cover };
-    })
-  );
-
-  return list;
+  return {
+    slug,
+    name: slug,
+    cover: images[0]?.thumb || null,
+    images,
+  };
 }
+
 
 /**
  * ✅ Backwards compatibility:

@@ -37,7 +37,7 @@ function GalleryAlbumPage() {
   const [touchStartX, setTouchStartX] = useState(null);
   const [touchEndX, setTouchEndX] = useState(null);
 
-  // Load album on slug change
+  // ✅ Load album on slug change (ONLY ONCE)
   useEffect(() => {
     let alive = true;
 
@@ -47,17 +47,19 @@ function GalleryAlbumPage() {
     setLightboxIndex(null);
     setIntrinsic(null);
 
-    getAlbum(slug)
-      .then((a) => {
+    (async () => {
+      try {
+        const a = await getAlbum(slug);
         if (!alive) return;
         setAlbum(a);
-        setLoading(false);
-      })
-      .catch(() => {
+      } catch (e) {
         if (!alive) return;
         setAlbum(null);
+      } finally {
+        if (!alive) return;
         setLoading(false);
-      });
+      }
+    })();
 
     return () => {
       alive = false;
@@ -174,25 +176,8 @@ function GalleryAlbumPage() {
     setTouchEndX(null);
   };
 
-  // states UI
-  if (loading) {
-    return (
-      <>
-        <Navbar />
-        <main className="min-h-screen bg-[#0b0b10] text-neutral-100">
-          <div className="mx-auto max-w-5xl px-4 pt-28 pb-16">
-            <h1 className="text-2xl font-semibold">Loading…</h1>
-            <p className="mt-2 text-sm text-neutral-400">
-              Fetching album assets…
-            </p>
-          </div>
-        </main>
-        <Footer />
-      </>
-    );
-  }
-
-  if (!album) {
+  // If finished loading and album missing → not found
+  if (!loading && !album) {
     return (
       <>
         <Navbar />
@@ -206,15 +191,15 @@ function GalleryAlbumPage() {
     );
   }
 
-  const shown = album.images.slice(0, visibleCount);
+  const shown = album?.images ? album.images.slice(0, visibleCount) : [];
   const displaySize = computeDisplaySize();
 
   return (
     <>
       <Navbar />
 
-      {/* backdrop with subtle glow to match theme */}
       <main className="relative min-h-screen overflow-hidden bg-[#0b0b10] text-neutral-100">
+        {/* background */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(1100px_500px_at_10%_-10%,rgba(255,220,185,0.06),transparent_60%),radial-gradient(900px_480px_at_100%_130%,rgba(255,154,158,0.06),transparent_60%)]" />
           <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-white/5 shadow-[inset_0_0_140px_40px_rgba(0,0,0,0.65)]" />
@@ -224,41 +209,49 @@ function GalleryAlbumPage() {
         <div className="mx-auto max-w-7xl px-4 pt-28 pb-16">
           <h1 className="text-3xl font-bold md:text-4xl">
             <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
-              {album.name}
+              {album?.name || slug}
             </span>
           </h1>
+
           <p className="mt-2 text-sm text-neutral-300">
-            A selection from {album.name}.
+            {album?.name ? `A selection from ${album.name}.` : "Loading album…"}
           </p>
 
-          {/* Masonry via CSS columns */}
-          <div className="mt-8" style={{ columnCount: cols, columnGap: "16px" }}>
-            {shown.map((img, idx) => (
-              <div
-                key={img.name || idx}
-                style={{ breakInside: "avoid" }}
-                className="mb-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
-              >
-                <img
-                  src={img.thumb} // ✅ thumbnails in grid (FAST)
-                  alt={`${album.name} ${idx + 1}`}
-                  className="block h-auto w-full cursor-pointer"
-                  loading="lazy"
-                  decoding="async"
-                  fetchpriority={idx < 6 ? "high" : "auto"}
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                  onClick={() => openLightbox(idx)}
-                />
-              </div>
-            ))}
-          </div>
+          {/* ✅ No full-screen loader, only small loader */}
+          {loading && (
+            <div className="mt-6 text-sm text-neutral-400">Loading photos…</div>
+          )}
+
+          {/* Masonry */}
+          {!!album?.images?.length && (
+            <div className="mt-8" style={{ columnCount: cols, columnGap: "16px" }}>
+              {shown.map((img, idx) => (
+                <div
+                  key={img.name || idx}
+                  style={{ breakInside: "avoid" }}
+                  className="mb-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                >
+                  <img
+                    src={img.thumb}
+                    alt={`${album.name} ${idx + 1}`}
+                    className="block h-auto w-full cursor-pointer"
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority={idx < 6 ? "high" : "auto"}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                    onClick={() => openLightbox(idx)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
 
           <div ref={loadMoreRef} className="h-10" />
         </div>
       </main>
 
       {/* Lightbox */}
-      {lightboxIndex !== null && (
+      {lightboxIndex !== null && album?.images?.[lightboxIndex] && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
           role="dialog"
@@ -268,7 +261,6 @@ function GalleryAlbumPage() {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          {/* controls */}
           <button
             aria-label="Close"
             onClick={(e) => {
@@ -303,7 +295,7 @@ function GalleryAlbumPage() {
           </button>
 
           <img
-            src={album.images[lightboxIndex].full} // ✅ full only when opened
+            src={album.images[lightboxIndex].full}
             alt={`enlarged ${album.name} ${lightboxIndex + 1}`}
             className="block select-none object-contain"
             style={displaySize || { maxWidth: "96vw", maxHeight: "90svh" }}
