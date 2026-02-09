@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // Import your three images
-import m1 from "../../pages/Gallery/albums/Maya & Anas - S.t Regis/1.jpg";
+import m1 from "../../pages/Gallery/albums/Destination weddings/1.PNG";
 import m2 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/1.JPG";
 import m3 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5134.jpg";
 
 function Portfolio() {
   const galleryItems = [
-    { src: m1, title: "Maya & Anas", desc: "A glimpse into their special day. Explore more of their story.", href: "/gallery" },
+    { src: m1, title: "Destination weddings", desc: "A glimpse into their special day.", href: "/gallery" },
     { src: m2, title: "Yasmin & Ammar", desc: "A timeless celebration of love and joy.", href: "/gallery" },
     { src: m3, title: "Zeina & Hussam", desc: "Capturing moments that last a lifetime.", href: "/gallery" },
   ];
