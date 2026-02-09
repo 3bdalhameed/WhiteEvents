@@ -1,22 +1,21 @@
-import React, { useState, useEffect, useCallback } from "react";
+// GalleryAlbumPage.jsx
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbargallery/navbar";
-import { albums } from "./albumsdata";
 import Footer from "../../components/Footer/footer";
-
+import { getAlbum } from "./albumsdata";
 
 function GalleryAlbumPage() {
-  const [visibleCount, setVisibleCount] = useState(24);
-  const loadMoreRef = React.useRef(null);
   const { slug } = useParams();
-  const album = albums.find((a) => a.slug === slug);
 
-  useEffect(() => {
-    setVisibleCount(24);
-  }, [slug]);
-  
+  const [album, setAlbum] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // ── responsive columns: 2 (mobile), 3 (md), 4 (lg+)
+  // infinite load
+  const [visibleCount, setVisibleCount] = useState(24);
+  const loadMoreRef = useRef(null);
+
+  // responsive columns: 2 (mobile), 3 (md), 4 (lg+)
   const getCols = () => {
     if (typeof window === "undefined") return 4;
     const w = window.innerWidth;
@@ -24,12 +23,11 @@ function GalleryAlbumPage() {
     if (w < 1024) return 3;
     return 4;
   };
-
   const [cols, setCols] = useState(getCols);
 
   // Lightbox state
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const [intrinsic, setIntrinsic] = useState(null); // {w,h} natural size of current image
+  const [intrinsic, setIntrinsic] = useState(null); // {w,h}
   const [viewport, setViewport] = useState(() => ({
     w: typeof window !== "undefined" ? window.innerWidth : 0,
     h: typeof window !== "undefined" ? window.innerHeight : 0,
@@ -39,6 +37,34 @@ function GalleryAlbumPage() {
   const [touchStartX, setTouchStartX] = useState(null);
   const [touchEndX, setTouchEndX] = useState(null);
 
+  // Load album on slug change
+  useEffect(() => {
+    let alive = true;
+
+    setAlbum(null);
+    setLoading(true);
+    setVisibleCount(24);
+    setLightboxIndex(null);
+    setIntrinsic(null);
+
+    getAlbum(slug)
+      .then((a) => {
+        if (!alive) return;
+        setAlbum(a);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!alive) return;
+        setAlbum(null);
+        setLoading(false);
+      });
+
+    return () => {
+      alive = false;
+    };
+  }, [slug]);
+
+  // Resize listener for columns + viewport
   useEffect(() => {
     const handler = () => {
       setCols(getCols());
@@ -48,7 +74,6 @@ function GalleryAlbumPage() {
     window.addEventListener("resize", handler);
     return () => window.removeEventListener("resize", handler);
   }, []);
-  
 
   // Lock background scroll when lightbox open
   useEffect(() => {
@@ -61,42 +86,42 @@ function GalleryAlbumPage() {
     }
   }, [lightboxIndex]);
 
+  // Infinite loader (IntersectionObserver)
   useEffect(() => {
     const el = loadMoreRef.current;
-    if (!el) return;
-  
+    if (!el || !album?.images?.length) return;
+
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           setVisibleCount((c) => Math.min(c + 24, album.images.length));
         }
       },
-      { rootMargin: "600px" } // loads before reaching bottom
+      { rootMargin: "600px" }
     );
-  
+
     io.observe(el);
     return () => io.disconnect();
-  }, [album.images.length]);
-  
+  }, [album?.images?.length]);
 
   // Keyboard controls
   const prevImage = useCallback(() => {
     setLightboxIndex((i) => {
-      if (i === null) return i;
+      if (i === null || !album?.images?.length) return i;
       const next = i > 0 ? i - 1 : album.images.length - 1;
       setIntrinsic(null);
       return next;
     });
-  }, [album?.images.length]);
+  }, [album?.images?.length]);
 
   const nextImage = useCallback(() => {
     setLightboxIndex((i) => {
-      if (i === null) return i;
+      if (i === null || !album?.images?.length) return i;
       const next = i < album.images.length - 1 ? i + 1 : 0;
       setIntrinsic(null);
       return next;
     });
-  }, [album?.images.length]);
+  }, [album?.images?.length]);
 
   const onKeyDown = useCallback(
     (e) => {
@@ -113,19 +138,6 @@ function GalleryAlbumPage() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onKeyDown]);
 
-  if (!album) {
-    return (
-      <>
-        <Navbar />
-        <main className="min-h-screen bg-[#0b0b10] text-neutral-100">
-          <div className="mx-auto max-w-5xl px-4 pt-28 pb-16">
-            <h1 className="text-2xl font-semibold">Album not found</h1>
-          </div>
-        </main>
-      </>
-    );
-  }
-
   const openLightbox = (idx) => {
     setLightboxIndex(idx);
     setIntrinsic(null);
@@ -135,7 +147,7 @@ function GalleryAlbumPage() {
   };
   const closeLightbox = () => setLightboxIndex(null);
 
-  // Compute size: fit inside viewport (with padding) and NEVER upscale beyond intrinsic
+  // Compute size: fit inside viewport (padding) and NEVER upscale beyond intrinsic
   const computeDisplaySize = () => {
     if (!intrinsic) return undefined;
     const padX = Math.max(16, viewport.w * 0.02);
@@ -162,9 +174,40 @@ function GalleryAlbumPage() {
     setTouchEndX(null);
   };
 
-  const displaySize = computeDisplaySize();
+  // states UI
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-[#0b0b10] text-neutral-100">
+          <div className="mx-auto max-w-5xl px-4 pt-28 pb-16">
+            <h1 className="text-2xl font-semibold">Loading…</h1>
+            <p className="mt-2 text-sm text-neutral-400">
+              Fetching album assets…
+            </p>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
+  if (!album) {
+    return (
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-[#0b0b10] text-neutral-100">
+          <div className="mx-auto max-w-5xl px-4 pt-28 pb-16">
+            <h1 className="text-2xl font-semibold">Album not found</h1>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
 
   const shown = album.images.slice(0, visibleCount);
+  const displaySize = computeDisplaySize();
 
   return (
     <>
@@ -184,28 +227,32 @@ function GalleryAlbumPage() {
               {album.name}
             </span>
           </h1>
-          <p className="mt-2 text-sm text-neutral-300">A selection from {album.name}.</p>
+          <p className="mt-2 text-sm text-neutral-300">
+            A selection from {album.name}.
+          </p>
 
           {/* Masonry via CSS columns */}
           <div className="mt-8" style={{ columnCount: cols, columnGap: "16px" }}>
-            {shown.map((src, idx) => (
+            {shown.map((img, idx) => (
               <div
-                key={idx}
+                key={img.name || idx}
                 style={{ breakInside: "avoid" }}
                 className="mb-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
               >
                 <img
-                  src={src}
+                  src={img.thumb} // ✅ thumbnails in grid (FAST)
                   alt={`${album.name} ${idx + 1}`}
                   className="block h-auto w-full cursor-pointer"
                   loading="lazy"
                   decoding="async"
+                  fetchpriority={idx < 6 ? "high" : "auto"}
                   sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                   onClick={() => openLightbox(idx)}
                 />
               </div>
             ))}
           </div>
+
           <div ref={loadMoreRef} className="h-10" />
         </div>
       </main>
@@ -216,8 +263,8 @@ function GalleryAlbumPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
           role="dialog"
           aria-modal="true"
-          onClick={closeLightbox}               // click outside image closes
-          onTouchStart={handleTouchStart}       // swipe to change
+          onClick={closeLightbox}
+          onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
@@ -256,7 +303,7 @@ function GalleryAlbumPage() {
           </button>
 
           <img
-            src={album.images[lightboxIndex]}
+            src={album.images[lightboxIndex].full} // ✅ full only when opened
             alt={`enlarged ${album.name} ${lightboxIndex + 1}`}
             className="block select-none object-contain"
             style={displaySize || { maxWidth: "96vw", maxHeight: "90svh" }}
@@ -265,7 +312,7 @@ function GalleryAlbumPage() {
               const img = e.currentTarget;
               setIntrinsic({ w: img.naturalWidth, h: img.naturalHeight });
             }}
-            onClick={(e) => e.stopPropagation()} // clicking image itself won't close
+            onClick={(e) => e.stopPropagation()}
           />
 
           <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs text-white backdrop-blur">
