@@ -1,7 +1,7 @@
 // src/pages/Gallery/albumsdata.jsx
 
 // Lazy loaders (FAST)
-const fullFiles = import.meta.glob("./albums/*/*.{jpg,jpeg,png,webp,JPG}", { eager: false });
+const fullFiles = import.meta.glob("./albums/*/*.{jpg,jpeg,png,PNG,webp,JPG}", { eager: false });
 const thumbFiles = import.meta.glob("./albums_thumbs/*/*.{webp,jpg,jpeg,png}", { eager: false });
 
 const parse = (path) => {
