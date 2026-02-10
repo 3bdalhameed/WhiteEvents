@@ -226,7 +226,7 @@ export default function About() {
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="/contact"
+              href="/#appointment"
               className="rounded-full border border-amber-300/60 bg-white/5 px-6 py-3 text-sm font-semibold text-amber-100 transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
             >
               Enquire Now
