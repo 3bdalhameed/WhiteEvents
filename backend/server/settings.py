@@ -70,6 +70,7 @@ EMAIL_HOST_USER = "abdalhmeed.dradkeh@gmail.com"
 EMAIL_HOST_PASSWORD = "bzpokgdulrmiwexl"
 DEFAULT_FROM_EMAIL = "abdalhmeed.dradkeh@gmail.com"
 BOOKINGS_TO_EMAIL = "dimaaljammal@gmail.com"
+EMAIL_TIMEOUT = 10  # seconds
 
 
 # ===== DATABASE =====
