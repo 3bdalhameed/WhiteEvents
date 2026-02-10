@@ -26,9 +26,13 @@ export default function Main() {
   return (
     <section className="relative w-full h-screen flex justify-center items-center">
       {/* Video Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <img src={background} className="w-full" />
-        <div className="absolute inset-0 bg-black/50" />
+      <div className="relative w-full h-[100svh] overflow-hidden">
+        <img
+          src={background}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        {/* your content here */}
       </div>
 
       {/* Content */}

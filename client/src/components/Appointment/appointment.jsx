@@ -8,9 +8,9 @@ export default function AppointmentCalendar({
     tue: ["09:00-18:00"],
     wed: ["09:00-18:00"],
     thu: ["09:00-18:00"],
-    fri: ["09:00-18:00"],
-    sat: ["10:00-16:00"],
-    sun: [],
+    fri: [],
+    sat: [],
+    sun: ["09:00-18:00"],
   },
   blackoutDates = [],
 }) {
