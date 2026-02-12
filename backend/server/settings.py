@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-_mp=mb(9$#_+%j-*7td)2*_rp8rw$4apj&ffdg1*lq34h4o0+w
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "whiteevents.onrender.com",  # Render backend URL
+    #"whiteevents.onrender.com",  # Render backend URL
     "localhost",                 # optional, for local dev
     "127.0.0.1"
 ]
