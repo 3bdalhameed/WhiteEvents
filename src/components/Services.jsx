@@ -1,0 +1,92 @@
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+
+const m1 = "/gallery/albums_thumbs/Ahmad & Dana - St.Regis/1.webp";
+const m2 = "/gallery/albums_thumbs/Haya & Mustafa - La Plage Beach Club, Aqaba/1.webp";
+
+function Services() {
+  const services = [
+    "Styling",
+    "Styling & Management",
+    "Planning, Styling & Management",
+    "Destination Weddings",
+  ];
+
+  return (
+    <section id="services" className="relative overflow-hidden bg-[#FAFAF7] text-neutral-900">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_12%_-10%,rgba(255,220,185,0.18),transparent_60%),radial-gradient(900px_500px_at_100%_120%,rgba(255,154,158,0.14),transparent_60%),linear-gradient(180deg,rgba(255,255,255,0.8),transparent_50%)]" />
+        <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-neutral-200 shadow-[inset_0_0_140px_40px_rgba(255,255,255,0.8)]" />
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-rose-300/30 blur-3xl" />
+        <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-amber-300/30 blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.08] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px] text-neutral-300" />
+      </div>
+
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-14 pt-32 pb-32 md:grid-cols-3 md:px-6 lg:px-12">
+        <div className="relative">
+          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-neutral-200">
+            <Image
+              src={m1}
+              alt="Bride and Groom Holding Hands"
+              fill
+              className="object-cover"
+              loading="lazy"
+              quality={80}
+              sizes="(min-width: 768px) 33vw, 100vw"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
+          </div>
+          <div className="pointer-events-none absolute -inset-3 -z-10 rounded-[2rem] bg-amber-200/30 blur-2xl" />
+        </div>
+
+        <div className="text-center">
+          <h2 className="font-serif text-3xl font-bold tracking-tight md:text-4xl">
+            <span className="bg-gradient-to-r from-amber-700 via-rose-600 to-amber-600 bg-clip-text text-transparent">
+              Our Services
+            </span>
+          </h2>
+
+          <p className="mx-auto mt-6 max-w-xl px-2 text-base leading-relaxed text-neutral-700 md:text-lg">
+            As a specialised event design studio, we offer a selection of wedding planning, styling &amp; management services—perfect for couples who still want to be hands-on, and those who prefer to leave it all to the experts.
+          </p>
+
+          <div className="mt-10 flex flex-col items-center gap-4">
+            {services.map((service, i) => (
+              <Link
+                key={i}
+                href="/services"
+                className="group relative w-full max-w-xs overflow-hidden rounded-full ring-1 ring-amber-400/40 bg-white px-6 py-3 text-sm font-medium tracking-wide text-amber-800 backdrop-blur-sm transition-all duration-300 hover:bg-amber-50 hover:text-amber-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60 md:text-base"
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{ boxShadow: "inset 0 0 0 1px rgba(251,191,36,0.65), 0 0 0 0 rgba(251,191,36,0.0)" }}
+                />
+                <span className="relative z-10">{service}</span>
+                <span className="pointer-events-none absolute bottom-1 left-1/2 z-0 h-px w-0 -translate-x-1/2 bg-gradient-to-r from-transparent via-amber-600 to-transparent transition-all duration-300 group-hover:w-3/4" />
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-neutral-200">
+            <Image
+              src={m2}
+              alt="Elegant Wedding Table Setup"
+              fill
+              className="object-cover"
+              loading="lazy"
+              quality={80}
+              sizes="(min-width: 768px) 33vw, 100vw"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
+          </div>
+          <div className="pointer-events-none absolute -inset-3 -z-10 rounded-[2rem] bg-rose-200/30 blur-2xl" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Services;
