@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import background from "client/src/pages/newimg/logo projects by white-01.jpg.jpeg";
+import background from "../../pages/newimg/logo projects by white-01.jpg.jpeg";
 
 export default function Main() {
   const vidRef = useRef(null);
