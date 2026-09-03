@@ -1,14 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-// Import your three images
-import m1 from "../../pages/Gallery/albums/Events/24A2B3C3-3359-4D62-92A2-6F4ED0CACE00.jpg";
+// Events by White — cycling gallery images
+import e1 from "../../pages/Gallery/albums/Events/24A2B3C3-3359-4D62-92A2-6F4ED0CACE00.jpg";
+import e2 from "../../pages/Gallery/albums/Events/39E41A0C-BE6F-4653-9067-76ED51F79E55.jpg";
+import e3 from "../../pages/Gallery/albums/Events/C3E960C1-707C-42AC-8805-C6D27F811D8E.jpg";
+import e4 from "../../pages/Gallery/albums/Events/FBD111D4-E0A1-4116-B8C4-C2DE3BA54DAE.jpg";
+
 import m2 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/1.JPG";
 import m3 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5134.jpg";
 
+const eventsByWhiteImages = [e1, e2, e3, e4];
+
+function CyclingImage({ images, alt }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % images.length);
+    }, 2800);
+    return () => clearInterval(id);
+  }, [images.length]);
+
+  return (
+    <>
+      {images.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt={alt}
+          className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1200ms] ease-out group-hover:scale-[1.06] motion-reduce:transition-none ${
+            i === index ? "opacity-100" : "opacity-0"
+          }`}
+          loading={i === 0 ? "lazy" : "eager"}
+          decoding="async"
+        />
+      ))}
+    </>
+  );
+}
+
 function Portfolio() {
   const galleryItems = [
-    { src: m1, title: "Destination weddings", desc: "A glimpse into their special day.", href: "/gallery" },
+    {
+      images: eventsByWhiteImages,
+      title: "Events by White",
+      desc: "Corporate galas, product launches, and brand activations.",
+      href: "/gallery",
+    },
     { src: m2, title: "Yasmin & Ammar", desc: "A timeless celebration of love and joy.", href: "/gallery" },
     { src: m3, title: "Zeina & Hussam", desc: "Capturing moments that last a lifetime.", href: "/gallery" },
   ];
@@ -77,14 +116,18 @@ function Portfolio() {
           >
             {/* fixed aspect for harmony */}
             <div className="relative aspect-[4/5] w-full">
-              <img
-                src={item.src}
-                alt={`${item.title} — wedding highlight`}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] motion-reduce:transition-none"
-                loading="lazy"
-                decoding="async"
-                sizes="(min-width: 1024px) 28vw, (min-width: 768px) 40vw, 100vw"
-              />
+              {item.images ? (
+                <CyclingImage images={item.images} alt={`${item.title} — highlight`} />
+              ) : (
+                <img
+                  src={item.src}
+                  alt={`${item.title} — wedding highlight`}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] motion-reduce:transition-none"
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 28vw, (min-width: 768px) 40vw, 100vw"
+                />
+              )}
 
               {/* luxe border shimmer on hover */}
               <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/10 transition-[box-shadow,opacity] duration-500 group-hover:shadow-[0_0_0_2px_rgba(251,191,36,0.5),inset_0_0_60px_rgba(0,0,0,0.35)] group-hover:opacity-100" />
