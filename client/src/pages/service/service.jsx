@@ -143,8 +143,8 @@ const CTA = () => (
       <motion.h3 {...fade(0)} className="font-serif text-2xl md:text-3xl font-bold tracking-tight"><span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">Ready to begin?</span></motion.h3>
       <motion.p {...fade(0.05)} className="mx-auto mt-3 max-w-prose text-neutral-300">Share your vision and we’ll curate the perfect path—venues, design, and a seamless plan.</motion.p>
       <motion.div {...fade(0.1)} className="mt-6 flex flex-wrap items-center justify-center gap-3">
-        <a href="/contact" className="rounded-full border border-amber-300/60 bg-white/5 px-6 py-3 text-sm font-semibold text-amber-100 transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40">Enquire Now</a>
-        <a href="/about" className="rounded-full border border-white/10 px-6 py-3 text-sm text-neutral-200 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20">View Portfolio</a>
+        <a href="mailto:tameem_aldaradkeh@outlook.com" className="rounded-full border border-amber-300/60 bg-white/5 px-6 py-3 text-sm font-semibold text-amber-100 transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40">Enquire Now</a>
+        <a href="/gallery" className="rounded-full border border-white/10 px-6 py-3 text-sm text-neutral-200 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20">View Portfolio</a>
       </motion.div>
     </div>
   </section>

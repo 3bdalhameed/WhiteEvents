@@ -19,10 +19,10 @@ function Home() {
         <Analytics/>
         <Navbar />
         <Main />
-        <ProjectsByWhite />
         <Project />
         <Portfolio />
         <Services />
+        <ProjectsByWhite />
         <Feadback />
         <Socialgallery />
         <Footer />

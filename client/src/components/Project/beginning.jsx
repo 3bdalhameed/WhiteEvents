@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { HashLink } from "react-router-hash-link";
 import heroSplit from "../../pages/newimg/beginning.png";
 
 export default function Beginning() {
@@ -138,12 +139,13 @@ export default function Beginning() {
                   </svg>
                 </a>
 
-                <a
-                  href="/portfolio"
+                <HashLink
+                  smooth
+                  to="/#portfolio"
                   className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/0 px-6 py-3 text-sm font-semibold tracking-wide text-neutral-200 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
                 >
                   VIEW PORTFOLIO
-                </a>
+                </HashLink>
               </div>
 
               <div className="pointer-events-none absolute -inset-x-6 -inset-y-6 -z-10 hidden rounded-3xl bg-amber-300/5 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100 md:block" />

@@ -204,7 +204,7 @@ export default function About() {
               role="Events & Operations Manager"
               chips={["Logistics", "Vendors", "Timelines"]}
               bio="Runs the engine room: production schedules, suppliers, and seamless logistics—so everything flows flawlessly on the day."
-              ctaHref="/appointment"
+              ctaHref="mailto:tameem_aldaradkeh@outlook.com"
               ctaLabel="Work with us"
             />
           </div>
@@ -226,7 +226,7 @@ export default function About() {
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="/#appointment"
+              href="mailto:tameem_aldaradkeh@outlook.com"
               className="rounded-full border border-amber-300/60 bg-white/5 px-6 py-3 text-sm font-semibold text-amber-100 transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
             >
               Enquire Now

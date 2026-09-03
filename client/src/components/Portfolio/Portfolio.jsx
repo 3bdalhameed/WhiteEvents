@@ -41,7 +41,7 @@ function CyclingImage({ images, alt, intervalMs = 2800 }) {
           className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1200ms] ease-out group-hover:scale-[1.06] motion-reduce:transition-none ${
             i === index ? "opacity-100" : "opacity-0"
           }`}
-          loading={i === 0 ? "lazy" : "eager"}
+          loading={i === 0 ? "eager" : "lazy"}
           decoding="async"
         />
       ))}
@@ -134,7 +134,7 @@ function Portfolio() {
             aria-label={`${item.title}: ${item.desc}`}
           >
             {/* fixed aspect for harmony */}
-            <div className="relative aspect-[4/5] w-full">
+            <div className="relative aspect-[4/5] w-full bg-white/5">
               <CyclingImage
                 images={item.images}
                 alt={`${item.title} — highlight`}

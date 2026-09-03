@@ -100,7 +100,7 @@ const NavBar = () => {
             Gallery
           </a>
           <a
-            href="/testimonials"
+            href="/#testimonials"
             className="block py-2 hover:text-blue-600 transition"
             onClick={() => setIsMenuOpen(false)}
           >
