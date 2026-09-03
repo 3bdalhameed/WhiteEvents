@@ -65,12 +65,12 @@ function Portfolio() {
       </div>
 
       {/* gallery */}
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 md:grid-cols-3">
+      <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-6 px-6">
         {galleryItems.map((item, i) => (
           <Link
             to={item.href}
             key={i}
-            className="group relative block overflow-hidden rounded-2xl ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/50"
+            className="group relative block w-full overflow-hidden rounded-2xl ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/50 sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             aria-label={`${item.title}: ${item.desc}`}
           >
             {/* fixed aspect for harmony */}

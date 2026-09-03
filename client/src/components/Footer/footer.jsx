@@ -49,14 +49,20 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-zinc-400" />
-                <a href="mailto:tameem_aldaradkeh@outlook.com" className="transition-colors hover:text-white">
-                  tameem_aldaradkeh@outlook.com
+                <a href="mailto:White.events@outlook.com" className="transition-colors hover:text-white">
+                  White.events@outlook.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-zinc-400" />
                 <a href="tel:00962796389580" className="transition-colors hover:text-white">
                   +962 7 9638 9580
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="h-4 w-4 text-zinc-400" />
+                <a href="tel:00962793397555" className="transition-colors hover:text-white">
+                  +962 7 9339 7555
                 </a>
               </li>
             </ul>
