@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ["nodemailer"],
+  experimental: {
+    serverComponentsExternalPackages: ["nodemailer"],
+  },
   images: {
     // Serve modern formats — Next.js will convert JPG/PNG to WebP/AVIF automatically
     formats: ["image/avif", "image/webp"],
