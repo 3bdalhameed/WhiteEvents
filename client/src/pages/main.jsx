@@ -19,8 +19,8 @@ function Home() {
       <header>
         <Analytics/>
         <Navbar />
-        <ProjectsByWhite />
         <Main />
+        <ProjectsByWhite />
         <Project />
         <Portfolio />
         <Services />
