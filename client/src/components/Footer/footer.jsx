@@ -63,12 +63,11 @@ export default function Footer() {
           </div>
 
           {/* Logo & mini blurb */}
-          <div className="flex flex-col items-center gap-4 text-center">
+          <div className="flex flex-col items-center justify-center gap-4 text-center">
             <img src={logo} alt="White Events Logo" className="w-28 drop-shadow sm:w-36" />
             <p className="max-w-sm text-sm text-zinc-400">
               Bespoke weddings and events crafted with care. From concept to last dance.
             </p>
-
           </div>
 
           {/* Menu */}

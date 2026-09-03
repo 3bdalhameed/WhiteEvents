@@ -82,7 +82,7 @@ export default function ProjectsByWhite() {
         </motion.div>
 
         {/* notable projects */}
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 flex flex-wrap justify-center gap-5">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
@@ -90,7 +90,7 @@ export default function ProjectsByWhite() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.45)]"
+              className="w-full rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.45)] sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]"
             >
               <h3 className="font-serif text-lg font-semibold text-white">
                 {project.title}
