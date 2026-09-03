@@ -7,20 +7,29 @@ import e2 from "../../pages/Gallery/albums/Events/39E41A0C-BE6F-4653-9067-76ED51
 import e3 from "../../pages/Gallery/albums/Events/C3E960C1-707C-42AC-8805-C6D27F811D8E.jpg";
 import e4 from "../../pages/Gallery/albums/Events/FBD111D4-E0A1-4116-B8C4-C2DE3BA54DAE.jpg";
 
-import m2 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/1.JPG";
-import m3 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5134.jpg";
+import y1 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/1.JPG";
+import y2 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/IMG_7501.JPG";
+import y3 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/IMG_7567.JPG";
+import y4 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/IMG_7636.JPG";
+
+import z1 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5134.jpg";
+import z2 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5170.jpg";
+import z3 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5254.jpg";
+import z4 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5340.jpg";
 
 const eventsByWhiteImages = [e1, e2, e3, e4];
+const yasminAmmarImages = [y1, y2, y3, y4];
+const zeinaHussamImages = [z1, z2, z3, z4];
 
-function CyclingImage({ images, alt }) {
+function CyclingImage({ images, alt, intervalMs = 2800 }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % images.length);
-    }, 2800);
+    }, intervalMs);
     return () => clearInterval(id);
-  }, [images.length]);
+  }, [images.length, intervalMs]);
 
   return (
     <>
@@ -48,8 +57,18 @@ function Portfolio() {
       desc: "Corporate galas, product launches, and brand activations.",
       href: "/gallery",
     },
-    { src: m2, title: "Yasmin & Ammar", desc: "A timeless celebration of love and joy.", href: "/gallery" },
-    { src: m3, title: "Zeina & Hussam", desc: "Capturing moments that last a lifetime.", href: "/gallery" },
+    {
+      images: yasminAmmarImages,
+      title: "Yasmin & Ammar",
+      desc: "A timeless celebration of love and joy.",
+      href: "/gallery",
+    },
+    {
+      images: zeinaHussamImages,
+      title: "Zeina & Hussam",
+      desc: "Capturing moments that last a lifetime.",
+      href: "/gallery",
+    },
   ];
 
   return (
@@ -116,18 +135,11 @@ function Portfolio() {
           >
             {/* fixed aspect for harmony */}
             <div className="relative aspect-[4/5] w-full">
-              {item.images ? (
-                <CyclingImage images={item.images} alt={`${item.title} — highlight`} />
-              ) : (
-                <img
-                  src={item.src}
-                  alt={`${item.title} — wedding highlight`}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] motion-reduce:transition-none"
-                  loading="lazy"
-                  decoding="async"
-                  sizes="(min-width: 1024px) 28vw, (min-width: 768px) 40vw, 100vw"
-                />
-              )}
+              <CyclingImage
+                images={item.images}
+                alt={`${item.title} — highlight`}
+                intervalMs={2800 + i * 400}
+              />
 
               {/* luxe border shimmer on hover */}
               <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/10 transition-[box-shadow,opacity] duration-500 group-hover:shadow-[0_0_0_2px_rgba(251,191,36,0.5),inset_0_0_60px_rgba(0,0,0,0.35)] group-hover:opacity-100" />
