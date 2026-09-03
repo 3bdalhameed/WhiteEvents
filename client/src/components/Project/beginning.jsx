@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { HashLink } from "react-router-hash-link";
-import heroSplit from "../../pages/newimg/beginning.png";
+import heroSplit from "../../pages/newimg/beginning.webp";
 
 export default function Beginning() {
   return (

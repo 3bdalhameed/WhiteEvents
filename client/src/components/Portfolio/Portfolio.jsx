@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-// Events by White — cycling gallery images
-import e1 from "../../pages/Gallery/albums/Events/24A2B3C3-3359-4D62-92A2-6F4ED0CACE00.jpg";
-import e2 from "../../pages/Gallery/albums/Events/39E41A0C-BE6F-4653-9067-76ED51F79E55.jpg";
-import e3 from "../../pages/Gallery/albums/Events/C3E960C1-707C-42AC-8805-C6D27F811D8E.jpg";
-import e4 from "../../pages/Gallery/albums/Events/FBD111D4-E0A1-4116-B8C4-C2DE3BA54DAE.jpg";
+// Events by White — cycling gallery images (pre-generated 420px webp thumbs, not the multi-MB originals)
+import e1 from "../../pages/Gallery/albums_thumbs/Events/24A2B3C3-3359-4D62-92A2-6F4ED0CACE00.webp";
+import e2 from "../../pages/Gallery/albums_thumbs/Events/39E41A0C-BE6F-4653-9067-76ED51F79E55.webp";
+import e3 from "../../pages/Gallery/albums_thumbs/Events/C3E960C1-707C-42AC-8805-C6D27F811D8E.webp";
+import e4 from "../../pages/Gallery/albums_thumbs/Events/FBD111D4-E0A1-4116-B8C4-C2DE3BA54DAE.webp";
 
-import y1 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/1.JPG";
-import y2 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/IMG_7501.JPG";
-import y3 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/IMG_7567.JPG";
-import y4 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/IMG_7636.JPG";
+import y1 from "../../pages/Gallery/albums_thumbs/Yasmin & Ammar - The Ritz Carlton/1.webp";
+import y2 from "../../pages/Gallery/albums_thumbs/Yasmin & Ammar - The Ritz Carlton/IMG_7501.webp";
+import y3 from "../../pages/Gallery/albums_thumbs/Yasmin & Ammar - The Ritz Carlton/IMG_7567.webp";
+import y4 from "../../pages/Gallery/albums_thumbs/Yasmin & Ammar - The Ritz Carlton/IMG_7636.webp";
 
-import z1 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5134.jpg";
-import z2 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5170.jpg";
-import z3 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5254.jpg";
-import z4 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5340.jpg";
+import z1 from "../../pages/Gallery/albums_thumbs/Zeina & Hussam - Four Seasons/IMG_5134.webp";
+import z2 from "../../pages/Gallery/albums_thumbs/Zeina & Hussam - Four Seasons/IMG_5170.webp";
+import z3 from "../../pages/Gallery/albums_thumbs/Zeina & Hussam - Four Seasons/IMG_5254.webp";
+import z4 from "../../pages/Gallery/albums_thumbs/Zeina & Hussam - Four Seasons/IMG_5340.webp";
 
 const eventsByWhiteImages = [e1, e2, e3, e4];
 const yasminAmmarImages = [y1, y2, y3, y4];

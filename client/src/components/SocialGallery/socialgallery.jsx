@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Instagram, ArrowRight } from "lucide-react";
-import G1 from "../../pages/newimg/G1.png";
-import G2 from "../../pages/newimg/G2.png";
-import G3 from "../../pages/newimg/G3.png";
-import G4 from "../../pages/newimg/G4.png";
+import G1 from "../../pages/newimg/G1.webp";
+import G2 from "../../pages/newimg/G2.webp";
+import G3 from "../../pages/newimg/G3.webp";
+import G4 from "../../pages/newimg/G4.webp";
 
 const gallery = [
   { src: G1, link: "https://www.instagram.com/reel/DB9X-k4NXlE/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" },
