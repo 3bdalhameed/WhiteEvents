@@ -9,8 +9,6 @@ import m3 from "../../pages/Gallery/albums_thumbs/Zeina & Hussam - Four Seasons/
 function Portfolio() {
   const galleryItems = [
     { src: m1, title: "Events by White", desc: "Corporate galas, product launches, and brand activations.", href: "/gallery" },
-    { src: m2, title: "Yasmin & Ammar", desc: "A timeless celebration of love and joy.", href: "/gallery" },
-    { src: m3, title: "Zeina & Hussam", desc: "Capturing moments that last a lifetime.", href: "/gallery" },
   ];
 
   return (
