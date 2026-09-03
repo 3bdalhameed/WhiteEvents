@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Instagram, ArrowRight } from "lucide-react";
+import logo from "../../pages/newimg/projects-by-white-logo.webp";
 
 const projects = [
   {
@@ -49,20 +50,19 @@ export default function ProjectsByWhite() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mx-auto max-w-3xl text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-wider text-zinc-300">
-            Corporate &amp; Events Division
-          </span>
-
-          <h2
-            id="projects-by-white-title"
-            className="mt-4 font-serif text-3xl font-bold tracking-tight md:text-4xl"
-          >
-            <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
-              Projects by White
-            </span>
+          <h2 id="projects-by-white-title" className="sr-only">
+            Projects by White — Corporate &amp; Events
           </h2>
 
-          <p className="mt-5 text-[15px] leading-relaxed text-neutral-300 md:text-base">
+          <img
+            src={logo}
+            alt="Projects by White — Corporate &amp; Events"
+            className="mx-auto w-full max-w-xl"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <p className="mt-6 text-[15px] leading-relaxed text-neutral-300 md:text-base">
             Projects by White is the corporate and events division of White, specializing
             in event planning, design, production, and execution for corporate,
             governmental, and private-sector clients.
