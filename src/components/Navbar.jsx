@@ -48,6 +48,7 @@ const NavBar = () => {
           <Link href="/" className="hover:text-gray-400 transition">Home</Link>
           <Link href="/about" className="hover:text-gray-400 transition">About</Link>
           <Link href="/services" className="hover:text-gray-400 transition">Services</Link>
+          <Link href="/projects-by-white" className="hover:text-gray-400 transition">Projects by White</Link>
         </div>
 
         <div className="hidden md:flex gap-8 text-white pr-36">
@@ -75,6 +76,7 @@ const NavBar = () => {
           <Link href="/" className="py-4 text-xl hover:text-gray-400 transition" onClick={closeMenu}>Home</Link>
           <Link href="/about" className="py-4 text-xl hover:text-gray-400 transition" onClick={closeMenu}>About</Link>
           <Link href="/services" className="py-4 text-xl hover:text-gray-400 transition" onClick={closeMenu}>Services</Link>
+          <Link href="/projects-by-white" className="py-4 text-xl hover:text-gray-400 transition" onClick={closeMenu}>Projects by White</Link>
           <Link href="/gallery" className="py-4 text-xl hover:text-gray-400 transition" onClick={closeMenu}>Gallery</Link>
           <Link href="/#testimonials" className="py-4 text-xl hover:text-gray-400 transition" onClick={closeMenu}>Testimonials</Link>
           <Link href="/#appointment" className="py-4 text-xl hover:text-gray-400 transition" onClick={closeMenu}>Book</Link>

@@ -11,6 +11,7 @@ const NavBar = () => {
           <a href="/" className="hover:text-gray-400 transition">Home</a>
           <a href="/about" className="hover:text-gray-400 transition">About</a>
           <a href="/services" className="hover:text-gray-400 transition">Services</a>
+          <a href="/projects-by-white" className="hover:text-gray-400 transition">Projects by White</a>
         </div>
 
         <div className="flex justify-center items-center">
@@ -44,6 +45,7 @@ const NavBar = () => {
           <a href="/" className="block py-2 hover:text-gray-400 transition" onClick={() => setIsMenuOpen(false)}>Home</a>
           <a href="/about" className="block py-2 hover:text-gray-400 transition" onClick={() => setIsMenuOpen(false)}>About</a>
           <a href="/services" className="block py-2 hover:text-gray-400 transition" onClick={() => setIsMenuOpen(false)}>Services</a>
+          <a href="/projects-by-white" className="block py-2 hover:text-gray-400 transition" onClick={() => setIsMenuOpen(false)}>Projects by White</a>
           <a href="/gallery" className="block py-2 hover:text-gray-400 transition" onClick={() => setIsMenuOpen(false)}>Gallery</a>
           <a href="/#testimonials" className="block py-2 hover:text-gray-400 transition" onClick={() => setIsMenuOpen(false)}>Testimonials</a>
           <a href="/#appointment" className="block py-2 hover:text-gray-400 transition" onClick={() => setIsMenuOpen(false)}>Book</a>
