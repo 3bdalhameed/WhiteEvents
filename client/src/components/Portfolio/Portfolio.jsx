@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // Import your three images
-import m1 from "../../pages/Gallery/albums/Events/96E5A8F2-F9BA-40D2-AE26-FACA9EB66699.PNG";
+import m1 from "../../pages/Gallery/albums/Events/24A2B3C3-3359-4D62-92A2-6F4ED0CACE00.jpg";
 import m2 from "../../pages/Gallery/albums/Yasmin & Ammar - The Ritz Carlton/1.JPG";
 import m3 from "../../pages/Gallery/albums/Zeina & Hussam - Four Seasons/IMG_5134.jpg";
 
