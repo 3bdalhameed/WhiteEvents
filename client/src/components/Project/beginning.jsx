@@ -83,40 +83,37 @@ export default function Beginning() {
             className="relative max-w-3xl lg:max-w-[100%]"
           >
             <div className="group rounded-3xl bg-white/5 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md md:p-8 lg:p-10">
-              <h2 id="projects-title" className="font-serif text-2xl font-bold leading-tight tracking-tight md:text-3xl">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-wider text-zinc-300">
+                White Events
+              </span>
+
+              <h2 id="projects-title" className="mt-4 font-serif text-2xl font-bold leading-tight tracking-tight md:text-3xl">
                 <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
-                  CREATORS OF EXCEPTIONAL EVENTS
+                  We Create. We Curate. We Deliver.
                 </span>
               </h2>
 
               <p className="mt-4 text-[15px] leading-relaxed text-neutral-300 md:text-base">
-              White Events is a luxury, high-end wedding planning and design studio specializing in destination and worldwide weddings.
-              We create elegant, heartfelt celebrations that reflect each couple’s love story, with thoughtful design and seamless planning.
+                At White Events, we believe every event should be more than a gathering — it
+                should be an experience.
               </p>
 
               <p className="mt-3 text-[15px] leading-relaxed text-neutral-300 md:text-base">
-                Established in 2015, White Events has earned a reputation as Jordan’s leading
-                wedding planning studio, led by{" "}
-                <a
-                  href="#"
-                  className="inline-flex items-center font-medium text-amber-200 underline decoration-amber-300/40 underline-offset-4 transition hover:text-amber-100 hover:decoration-amber-200"
-                >
-                  Farah Daradkeh
-                  <svg
-                    aria-hidden="true"
-                    className="ml-1 h-3.5 w-3.5 translate-y-[1px]"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-                .
+                From concept and creative direction to production, styling, entertainment, and
+                on-ground management, we bring every element together under one vision. Our team
+                works closely with clients to transform ideas into thoughtfully designed
+                experiences that are seamless, distinctive, and memorable.
+              </p>
+
+              <p className="mt-3 text-[15px] leading-relaxed text-neutral-300 md:text-base">
+                Whether it’s an intimate celebration, a luxury wedding, a corporate event, a
+                brand activation, a gala dinner, or a large-scale occasion, White Events manages
+                every detail from A to Z, ensuring that creativity, precision, and execution
+                come together effortlessly.
+              </p>
+
+              <p className="mt-4 text-[15px] font-medium italic text-amber-100 md:text-base">
+                Your vision. Our expertise. One unforgettable experience.
               </p>
 
               <div className="mt-7 flex flex-wrap items-center gap-3">
