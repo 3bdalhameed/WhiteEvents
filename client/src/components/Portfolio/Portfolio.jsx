@@ -1,74 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-// Events by White — cycling gallery images (pre-generated 420px webp thumbs, not the multi-MB originals)
-import e1 from "../../pages/Gallery/albums_thumbs/Events/24A2B3C3-3359-4D62-92A2-6F4ED0CACE00.webp";
-import e2 from "../../pages/Gallery/albums_thumbs/Events/39E41A0C-BE6F-4653-9067-76ED51F79E55.webp";
-import e3 from "../../pages/Gallery/albums_thumbs/Events/C3E960C1-707C-42AC-8805-C6D27F811D8E.webp";
-import e4 from "../../pages/Gallery/albums_thumbs/Events/FBD111D4-E0A1-4116-B8C4-C2DE3BA54DAE.webp";
-
-import y1 from "../../pages/Gallery/albums_thumbs/Yasmin & Ammar - The Ritz Carlton/1.webp";
-import y2 from "../../pages/Gallery/albums_thumbs/Yasmin & Ammar - The Ritz Carlton/IMG_7501.webp";
-import y3 from "../../pages/Gallery/albums_thumbs/Yasmin & Ammar - The Ritz Carlton/IMG_7567.webp";
-import y4 from "../../pages/Gallery/albums_thumbs/Yasmin & Ammar - The Ritz Carlton/IMG_7636.webp";
-
-import z1 from "../../pages/Gallery/albums_thumbs/Zeina & Hussam - Four Seasons/IMG_5134.webp";
-import z2 from "../../pages/Gallery/albums_thumbs/Zeina & Hussam - Four Seasons/IMG_5170.webp";
-import z3 from "../../pages/Gallery/albums_thumbs/Zeina & Hussam - Four Seasons/IMG_5254.webp";
-import z4 from "../../pages/Gallery/albums_thumbs/Zeina & Hussam - Four Seasons/IMG_5340.webp";
-
-const eventsByWhiteImages = [e1, e2, e3, e4];
-const yasminAmmarImages = [y1, y2, y3, y4];
-const zeinaHussamImages = [z1, z2, z3, z4];
-
-function CyclingImage({ images, alt, intervalMs = 2800 }) {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % images.length);
-    }, intervalMs);
-    return () => clearInterval(id);
-  }, [images.length, intervalMs]);
-
-  return (
-    <>
-      {images.map((src, i) => (
-        <img
-          key={src}
-          src={src}
-          alt={alt}
-          className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1200ms] ease-out group-hover:scale-[1.06] motion-reduce:transition-none ${
-            i === index ? "opacity-100" : "opacity-0"
-          }`}
-          loading={i === 0 ? "eager" : "lazy"}
-          decoding="async"
-        />
-      ))}
-    </>
-  );
-}
+// pre-generated 420px webp thumbs, not the multi-MB originals
+import m1 from "../../pages/Gallery/albums_thumbs/Events/24A2B3C3-3359-4D62-92A2-6F4ED0CACE00.webp";
+import m2 from "../../pages/Gallery/albums_thumbs/Yasmin & Ammar - The Ritz Carlton/1.webp";
+import m3 from "../../pages/Gallery/albums_thumbs/Zeina & Hussam - Four Seasons/IMG_5134.webp";
 
 function Portfolio() {
   const galleryItems = [
-    {
-      images: eventsByWhiteImages,
-      title: "Events by White",
-      desc: "Corporate galas, product launches, and brand activations.",
-      href: "/gallery",
-    },
-    {
-      images: yasminAmmarImages,
-      title: "Yasmin & Ammar",
-      desc: "A timeless celebration of love and joy.",
-      href: "/gallery",
-    },
-    {
-      images: zeinaHussamImages,
-      title: "Zeina & Hussam",
-      desc: "Capturing moments that last a lifetime.",
-      href: "/gallery",
-    },
+    { src: m1, title: "Events by White", desc: "Corporate galas, product launches, and brand activations.", href: "/gallery" },
+    { src: m2, title: "Yasmin & Ammar", desc: "A timeless celebration of love and joy.", href: "/gallery" },
+    { src: m3, title: "Zeina & Hussam", desc: "Capturing moments that last a lifetime.", href: "/gallery" },
   ];
 
   return (
@@ -135,10 +77,13 @@ function Portfolio() {
           >
             {/* fixed aspect for harmony */}
             <div className="relative aspect-[4/5] w-full bg-white/5">
-              <CyclingImage
-                images={item.images}
+              <img
+                src={item.src}
                 alt={`${item.title} — highlight`}
-                intervalMs={2800 + i * 400}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] motion-reduce:transition-none"
+                loading="lazy"
+                decoding="async"
+                sizes="(min-width: 1024px) 28vw, (min-width: 768px) 40vw, 100vw"
               />
 
               {/* luxe border shimmer on hover */}
