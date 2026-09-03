@@ -44,7 +44,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 text-zinc-400" />
                 <span>
-                  1 st floor, Abu Rumman Plaza
+                  Mecca Street
                 </span>
               </li>
               <li className="flex items-center gap-3">
