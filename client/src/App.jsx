@@ -1,6 +1,7 @@
 // src/App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 import MyTest from "./pages/main.jsx";
 import Galary from "./pages/Gallery/WeddingGallery.jsx";
 import GalleryAlbumPage from "./pages/Gallery/GalleryAlbum.jsx"
@@ -14,6 +15,7 @@ function App() {
     return (
         <Router>
             <div>
+                <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<MyTest />} />
                     <Route path="/gallery" element={<Galary />} />
