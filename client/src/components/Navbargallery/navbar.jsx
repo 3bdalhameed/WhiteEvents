@@ -33,9 +33,6 @@ const NavBar = () => {
           <a href="/#testimonials" className="hover:text-blue-600 transition">
             Testimonials
           </a>
-          <a href="/#appointment" className="hover:text-blue-600 transition">
-            Book
-          </a>
         </div>
 
         {/* Hamburger Menu (Visible on small screens) */}
@@ -108,13 +105,6 @@ const NavBar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             Testimonials
-          </a>
-          <a
-            href="#appointment"
-            className="block py-2 hover:text-blue-600 transition"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Book
           </a>
         </div>
       )}

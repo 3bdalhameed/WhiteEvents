@@ -69,13 +69,6 @@ export default function Footer() {
               Bespoke weddings and events crafted with care. From concept to last dance.
             </p>
 
-            <a
-              href="/#appointment"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/0 px-4 py-2 text-sm text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-            >
-              Book a Consultation
-              <ArrowRight className="h-4 w-4" />
-            </a>
           </div>
 
           {/* Menu */}
@@ -87,7 +80,6 @@ export default function Footer() {
               <FooterLink href="/services">Services</FooterLink>
               <FooterLink href="/gallery">Gallery</FooterLink>
               <FooterLink href="/#testimonials">Testimonials</FooterLink>
-              <FooterLink href="/#appointment">Book</FooterLink>
             </div>
           </div>
         </div>
