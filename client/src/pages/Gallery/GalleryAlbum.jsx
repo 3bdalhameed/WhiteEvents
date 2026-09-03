@@ -1,7 +1,7 @@
 // GalleryAlbumPage.jsx
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../../components/Navbargallery/navbar";
+import Navbar from "../../components/Navbar1/navbar";
 import Footer from "../../components/Footer/footer";
 import { getAlbum } from "./albumsdata";
 

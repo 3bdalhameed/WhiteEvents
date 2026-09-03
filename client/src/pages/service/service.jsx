@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Navbar from "../../components/Navbargallery/navbar";
+import Navbar from "../../components/Navbar1/navbar";
 import Footer from "../../components/Footer/footer.jsx";
 import backgroundImage from "../newimg/background.png";
 import ss2 from "../newimg/ss2.png";

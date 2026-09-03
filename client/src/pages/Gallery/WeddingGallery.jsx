@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../../components/Navbargallery/navbar";
+import Navbar from "../../components/Navbar1/navbar";
 import Footer from "../../components/Footer/footer";
 import { getAlbums } from "./albumsdata";
 

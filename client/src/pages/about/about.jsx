@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../../components/Navbargallery/navbar";
+import Navbar from "../../components/Navbar1/navbar";
 import Footer from "../../components/Footer/footer.jsx";
 
 // 🔧 adjust paths as needed
