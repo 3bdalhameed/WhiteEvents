@@ -23,7 +23,6 @@ function Home() {
         <Portfolio />
         <Services />
         <Feadback />
-        <Appointment />
         <Socialgallery />
         <Footer />
       </header>
