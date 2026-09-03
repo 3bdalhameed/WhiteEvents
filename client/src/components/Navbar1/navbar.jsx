@@ -69,13 +69,6 @@ const NavBar = () => {
           >
             Testimonials
           </HashLink>
-          <HashLink
-            smooth
-            to="/#appointment"
-            className="hover:text-gray-400 transition"
-          >
-            Book
-          </HashLink>
         </div>
       </nav>
 
@@ -134,14 +127,6 @@ const NavBar = () => {
             onClick={closeMenu}
           >
             Testimonials
-          </HashLink>
-          <HashLink
-            smooth
-            to="/#appointment"
-            className="py-4 text-xl hover:text-gray-400 transition"
-            onClick={closeMenu}
-          >
-            Book
           </HashLink>
         </div>
       )}

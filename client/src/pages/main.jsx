@@ -4,6 +4,7 @@ import Main from "../components/Main/main";
 import Project from "../components/Project/beginning";
 import Portfolio from "../components/Portfolio/Portfolio";
 import Services from "../components/Services/services";
+import ProjectsByWhite from "../components/ProjectsByWhite/projectsbywhite";
 import Feadback from "../components/Feedback/feedback";
 import Appointment from "../components/Appointment/appointment";
 import Socialgallery from "../components/SocialGallery/socialgallery";
@@ -22,6 +23,7 @@ function Home() {
         <Project />
         <Portfolio />
         <Services />
+        <ProjectsByWhite />
         <Feadback />
         <Socialgallery />
         <Footer />
