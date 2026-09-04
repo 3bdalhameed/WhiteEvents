@@ -26,9 +26,9 @@ function Services() {
         <div className="absolute inset-0 opacity-[0.08] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px] text-neutral-300" />
       </div>
 
-      <div className="mx-auto grid max-w-7xl items-center gap-8 px-6 py-16 md:grid-cols-3 md:gap-10 md:px-6 md:py-24 lg:px-12">
-        {/* Left Image */}
-        <div className="relative mx-auto w-full max-w-[15rem] md:max-w-none">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 items-center gap-x-4 gap-y-8 px-6 py-16 md:grid-cols-3 md:gap-10 md:px-6 md:py-24 lg:px-12">
+        {/* Left Image — after the copy on phones */}
+        <div className="relative order-2 mx-auto w-full md:order-1">
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-neutral-200">
             <img
               src={m1}
@@ -43,8 +43,8 @@ function Services() {
           <div className="pointer-events-none absolute -inset-3 -z-10 rounded-[2rem] bg-amber-200/30 blur-2xl" />
         </div>
 
-        {/* Center Text & Buttons */}
-        <div className="text-center">
+        {/* Center Text & Buttons — first on phones */}
+        <div className="order-1 col-span-2 text-center md:order-2 md:col-span-1">
           <h2 className="font-serif text-3xl font-bold tracking-tight md:text-4xl">
             <span className="bg-gradient-to-r from-amber-700 via-rose-600 to-amber-600 bg-clip-text text-transparent">
               Our Services
@@ -81,7 +81,7 @@ function Services() {
         </div>
 
         {/* Right Image */}
-        <div className="relative mx-auto w-full max-w-[15rem] md:max-w-none">
+        <div className="relative order-3 mx-auto w-full">
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-neutral-200">
             <img
               src={m2}
