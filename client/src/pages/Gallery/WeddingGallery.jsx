@@ -83,12 +83,12 @@ function Galleries() {
       <Navbar />
       <main
         ref={heroRef}
-        className="relative min-h-screen overflow-hidden bg-[#0b0b10] text-neutral-100"
+        className="relative min-h-screen overflow-hidden bg-[var(--surface-0)] text-[var(--text-primary)]"
       >
         {/* ===== THEME BACKGROUND LAYERS ===== */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(1100px_500px_at_10%_-10%,rgba(255,220,185,0.06),transparent_60%),radial-gradient(900px_480px_at_100%_130%,rgba(255,154,158,0.06),transparent_60%)]" />
-          <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-white/5 shadow-[inset_0_0_140px_40px_rgba(0,0,0,0.65)]" />
+          <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-[var(--border-subtlest)] shadow-[inset_0_0_140px_40px_var(--vignette)]" />
           <div
             className="absolute -top-1/3 -left-1/4 h-[140%] w-[140%] opacity-15 will-change-transform"
             style={{
@@ -115,13 +115,13 @@ function Galleries() {
         </div>
 
         <div className="relative mx-auto max-w-8xl px-6 pt-28 pb-16 sm:px-10 md:px-12 lg:px-18 xl:px-20 2xl:px-24">
-          <div className="mx-auto max-w-3xl rounded-3xl bg-white/5 p-10 text-center shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md">
+          <div className="mx-auto max-w-3xl rounded-3xl bg-[var(--surface-1)] p-10 text-center shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-[var(--border-subtle)] backdrop-blur-md">
             <h1 className="mb-2 text-3xl font-bold md:text-4xl">
-              <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--gradient-1)] via-[var(--gradient-2)] to-[var(--gradient-3)] bg-clip-text text-transparent">
                 Wedding Galleries
               </span>
             </h1>
-            <p className="text-neutral-300">
+            <p className="text-[var(--text-secondary)]">
               Explore our curated albums. Tap a card to see the wedding name.
             </p>
             <div className="mx-auto mt-6 h-px w-24 bg-gradient-to-r from-transparent via-amber-300/70 to-transparent" />
@@ -129,7 +129,7 @@ function Galleries() {
 
           {/* ✅ NEW: loading state but layout/design same */}
           {!albums ? (
-            <div className="mt-10 text-center text-neutral-300">Loading…</div>
+            <div className="mt-10 text-center text-[var(--text-secondary)]">Loading…</div>
           ) : (
             <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
               {albums.map((album) => {
@@ -145,7 +145,7 @@ function Galleries() {
                     <div
                       onMouseMove={handleCardMove}
                       onMouseLeave={handleCardLeave}
-                      className="relative overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur-md
+                      className="relative overflow-hidden rounded-2xl bg-[var(--surface-1)] ring-1 ring-[var(--border-subtle)] backdrop-blur-md
                                  shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition-transform duration-300 will-change-transform
                                  [transform:perspective(900px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))_translate3d(var(--tx,0),var(--ty,0),0)_scale(var(--s,1))]
                                  group-hover:[--s:1.02] group-hover:shadow-2xl"

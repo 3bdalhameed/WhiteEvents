@@ -181,7 +181,7 @@ function GalleryAlbumPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-[#0b0b10] text-neutral-100">
+        <main className="min-h-screen bg-[var(--surface-0)] text-[var(--text-primary)]">
           <div className="mx-auto max-w-5xl px-4 pt-28 pb-16">
             <h1 className="text-2xl font-semibold">Album not found</h1>
           </div>
@@ -198,28 +198,28 @@ function GalleryAlbumPage() {
     <>
       <Navbar />
 
-      <main className="relative min-h-screen overflow-hidden bg-[#0b0b10] text-neutral-100">
+      <main className="relative min-h-screen overflow-hidden bg-[var(--surface-0)] text-[var(--text-primary)]">
         {/* background */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(1100px_500px_at_10%_-10%,rgba(255,220,185,0.06),transparent_60%),radial-gradient(900px_480px_at_100%_130%,rgba(255,154,158,0.06),transparent_60%)]" />
-          <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-white/5 shadow-[inset_0_0_140px_40px_rgba(0,0,0,0.65)]" />
+          <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-[var(--border-subtlest)] shadow-[inset_0_0_140px_40px_var(--vignette)]" />
           <div className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px]" />
         </div>
 
         <div className="mx-auto max-w-7xl px-4 pt-28 pb-16">
           <h1 className="text-3xl font-bold md:text-4xl">
-            <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--gradient-1)] via-[var(--gradient-2)] to-[var(--gradient-3)] bg-clip-text text-transparent">
               {album?.name || slug}
             </span>
           </h1>
 
-          <p className="mt-2 text-sm text-neutral-300">
+          <p className="mt-2 text-sm text-[var(--text-secondary)]">
             {album?.name ? `A selection from ${album.name}.` : "Loading album…"}
           </p>
 
           {/* ✅ No full-screen loader, only small loader */}
           {loading && (
-            <div className="mt-6 text-sm text-neutral-400">Loading photos…</div>
+            <div className="mt-6 text-sm text-[var(--text-tertiary)]">Loading photos…</div>
           )}
 
           {/* Masonry */}
@@ -229,7 +229,7 @@ function GalleryAlbumPage() {
                 <div
                   key={img.name || idx}
                   style={{ breakInside: "avoid" }}
-                  className="mb-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                  className="mb-4 overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-1)] shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
                 >
                   <img
                     src={img.thumb}

@@ -110,7 +110,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
   return (
     <section
       id="testimonials"
-      className="relative flex flex-col items-center justify-center px-4 py-24 sm:py-32 text-neutral-100 overflow-hidden"
+      className="relative flex flex-col items-center justify-center px-4 py-24 sm:py-32 text-[var(--text-primary)] overflow-hidden"
       style={{
         paddingTop: `calc(env(safe-area-inset-top) + 4rem)`,
         paddingBottom: `calc(env(safe-area-inset-bottom) + 4rem)`,
@@ -125,9 +125,9 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
     >
       {/* background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[#0b0b10]" />
+        <div className="absolute inset-0 bg-[var(--surface-0)]" />
         <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_12%_-10%,rgba(255,220,185,0.06),transparent_60%),radial-gradient(900px_500px_at_100%_120%,rgba(255,154,158,0.06),transparent_60%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_50%)]" />
-        <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-white/5 shadow-[inset_0_0_160px_50px_rgba(0,0,0,0.7)]" />
+        <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-[var(--border-subtlest)] shadow-[inset_0_0_160px_50px_var(--vignette)]" />
         <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-rose-300/10 blur-3xl" />
         <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl" />
         <div className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px]" />
@@ -139,11 +139,11 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
           id="testimonials-heading"
           className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-snug"
         >
-          <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[var(--gradient-1)] via-[var(--gradient-2)] to-[var(--gradient-3)] bg-clip-text text-transparent">
             KIND WORDS FROM OUR COUPLES
           </span>
         </h2>
-        <p className="mt-2 text-sm sm:text-base md:text-lg text-neutral-300">
+        <p className="mt-2 text-sm sm:text-base md:text-lg text-[var(--text-secondary)]">
           A few heartfelt messages from couples we’ve had the privilege to work with.
         </p>
       </div>
@@ -152,7 +152,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
       <div className="hidden sm:flex items-center justify-center gap-6 sm:gap-8 w-full max-w-4xl">
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-amber-300/50 bg-white/5 text-amber-100 hover:bg-amber-300/20 hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-amber-300/50 bg-[var(--surface-1)] text-[var(--accent-amber-text)] hover:bg-amber-300/20 hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60"
           onClick={prev}
           aria-label="Previous testimonial"
         >
@@ -162,7 +162,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
         </button>
 
         <div
-          className={`relative w-full sm:w-11/12 max-w-6xl rounded-3xl bg-white/5 p-6 sm:p-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md transition-opacity duration-500 ${
+          className={`relative w-full sm:w-11/12 max-w-6xl rounded-3xl bg-[var(--surface-1)] p-6 sm:p-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-[var(--border-subtle)] backdrop-blur-md transition-opacity duration-500 ${
             animate ? "opacity-0" : "opacity-100"
           }`}
           role="region"
@@ -182,7 +182,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
           </div>
 
           <p
-            className={`mx-auto max-w-3xl text-base sm:text-lg text-neutral-100/95 mb-4 transition-transform duration-300 ${
+            className={`mx-auto max-w-3xl text-base sm:text-lg text-[var(--text-primary)] mb-4 transition-transform duration-300 ${
               animate ? "translate-x-[-40px] opacity-0" : "translate-x-0 opacity-100"
             }`}
           >
@@ -190,7 +190,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
           </p>
 
           <p
-            className={`font-bold text-lg sm:text-xl text-white transition-transform duration-300 ${
+            className={`font-bold text-lg sm:text-xl text-[var(--text-primary)] transition-transform duration-300 ${
               animate ? "translate-x-[40px] opacity-0" : "translate-x-0 opacity-100"
             }`}
           >
@@ -201,7 +201,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
             {t.services?.map((s, i) => (
               <span
                 key={i}
-                className="rounded-full border border-amber-300/40 bg-amber-300/10 px-2 py-1 text-[10px] sm:text-[11px] uppercase tracking-wide text-amber-100"
+                className="rounded-full border border-amber-300/40 bg-amber-300/10 px-2 py-1 text-[10px] sm:text-[11px] uppercase tracking-wide text-[var(--accent-amber-text)]"
               >
                 {s}
               </span>
@@ -209,7 +209,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
           </div>
 
           {autoRotate && (
-            <div className="mt-6 h-1 w-full rounded bg-white/10">
+            <div className="mt-6 h-1 w-full rounded bg-[var(--surface-1-hover)]">
               <div
                 ref={progressRef}
                 className="h-1 w-0 rounded bg-gradient-to-r from-amber-300 via-rose-300 to-amber-200"
@@ -221,7 +221,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-amber-300/50 bg-white/5 text-amber-100 hover:bg-amber-300/20 hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-amber-300/50 bg-[var(--surface-1)] text-[var(--accent-amber-text)] hover:bg-amber-300/20 hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60"
           onClick={next}
           aria-label="Next testimonial"
         >
@@ -234,7 +234,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
       {/* Mobile */}
       <div className="sm:hidden w-full max-w-xl">
         <div
-          className={`rounded-2xl bg-white/5 p-5 text-center shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md transition-opacity duration-500 ${
+          className={`rounded-2xl bg-[var(--surface-1)] p-5 text-center shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-1 ring-[var(--border-subtle)] backdrop-blur-md transition-opacity duration-500 ${
             animate ? "opacity-0" : "opacity-100"
           }`}
           role="region"
@@ -254,7 +254,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
           </div>
 
           <p
-            className={`text-base mb-3 text-neutral-100/95 transition-transform duration-300 ${
+            className={`text-base mb-3 text-[var(--text-primary)] transition-transform duration-300 ${
               animate ? "translate-x-[-40px] opacity-0" : "translate-x-0 opacity-100"
             }`}
           >
@@ -262,14 +262,14 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
           </p>
 
           <p
-            className={`font-bold text-lg text-white transition-transform duration-300 ${
+            className={`font-bold text-lg text-[var(--text-primary)] transition-transform duration-300 ${
               animate ? "translate-x-[40px] opacity-0" : "translate-x-0 opacity-100"
             }`}
           >
             {t.author}
           </p>
 
-          <p className="mt-1 text-xs text-neutral-300">
+          <p className="mt-1 text-xs text-[var(--text-secondary)]">
             {t.date} <span className="mx-1">•</span> {t.location}
           </p>
 
@@ -277,7 +277,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
             {t.services?.map((s, i) => (
               <span
                 key={i}
-                className="rounded-full border border-amber-300/40 bg-amber-300/10 px-2 py-1 text-[10px] uppercase tracking-wide text-amber-100"
+                className="rounded-full border border-amber-300/40 bg-amber-300/10 px-2 py-1 text-[10px] uppercase tracking-wide text-[var(--accent-amber-text)]"
               >
                 {s}
               </span>
@@ -285,7 +285,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
           </div>
 
           {autoRotate && (
-            <div className="mt-5 h-1 w-full rounded bg-white/10">
+            <div className="mt-5 h-1 w-full rounded bg-[var(--surface-1-hover)]">
               <div
                 ref={progressRef}
                 className="h-1 w-0 rounded bg-gradient-to-r from-amber-300 via-rose-300 to-amber-200"
@@ -306,12 +306,12 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
               className={`h-2.5 w-2.5 rounded-full transition ${
                 i === current
                   ? "bg-amber-300 shadow-[0_0_0_4px_rgba(251,191,36,0.25)]"
-                  : "bg-white/20 hover:bg-white/40"
+                  : "bg-[var(--surface-1-hover)] hover:bg-amber-300/40"
               }`}
             />
           ))}
         </div>
-        <p className="mt-2 text-center text-xs text-white/70 select-none">Swipe to see more</p>
+        <p className="mt-2 text-center text-xs text-[var(--text-secondary)] select-none">Swipe to see more</p>
       </div>
 
       {/* Dots (desktop) */}
@@ -325,7 +325,7 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
             className={`h-2.5 w-2.5 rounded-full transition ${
               i === current
                 ? "bg-amber-300 shadow-[0_0_0_6px_rgba(251,191,36,0.18)]"
-                : "bg-white/20 hover:bg-white/40"
+                : "bg-[var(--surface-1-hover)] hover:bg-amber-300/40"
             }`}
           />
         ))}

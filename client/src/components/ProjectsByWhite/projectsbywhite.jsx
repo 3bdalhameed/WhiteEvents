@@ -125,7 +125,7 @@ export default function ProjectsByWhite() {
             href="https://www.instagram.com/projects.bywhite?igsi=eW5peTR6ZTdicTlv"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-gradient-to-b from-amber-300/20 to-transparent px-6 py-3 text-sm font-semibold tracking-wide text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
+            className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-gradient-to-b from-amber-300/20 to-transparent px-6 py-3 text-sm font-semibold tracking-wide text-[var(--accent-amber-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
             aria-label="Follow Projects by White on Instagram"
           >
             <Instagram className="h-4 w-4" />

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import { Sun, Moon } from "lucide-react";
 import logo from "../../pages/newimg/logo1.png";
+import useTheme from "../../hooks/useTheme";
 
 const NAV_LINKS = [
   { to: "/", label: "Home", type: "link" },
@@ -13,6 +15,7 @@ const NAV_LINKS = [
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
@@ -51,18 +54,35 @@ const NavBar = () => {
               </Link>
             )
           )}
+
+          <button
+            onClick={toggleTheme}
+            className="rounded-full border border-white/15 p-2 text-white transition hover:bg-white/10"
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+          >
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
         </div>
 
-        {/* Hamburger (mobile) */}
-        <button
-          onClick={() => setIsMenuOpen((v) => !v)}
-          className="text-2xl text-white focus:outline-none md:hidden"
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMenuOpen}
-          aria-controls="mobile-menu"
-        >
-          {isMenuOpen ? "✖" : "☰"}
-        </button>
+        {/* Mobile: theme toggle + hamburger */}
+        <div className="flex items-center gap-3 md:hidden">
+          <button
+            onClick={toggleTheme}
+            className="rounded-full border border-white/15 p-2 text-white transition hover:bg-white/10"
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+          >
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+          <button
+            onClick={() => setIsMenuOpen((v) => !v)}
+            className="text-2xl text-white focus:outline-none"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            {isMenuOpen ? "✖" : "☰"}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}

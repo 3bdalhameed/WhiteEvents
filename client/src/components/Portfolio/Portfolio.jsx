@@ -15,12 +15,12 @@ function Portfolio() {
     <section
       id="portfolio"
       aria-labelledby="portfolio-title"
-      className="relative overflow-hidden pb-24 text-center bg-[#0b0b10] text-neutral-100"
+      className="relative overflow-hidden pb-24 text-center bg-[var(--surface-0)] text-[var(--text-primary)]"
     >
       {/* background texture + vignette */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_10%_0%,rgba(255,220,185,0.06),transparent_60%),radial-gradient(900px_500px_at_100%_120%,rgba(255,154,158,0.06),transparent_60%)]" />
-        <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-white/5 shadow-[inset_0_0_140px_40px_rgba(0,0,0,0.65)]" />
+        <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-[var(--border-subtlest)] shadow-[inset_0_0_140px_40px_var(--vignette)]" />
         <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-rose-300/10 blur-3xl" />
         <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl" />
         <div className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px]" />
@@ -32,11 +32,11 @@ function Portfolio() {
           id="portfolio-title"
           className="mb-4 font-serif text-4xl font-bold tracking-tight"
         >
-          <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[var(--gradient-1)] via-[var(--gradient-2)] to-[var(--gradient-3)] bg-clip-text text-transparent">
             OUR PORTFOLIO
           </span>
         </h2>
-        <p className="mx-auto max-w-3xl text-lg text-neutral-300">
+        <p className="mx-auto max-w-3xl text-lg text-[var(--text-secondary)]">
           Specialising in blank-canvas weddings, our style is classic with a modern edge.
           Every celebration is bespoke—no two weddings will ever look the same.
         </p>
@@ -44,7 +44,7 @@ function Portfolio() {
         <Link to="/gallery" className="inline-block mt-8">
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-gradient-to-b from-amber-300/15 to-transparent px-6 py-3 text-sm font-semibold tracking-wide text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
+            className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-gradient-to-b from-amber-300/15 to-transparent px-6 py-3 text-sm font-semibold tracking-wide text-[var(--accent-amber-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
           >
             VIEW OUR WORK
             <svg
@@ -70,11 +70,11 @@ function Portfolio() {
           <Link
             to={item.href}
             key={i}
-            className="group relative block w-full overflow-hidden rounded-2xl ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/50 sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+            className="group relative block w-full overflow-hidden rounded-2xl ring-1 ring-[var(--border-subtle)] shadow-[0_10px_40px_rgba(0,0,0,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/50 sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             aria-label={`${item.title}: ${item.desc}`}
           >
             {/* fixed aspect for harmony */}
-            <div className="relative aspect-[4/5] w-full bg-white/5">
+            <div className="relative aspect-[4/5] w-full bg-[var(--surface-1)]">
               <img
                 src={item.src}
                 alt={`${item.title} — highlight`}

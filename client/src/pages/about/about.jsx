@@ -32,7 +32,7 @@ function TeamCard({ img, name, role, bio, chips = [], ctaHref = "#", ctaLabel = 
             {chips.map((c, i) => (
               <span
                 key={i}
-                className="rounded-full border border-amber-300/50 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-amber-100"
+                className="rounded-full border border-amber-300/50 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-[var(--accent-amber-text)]"
               >
                 {c}
               </span>
@@ -92,7 +92,7 @@ export default function About() {
       {/* ===== HERO (split) ===== */}
       <section
         aria-labelledby="about-title"
-        className="relative isolate overflow-hidden bg-[#0b0b10] text-neutral-100"
+        className="relative isolate overflow-hidden bg-[var(--surface-0)] text-neutral-100"
       >
         <img
           src={backgroundImage}
@@ -102,7 +102,7 @@ export default function About() {
           fetchpriority="high"
           decoding="async"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/65 via-black/55 to-[#0b0b10]/95" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/65 via-black/55 to-[var(--surface-0)]" />
         <div className="pointer-events-none absolute -inset-[6%] -z-10 rounded-[3rem] ring-1 ring-white/10 shadow-[inset_0_0_140px_40px_rgba(0,0,0,0.65)]" />
         <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-rose-300/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl" />
@@ -113,7 +113,7 @@ export default function About() {
               EST. 2015 • AMMAN, JO
             </span>
             <h1 id="about-title" className="mt-4 font-serif text-4xl font-bold tracking-tight md:text-5xl">
-              <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--gradient-1)] via-[var(--gradient-2)] to-[var(--gradient-3)] bg-clip-text text-transparent">
                 Who We Are
               </span>
             </h1>
@@ -126,7 +126,7 @@ export default function About() {
               {["150+ Events", "Design-Led", "White-Glove"].map((t) => (
                 <span
                   key={t}
-                  className="rounded-full border border-amber-300/60 bg-white/5 px-3 py-1 text-xs font-medium text-amber-100"
+                  className="rounded-full border border-amber-300/60 bg-white/5 px-3 py-1 text-xs font-medium text-[var(--accent-amber-text)]"
                 >
                   {t}
                 </span>
@@ -152,16 +152,16 @@ export default function About() {
       </section>
 
       {/* ===== DIRECTOR LETTER ===== */}
-      <section className="relative bg-[#0b0b10]">
+      <section className="relative bg-[var(--surface-0)]">
         <div className="mx-auto max-w-4xl gap-8 px-6 py-16 lg:px-12">
           <article
             id="director-letter" // 🔗 anchor target for the CTA
-            className="rounded-3xl bg-white/5 p-7 ring-1 ring-white/10 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.45)]"
+            className="rounded-3xl bg-[var(--surface-1)] p-7 ring-1 ring-[var(--border-subtle)] backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.45)]"
           >
-            <h2 className="text-sm font-semibold tracking-widest text-amber-100">
+            <h2 className="text-sm font-semibold tracking-widest text-[var(--accent-amber-text)]">
               FROM THE CREATIVE DIRECTOR
             </h2>
-            <div className="mt-3 space-y-4 text-neutral-300">
+            <div className="mt-3 space-y-4 text-[var(--text-secondary)]">
               <p>
                 Events have always been my passion. What followed has been an incredible
                 journey through the world of celebrations and design.
@@ -178,16 +178,16 @@ export default function About() {
             </div>
             <div className="mt-5 flex items-center gap-3">
               <div className="h-px flex-1 bg-gradient-to-r from-transparent via-amber-300/60 to-transparent" />
-              <span className="text-sm font-semibold text-neutral-100">Farah Daradkeh</span>
+              <span className="text-sm font-semibold text-[var(--text-primary)]">Farah Daradkeh</span>
             </div>
           </article>
         </div>
       </section>
 
       {/* ===== TEAM (enhanced) ===== */}
-      <section className="relative bg-[#0b0b10]" id="team">
+      <section className="relative bg-[var(--surface-0)]" id="team">
         <div className="mx-auto max-w-7xl px-6 py-8 md:py-16 lg:px-12">
-          <h2 className="text-center text-3xl font-serif font-bold text-white md:text-4xl">Meet the Team</h2>
+          <h2 className="text-center text-3xl font-serif font-bold text-[var(--text-primary)] md:text-4xl">Meet the Team</h2>
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
             <TeamCard
               img={farahd}
@@ -212,28 +212,28 @@ export default function About() {
       </section>
 
       {/* ===== CTA ===== */}
-      <section className="relative overflow-hidden bg-[#0b0b10] pb-20 pt-8 md:pt-0">
+      <section className="relative overflow-hidden bg-[var(--surface-0)] pb-20 pt-8 md:pt-0">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(800px_400px_at_20%_-10%,rgba(255,220,185,0.08),transparent_60%),radial-gradient(800px_400px_at_100%_120%,rgba(255,154,158,0.08),transparent_60%)]" />
         <div className="mx-auto max-w-7xl px-6 text-center lg:px-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs tracking-widest text-neutral-300">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-1)] px-4 py-2 text-xs tracking-widest text-[var(--text-secondary)]">
             BESPOKE • DETAIL-LED • SEAMLESS
           </div>
-          <h3 className="mt-5 font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
+          <h3 className="mt-5 font-serif text-2xl font-bold tracking-tight text-[var(--text-primary)] md:text-3xl">
             Ready to begin?
           </h3>
-          <p className="mx-auto mt-3 max-w-prose text-neutral-300">
+          <p className="mx-auto mt-3 max-w-prose text-[var(--text-secondary)]">
             Share your vision and we’ll curate the perfect path—venues, design, and a seamless plan.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="mailto:tameem_aldaradkeh@outlook.com"
-              className="rounded-full border border-amber-300/60 bg-white/5 px-6 py-3 text-sm font-semibold text-amber-100 transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
+              href="mailto:White.events@outlook.com"
+              className="rounded-full border border-amber-300/60 bg-[var(--surface-1)] px-6 py-3 text-sm font-semibold text-[var(--accent-amber-text)] transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
             >
               Enquire Now
             </a>
             <a
               href="/gallery"
-              className="rounded-full border border-white/10 px-6 py-3 text-sm text-neutral-200 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+              className="rounded-full border border-[var(--border-subtle)] px-6 py-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--surface-1-hover)] hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
             >
               View Gallery
             </a>

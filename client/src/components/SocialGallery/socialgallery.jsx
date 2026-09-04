@@ -24,7 +24,7 @@ function ImageTile({ item, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, delay: index * 0.06 }}
-      className="group relative block overflow-hidden rounded-2xl ring-1 ring-white/10 bg-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.45)] backdrop-blur-sm hover:ring-amber-300/40 transition-all"
+      className="group relative block overflow-hidden rounded-2xl ring-1 ring-[var(--border-subtle)] bg-[var(--surface-1)] shadow-[0_10px_40px_rgba(0,0,0,0.45)] backdrop-blur-sm hover:ring-amber-300/40 transition-all"
     >
       <div className="aspect-[3/4] w-full">
         <img
@@ -57,7 +57,7 @@ function ImageTile({ item, index }) {
 
 export default function SocialGallery() {
   return (
-    <section className="relative bg-[#0b0b10] text-white">
+    <section className="relative bg-[var(--surface-0)] text-[var(--text-primary)]">
       {/* background layers for consistency with theme */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(1100px_500px_at_10%_-10%,rgba(255,220,185,0.06),transparent_60%),radial-gradient(900px_480px_at_100%_130%,rgba(255,154,158,0.06),transparent_60%)]" />
@@ -70,7 +70,7 @@ export default function SocialGallery() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-wider text-zinc-300"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-1)] px-3 py-1 text-xs uppercase tracking-wider text-[var(--text-secondary)]"
           >
             <Instagram className="h-3.5 w-3.5" />
             Latest on Instagram
@@ -84,7 +84,7 @@ export default function SocialGallery() {
             className="text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl"
           >
             Our Work,{" "}
-            <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-amber-100 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--gradient-1)] via-[var(--gradient-2)] to-[var(--gradient-3)] bg-clip-text text-transparent">
               In Motion
             </span>
           </motion.h2>
@@ -94,15 +94,15 @@ export default function SocialGallery() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="max-w-2xl text-sm text-zinc-300 sm:text-base"
+            className="max-w-2xl text-sm text-[var(--text-secondary)] sm:text-base"
           >
             A peek at recent celebrations and behind-the-scenes moments. Tap any tile to watch the reel.
           </motion.p>
         </div>
 
         {/* edge fades */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-[#0b0b10] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-[#0b0b10] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-[var(--surface-0)] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-[var(--surface-0)] to-transparent" />
 
         {/* horizontal scroll row with snap + hidden scrollbar */}
         <div
@@ -137,7 +137,7 @@ export default function SocialGallery() {
             href="https://www.instagram.com/white.events_jo/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 shadow transition-shadow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--text-primary)] px-5 py-2.5 text-sm font-medium text-[var(--surface-0)] shadow transition-shadow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             aria-label="Follow White Events JO on Instagram"
           >
             <Instagram className="h-4 w-4" />
