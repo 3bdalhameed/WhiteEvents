@@ -143,7 +143,7 @@ const CTA = () => (
       <motion.h3 {...fade(0)} className="font-serif text-2xl md:text-3xl font-bold tracking-tight"><span className="bg-gradient-to-r from-[var(--gradient-1)] via-[var(--gradient-2)] to-[var(--gradient-3)] bg-clip-text text-transparent">Ready to begin?</span></motion.h3>
       <motion.p {...fade(0.05)} className="mx-auto mt-3 max-w-prose text-[var(--text-secondary)]">Share your vision and we’ll curate the perfect path—venues, design, and a seamless plan.</motion.p>
       <motion.div {...fade(0.1)} className="mt-6 flex flex-wrap items-center justify-center gap-3">
-        <a href="mailto:tameem_aldaradkeh@outlook.com" className="rounded-full border border-amber-300/60 bg-[var(--surface-1)] px-6 py-3 text-sm font-semibold text-[var(--accent-amber-text)] transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40">Enquire Now</a>
+        <a href="mailto:White.events@outlook.com" className="rounded-full border border-amber-300/60 bg-[var(--surface-1)] px-6 py-3 text-sm font-semibold text-[var(--accent-amber-text)] transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40">Enquire Now</a>
         <a href="/gallery" className="rounded-full border border-[var(--border-subtle)] px-6 py-3 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--surface-1-hover)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20">View Portfolio</a>
       </motion.div>
     </div>
