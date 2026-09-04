@@ -26,9 +26,9 @@ function Services() {
         <div className="absolute inset-0 opacity-[0.08] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px] text-neutral-300" />
       </div>
 
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-14 pt-32 pb-32 md:grid-cols-3 md:px-6 lg:px-12">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-6 py-16 md:grid-cols-3 md:gap-10 md:px-6 md:py-24 lg:px-12">
         {/* Left Image */}
-        <div className="relative">
+        <div className="relative mx-auto w-full max-w-[15rem] md:max-w-none">
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-neutral-200">
             <img
               src={m1}
@@ -51,12 +51,12 @@ function Services() {
             </span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-xl px-2 text-base leading-relaxed text-neutral-700 md:text-lg">
+          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-neutral-700 md:mt-6 md:text-lg">
             As a specialised event design studio, we offer a selection of wedding planning, styling &amp; management services—perfect for couples who still want to be hands-on, and those who prefer to leave it all to the experts.
           </p>
 
           {/* Elegant Buttons */}
-          <div className="mt-10 flex flex-col items-center gap-4">
+          <div className="mt-7 flex flex-col items-center gap-3 md:mt-10 md:gap-4">
             {services.map((service, i) => (
               <Link
                 key={i}
@@ -81,7 +81,7 @@ function Services() {
         </div>
 
         {/* Right Image */}
-        <div className="relative">
+        <div className="relative mx-auto w-full max-w-[15rem] md:max-w-none">
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-neutral-200">
             <img
               src={m2}

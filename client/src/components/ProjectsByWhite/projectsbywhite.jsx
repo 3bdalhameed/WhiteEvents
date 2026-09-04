@@ -31,7 +31,7 @@ export default function ProjectsByWhite() {
     <section
       id="projects-by-white"
       aria-labelledby="projects-by-white-title"
-      className="relative overflow-hidden bg-[#0b0b10] py-20 text-neutral-100 md:py-28"
+      className="relative overflow-hidden bg-black py-16 text-neutral-100 md:py-28"
     >
       {/* background layers, consistent with the rest of the page */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -82,7 +82,7 @@ export default function ProjectsByWhite() {
         </motion.div>
 
         {/* notable projects */}
-        <div className="mt-12 flex flex-wrap justify-center gap-5">
+        <div className="mt-8 flex flex-wrap justify-center gap-4 sm:gap-5 md:mt-12">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
@@ -107,7 +107,7 @@ export default function ProjectsByWhite() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto mt-12 max-w-3xl text-center text-[15px] leading-relaxed text-neutral-300 md:text-base"
+          className="mx-auto mt-8 max-w-3xl text-center text-[15px] leading-relaxed text-neutral-300 md:mt-12 md:text-base"
         >
           At Projects by White, we don’t simply organize events — we design experiences,
           manage every detail, and bring each concept to life from the first idea to the

@@ -6,7 +6,7 @@ function FooterLink({ href, children }) {
   return (
     <a
       href={href}
-      className="group relative block rounded py-1 text-sm text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+      className="group relative block rounded py-2.5 text-sm text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
     >
       {children}
       <span className="pointer-events-none absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-amber-300 via-rose-300 to-amber-200 transition-all duration-300 group-hover:w-10" />
@@ -49,19 +49,19 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-[var(--text-tertiary)]" />
-                <a href="mailto:White.events@outlook.com" className="transition-colors hover:text-[var(--text-primary)]">
+                <a href="mailto:White.events@outlook.com" className="-my-1 py-1 transition-colors hover:text-[var(--text-primary)]">
                   White.events@outlook.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-[var(--text-tertiary)]" />
-                <a href="tel:00962796389580" className="transition-colors hover:text-[var(--text-primary)]">
+                <a href="tel:00962796389580" className="-my-1 py-1 transition-colors hover:text-[var(--text-primary)]">
                   +962 7 9638 9580
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-[var(--text-tertiary)]" />
-                <a href="tel:00962793397555" className="transition-colors hover:text-[var(--text-primary)]">
+                <a href="tel:00962793397555" className="-my-1 py-1 transition-colors hover:text-[var(--text-primary)]">
                   +962 7 9339 7555
                 </a>
               </li>

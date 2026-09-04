@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import logo from "../../pages/newimg/logo1.png";
 import useTheme from "../../hooks/useTheme";
 
@@ -57,7 +57,7 @@ const NavBar = () => {
 
           <button
             onClick={toggleTheme}
-            className="rounded-full border border-white/15 p-2 text-white transition hover:bg-white/10"
+            className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white transition hover:bg-white/10"
             aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
           >
             {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -65,22 +65,22 @@ const NavBar = () => {
         </div>
 
         {/* Mobile: theme toggle + hamburger */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-1 md:hidden">
           <button
             onClick={toggleTheme}
-            className="rounded-full border border-white/15 p-2 text-white transition hover:bg-white/10"
+            className="grid h-11 w-11 place-items-center rounded-full text-white transition hover:bg-white/10"
             aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
           >
-            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
           <button
             onClick={() => setIsMenuOpen((v) => !v)}
-            className="text-2xl text-white focus:outline-none"
+            className="grid h-11 w-11 place-items-center rounded-full text-white transition hover:bg-white/10 focus:outline-none"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
           >
-            {isMenuOpen ? "✖" : "☰"}
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </nav>
@@ -95,34 +95,36 @@ const NavBar = () => {
         >
           <button
             onClick={closeMenu}
-            className="absolute top-6 right-6 text-3xl hover:text-gray-400 focus:outline-none"
+            className="absolute right-6 top-4 grid h-11 w-11 place-items-center rounded-full transition hover:bg-white/10 focus:outline-none"
             aria-label="Close menu"
           >
-            ✖
+            <X className="h-6 w-6" />
           </button>
 
-          {NAV_LINKS.map((item) =>
-            item.type === "hash" ? (
-              <HashLink
-                key={item.label}
-                smooth
-                to={item.to}
-                className="py-4 text-xl transition hover:text-gray-400"
-                onClick={closeMenu}
-              >
-                {item.label}
-              </HashLink>
-            ) : (
-              <Link
-                key={item.label}
-                to={item.to}
-                className="py-4 text-xl transition hover:text-gray-400"
-                onClick={closeMenu}
-              >
-                {item.label}
-              </Link>
-            )
-          )}
+          <nav className="flex w-full max-w-xs flex-col px-6">
+            {NAV_LINKS.map((item) =>
+              item.type === "hash" ? (
+                <HashLink
+                  key={item.label}
+                  smooth
+                  to={item.to}
+                  className="rounded-xl py-4 text-center text-xl transition hover:bg-white/10 active:bg-white/10"
+                  onClick={closeMenu}
+                >
+                  {item.label}
+                </HashLink>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  className="rounded-xl py-4 text-center text-xl transition hover:bg-white/10 active:bg-white/10"
+                  onClick={closeMenu}
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
+          </nav>
         </div>
       )}
     </>

@@ -15,7 +15,7 @@ function Portfolio() {
     <section
       id="portfolio"
       aria-labelledby="portfolio-title"
-      className="relative overflow-hidden pb-24 text-center bg-[var(--surface-0)] text-[var(--text-primary)]"
+      className="relative overflow-hidden pb-16 text-center bg-[var(--surface-0)] text-[var(--text-primary)] md:pb-24"
     >
       {/* background texture + vignette */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -27,21 +27,21 @@ function Portfolio() {
       </div>
 
       {/* header */}
-      <div className="mb-12 px-6">
+      <div className="mb-8 px-6 md:mb-12">
         <h2
           id="portfolio-title"
-          className="mb-4 font-serif text-4xl font-bold tracking-tight"
+          className="mb-3 font-serif text-3xl font-bold tracking-tight md:mb-4 md:text-4xl"
         >
           <span className="bg-gradient-to-r from-[var(--gradient-1)] via-[var(--gradient-2)] to-[var(--gradient-3)] bg-clip-text text-transparent">
             OUR PORTFOLIO
           </span>
         </h2>
-        <p className="mx-auto max-w-3xl text-lg text-[var(--text-secondary)]">
+        <p className="mx-auto max-w-3xl text-[15px] text-[var(--text-secondary)] md:text-lg">
           Specialising in blank-canvas weddings, our style is classic with a modern edge.
           Every celebration is bespoke—no two weddings will ever look the same.
         </p>
 
-        <Link to="/gallery" className="inline-block mt-8">
+        <Link to="/gallery" className="mt-6 inline-block md:mt-8">
           <button
             type="button"
             className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-gradient-to-b from-amber-300/15 to-transparent px-6 py-3 text-sm font-semibold tracking-wide text-[var(--accent-amber-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:bg-amber-300/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
@@ -70,7 +70,7 @@ function Portfolio() {
           <Link
             to={item.href}
             key={i}
-            className="group relative block w-full overflow-hidden rounded-2xl ring-1 ring-[var(--border-subtle)] shadow-[0_10px_40px_rgba(0,0,0,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/50 sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+            className="group relative block w-full max-w-[17rem] overflow-hidden rounded-2xl ring-1 ring-[var(--border-subtle)] shadow-[0_10px_40px_rgba(0,0,0,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/50 sm:max-w-none sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             aria-label={`${item.title}: ${item.desc}`}
           >
             {/* fixed aspect for harmony */}

@@ -269,9 +269,11 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
             {t.author}
           </p>
 
-          <p className="mt-1 text-xs text-[var(--text-secondary)]">
-            {t.date} <span className="mx-1">•</span> {t.location}
-          </p>
+          {(t.date || t.location) && (
+            <p className="mt-1 text-xs text-[var(--text-secondary)]">
+              {[t.date, t.location].filter(Boolean).join(" • ")}
+            </p>
+          )}
 
           <div className="mt-3 flex flex-wrap justify-center gap-2">
             {t.services?.map((s, i) => (
@@ -296,38 +298,46 @@ function Feedback({ autoRotate = true, intervalMs = 5000 }) {
         </div>
 
         {/* Dots + hint */}
-        <div className="mt-4 flex items-center justify-center gap-2">
+        <div className="mt-2 flex items-center justify-center">
           {testimonials.map((_, i) => (
             <button
               key={i}
               aria-label={`Go to testimonial ${i + 1}`}
               aria-current={i === current}
               onClick={() => setCurrent(i)}
-              className={`h-2.5 w-2.5 rounded-full transition ${
-                i === current
-                  ? "bg-amber-300 shadow-[0_0_0_4px_rgba(251,191,36,0.25)]"
-                  : "bg-[var(--surface-1-hover)] hover:bg-amber-300/40"
-              }`}
-            />
+              className="grid h-11 w-11 place-items-center"
+            >
+              <span
+                className={`block h-2.5 w-2.5 rounded-full transition ${
+                  i === current
+                    ? "bg-amber-300 shadow-[0_0_0_4px_rgba(251,191,36,0.25)]"
+                    : "bg-[var(--surface-1-hover)]"
+                }`}
+              />
+            </button>
           ))}
         </div>
         <p className="mt-2 text-center text-xs text-[var(--text-secondary)] select-none">Swipe to see more</p>
       </div>
 
       {/* Dots (desktop) */}
-      <div className="mt-6 hidden sm:flex items-center justify-center gap-2">
+      <div className="mt-4 hidden sm:flex items-center justify-center">
         {testimonials.map((_, i) => (
           <button
             key={i}
             aria-label={`Go to testimonial ${i + 1}`}
             aria-current={i === current}
             onClick={() => setCurrent(i)}
-            className={`h-2.5 w-2.5 rounded-full transition ${
-              i === current
-                ? "bg-amber-300 shadow-[0_0_0_6px_rgba(251,191,36,0.18)]"
-                : "bg-[var(--surface-1-hover)] hover:bg-amber-300/40"
-            }`}
-          />
+            className="group grid h-11 w-11 place-items-center"
+          >
+            <span
+              className={`block h-2.5 w-2.5 rounded-full transition ${
+                i === current
+                  ? "bg-amber-300 shadow-[0_0_0_6px_rgba(251,191,36,0.18)]"
+                  : "bg-[var(--surface-1-hover)] group-hover:bg-amber-300/40"
+              }`}
+            />
+          </button>
         ))}
       </div>
     </section>
