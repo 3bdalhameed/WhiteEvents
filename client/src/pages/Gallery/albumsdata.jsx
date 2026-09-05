@@ -12,6 +12,9 @@ const parse = (path) => {
   };
 };
 
+// "farah (100).jpg" -> "farah (100)"
+const stem = (name) => name.replace(/\.[^.]+$/, "");
+
 // ✅ Pre-index ONCE (at module load) so getAlbum doesn't scan everything each call
 const fullByAlbum = {};
 for (const [path, loader] of Object.entries(ALL_FULL)) {
@@ -60,12 +63,15 @@ export async function getAlbum(slug) {
     })
   );
 
-  const thumbByName = Object.fromEntries(thumbs.map((t) => [t.name, t.url]));
+  // Thumbs are .webp while originals are .JPG/.png, so match on the
+  // basename without its extension — otherwise every lookup misses and the
+  // grid falls back to multi-MB originals.
+  const thumbByStem = Object.fromEntries(thumbs.map((t) => [stem(t.name), t.url]));
 
   const images = full.map((f) => ({
     name: f.name,
     full: f.url,
-    thumb: thumbByName[f.name] || f.url,
+    thumb: thumbByStem[stem(f.name)] || f.url,
   }));
 
   return {

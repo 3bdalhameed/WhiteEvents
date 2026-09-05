@@ -18,6 +18,14 @@
   --vignette: rgba(0, 0, 0, 0.65);
   --accent-amber-text: #fde68a;
 
+  /* Services band — a light "paper" panel in light mode, dark in dark mode */
+  --services-sheen: rgba(255, 255, 255, 0.02);
+  --services-inner-glow: rgba(0, 0, 0, 0.65);
+  --glow-rose: rgba(253, 164, 175, 0.1);
+  --glow-amber: rgba(252, 211, 77, 0.1);
+  --pill-bg: rgba(255, 255, 255, 0.06);
+  --pill-bg-hover: rgba(255, 255, 255, 0.12);
+
   color-scheme: dark;
 }
 
@@ -37,6 +45,13 @@
   --vignette: rgba(0, 0, 0, 0.06);
   --accent-amber-text: #92400e;
 
+  --services-sheen: rgba(255, 255, 255, 0.8);
+  --services-inner-glow: rgba(255, 255, 255, 0.8);
+  --glow-rose: rgba(253, 164, 175, 0.3);
+  --glow-amber: rgba(252, 211, 77, 0.3);
+  --pill-bg: #ffffff;
+  --pill-bg-hover: #fffbeb;
+
   color-scheme: light;
 }
 
@@ -49,4 +64,25 @@ body {
    so it stays visible when the surface behind it turns light */
 [data-theme="light"] .theme-invert-logo {
   filter: invert(1);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.45s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+  }
 }

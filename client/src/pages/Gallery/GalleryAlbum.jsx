@@ -5,14 +5,20 @@ import Navbar from "../../components/Navbar1/navbar";
 import Footer from "../../components/Footer/footer";
 import { getAlbum } from "./albumsdata";
 
+// how many photos render per batch; the first batch is preloaded before reveal
+const PAGE_SIZE = 24;
+
 function GalleryAlbumPage() {
   const { slug } = useParams();
 
   const [album, setAlbum] = useState(null);
   const [loading, setLoading] = useState(true);
+  // stays false until the first screenful of thumbs has actually decoded,
+  // so the grid doesn't pop in half-rendered
+  const [thumbsReady, setThumbsReady] = useState(false);
 
   // infinite load
-  const [visibleCount, setVisibleCount] = useState(24);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const loadMoreRef = useRef(null);
 
   // responsive columns: 2 (mobile), 3 (md), 4 (lg+)
@@ -43,7 +49,8 @@ function GalleryAlbumPage() {
 
     setAlbum(null);
     setLoading(true);
-    setVisibleCount(24);
+    setThumbsReady(false);
+    setVisibleCount(PAGE_SIZE);
     setLightboxIndex(null);
     setIntrinsic(null);
 
@@ -65,6 +72,42 @@ function GalleryAlbumPage() {
       alive = false;
     };
   }, [slug]);
+
+  // Preload the first screenful of thumbnails before revealing the grid,
+  // so the album fades in already rendered instead of popping in piecemeal.
+  useEffect(() => {
+    const images = album?.images;
+    if (!images?.length) return;
+
+    let alive = true;
+    const batch = images.slice(0, PAGE_SIZE);
+    let settled = 0;
+
+    const onSettled = () => {
+      settled += 1;
+      if (alive && settled >= batch.length) setThumbsReady(true);
+    };
+
+    const loaders = batch.map((img) => {
+      const el = new Image();
+      el.onload = onSettled;
+      el.onerror = onSettled;
+      el.src = img.thumb;
+      return el;
+    });
+
+    // never block on a slow or broken image
+    const bail = setTimeout(() => alive && setThumbsReady(true), 4000);
+
+    return () => {
+      alive = false;
+      clearTimeout(bail);
+      loaders.forEach((el) => {
+        el.onload = null;
+        el.onerror = null;
+      });
+    };
+  }, [album]);
 
   // Resize listener for columns + viewport
   useEffect(() => {
@@ -91,12 +134,14 @@ function GalleryAlbumPage() {
   // Infinite loader (IntersectionObserver)
   useEffect(() => {
     const el = loadMoreRef.current;
-    if (!el || !album?.images?.length) return;
+    // hold off until the first batch is on screen, otherwise the sentinel is
+    // in view behind the loader and pulls in batches that aren't preloaded
+    if (!el || !album?.images?.length || !thumbsReady) return;
 
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setVisibleCount((c) => Math.min(c + 24, album.images.length));
+          setVisibleCount((c) => Math.min(c + PAGE_SIZE, album.images.length));
         }
       },
       { rootMargin: "600px" }
@@ -104,7 +149,7 @@ function GalleryAlbumPage() {
 
     io.observe(el);
     return () => io.disconnect();
-  }, [album?.images?.length]);
+  }, [album?.images?.length, thumbsReady]);
 
   // Keyboard controls
   const prevImage = useCallback(() => {
@@ -217,14 +262,27 @@ function GalleryAlbumPage() {
             {album?.name ? `A selection from ${album.name}.` : "Loading album…"}
           </p>
 
-          {/* ✅ No full-screen loader, only small loader */}
-          {loading && (
-            <div className="mt-6 text-sm text-[var(--text-tertiary)]">Loading photos…</div>
+          {/* Loader — stays up until the first thumbnails have decoded */}
+          {(loading || !thumbsReady) && (
+            <div
+              className="mt-16 flex flex-col items-center justify-center gap-4 py-10"
+              role="status"
+              aria-live="polite"
+            >
+              <span
+                className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--border-subtle)] border-t-amber-300"
+                aria-hidden="true"
+              />
+              <span className="text-sm text-[var(--text-tertiary)]">Loading photos…</span>
+            </div>
           )}
 
           {/* Masonry */}
-          {!!album?.images?.length && (
-            <div className="mt-8" style={{ columnCount: cols, columnGap: "16px" }}>
+          {!!album?.images?.length && thumbsReady && (
+            <div
+              className="fade-in mt-8"
+              style={{ columnCount: cols, columnGap: "16px" }}
+            >
               {shown.map((img, idx) => (
                 <div
                   key={img.name || idx}

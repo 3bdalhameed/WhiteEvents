@@ -12,24 +12,27 @@ function Services() {
   ];
 
   return (
-    <section id="services" className="relative overflow-hidden bg-[#FAFAF7] text-neutral-900">
+    <section
+      id="services"
+      className="relative overflow-hidden bg-[var(--surface-0)] text-[var(--text-primary)]"
+    >
       {/* background layers */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         {/* soft paper + light gradients */}
-        <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_12%_-10%,rgba(255,220,185,0.18),transparent_60%),radial-gradient(900px_500px_at_100%_120%,rgba(255,154,158,0.14),transparent_60%),linear-gradient(180deg,rgba(255,255,255,0.8),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_12%_-10%,rgba(255,220,185,0.18),transparent_60%),radial-gradient(900px_500px_at_100%_120%,rgba(255,154,158,0.14),transparent_60%),linear-gradient(180deg,var(--services-sheen),transparent_50%)]" />
         {/* subtle border frame */}
-        <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-neutral-200 shadow-[inset_0_0_140px_40px_rgba(255,255,255,0.8)]" />
+        <div className="absolute -inset-[8%] rounded-[3rem] ring-1 ring-[var(--border-subtle)] shadow-[inset_0_0_140px_40px_var(--services-inner-glow)]" />
         {/* ambient glows */}
-        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-rose-300/30 blur-3xl" />
-        <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-amber-300/30 blur-3xl" />
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[var(--glow-rose)] blur-3xl" />
+        <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-[var(--glow-amber)] blur-3xl" />
         {/* subtle dot texture */}
-        <div className="absolute inset-0 opacity-[0.08] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px] text-neutral-300" />
+        <div className="absolute inset-0 opacity-[0.08] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:6px_6px] text-[var(--text-tertiary)]" />
       </div>
 
       <div className="mx-auto grid max-w-7xl grid-cols-2 items-center gap-x-4 gap-y-8 px-6 py-16 md:grid-cols-3 md:gap-10 md:px-6 md:py-24 lg:px-12">
         {/* Left Image — after the copy on phones */}
         <div className="relative order-2 mx-auto w-full md:order-1">
-          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-neutral-200">
+          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-[var(--border-subtle)]">
             <img
               src={m1}
               alt="Bride and Groom Holding Hands"
@@ -40,18 +43,18 @@ function Services() {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
           </div>
           {/* subtle glow */}
-          <div className="pointer-events-none absolute -inset-3 -z-10 rounded-[2rem] bg-amber-200/30 blur-2xl" />
+          <div className="pointer-events-none absolute -inset-3 -z-10 rounded-[2rem] bg-[var(--glow-amber)] blur-2xl" />
         </div>
 
         {/* Center Text & Buttons — first on phones */}
         <div className="order-1 col-span-2 text-center md:order-2 md:col-span-1">
           <h2 className="font-serif text-3xl font-bold tracking-tight md:text-4xl">
-            <span className="bg-gradient-to-r from-amber-700 via-rose-600 to-amber-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--gradient-1)] via-[var(--gradient-2)] to-[var(--gradient-3)] bg-clip-text text-transparent">
               Our Services
             </span>
           </h2>
 
-          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-neutral-700 md:mt-6 md:text-lg">
+          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[var(--text-secondary)] md:mt-6 md:text-lg">
             As a specialised event design studio, we offer a selection of wedding planning, styling &amp; management services—perfect for couples who still want to be hands-on, and those who prefer to leave it all to the experts.
           </p>
 
@@ -61,7 +64,7 @@ function Services() {
               <Link
                 key={i}
                 to="/services"
-                className="group relative w-full max-w-xs overflow-hidden rounded-full ring-1 ring-amber-400/40 bg-white px-6 py-3 text-sm font-medium tracking-wide text-amber-800 backdrop-blur-sm transition-all duration-300 hover:bg-amber-50 hover:text-amber-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60 md:text-base"
+                className="group relative w-full max-w-xs overflow-hidden rounded-full bg-[var(--pill-bg)] px-6 py-3 text-sm font-medium tracking-wide text-[var(--accent-amber-text)] ring-1 ring-amber-400/40 backdrop-blur-sm transition-all duration-300 hover:bg-[var(--pill-bg-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60 md:text-base"
               >
                 {/* shimmer border on hover */}
                 <span
@@ -82,7 +85,7 @@ function Services() {
 
         {/* Right Image */}
         <div className="relative order-3 mx-auto w-full">
-          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-neutral-200">
+          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-[var(--border-subtle)]">
             <img
               src={m2}
               alt="Elegant Wedding Table Setup"
@@ -91,7 +94,7 @@ function Services() {
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
           </div>
-          <div className="pointer-events-none absolute -inset-3 -z-10 rounded-[2rem] bg-rose-200/30 blur-2xl" />
+          <div className="pointer-events-none absolute -inset-3 -z-10 rounded-[2rem] bg-[var(--glow-rose)] blur-2xl" />
         </div>
       </div>
     </section>
