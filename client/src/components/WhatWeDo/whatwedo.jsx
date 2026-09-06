@@ -48,36 +48,37 @@ function SideCard({ side }) {
     <Link
       to={side.to}
       aria-label={`${side.title} — ${side.blurb}`}
-      className="group flex flex-col overflow-hidden rounded-3xl bg-[var(--surface-1)] ring-1 ring-[var(--border-subtle)] shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition duration-300 hover:ring-amber-300/50 hover:shadow-[0_18px_60px_rgba(0,0,0,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60"
+      className="group flex flex-col overflow-hidden rounded-2xl bg-[var(--surface-1)] ring-1 ring-[var(--border-subtle)] shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition duration-300 hover:ring-amber-300/50 hover:shadow-[0_18px_60px_rgba(0,0,0,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60 sm:rounded-3xl"
     >
       {/* image */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--surface-1)]">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-[var(--surface-1)] sm:aspect-[16/10]">
         <img
           src={side.img}
           alt={side.alt}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
           loading="lazy"
           decoding="async"
-          sizes="(min-width: 768px) 45vw, 100vw"
+          sizes="(min-width: 768px) 45vw, 45vw"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 p-5 text-left md:p-6">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-white/70">
+        <div className="absolute inset-x-0 bottom-0 p-3 text-left sm:p-5 md:p-6">
+          <p className="truncate text-[9px] uppercase tracking-[0.06em] text-white/70 sm:text-[11px] sm:tracking-[0.2em]">
             {side.eyebrow}
           </p>
-          <h3 className="mt-1 font-serif text-2xl font-bold tracking-tight text-white md:text-3xl">
+          <h3 className="mt-0.5 font-serif text-lg font-bold tracking-tight text-white sm:mt-1 sm:text-2xl md:text-3xl">
             {side.title}
           </h3>
         </div>
       </div>
 
       {/* content */}
-      <div className="flex flex-1 flex-col p-5 text-left md:p-6">
-        <p className="text-[15px] leading-relaxed text-[var(--text-secondary)]">
+      <div className="flex flex-1 flex-col p-3 text-left sm:p-5 md:p-6">
+        <p className="text-xs leading-relaxed text-[var(--text-secondary)] sm:text-[15px]">
           {side.blurb}
         </p>
 
-        <ul className="mt-4 flex flex-wrap gap-2 md:mb-6">
+        {/* offering chips need room to read — from sm up */}
+        <ul className="mt-4 hidden flex-wrap gap-2 sm:flex md:mb-6">
           {side.items.map((item) => (
             <li
               key={item}
@@ -89,9 +90,9 @@ function SideCard({ side }) {
         </ul>
 
         {/* the whole card is the link, so this is presentational only */}
-        <span className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-amber-300/60 bg-gradient-to-b from-amber-300/15 to-transparent px-5 py-2.5 text-sm font-semibold tracking-wide text-[var(--accent-amber-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition group-hover:bg-amber-300/20 md:mt-auto">
+        <span className="mt-3 inline-flex items-center gap-1.5 self-start whitespace-nowrap rounded-full border border-amber-300/60 bg-gradient-to-b from-amber-300/15 to-transparent px-3 py-1.5 text-[11px] font-semibold tracking-wide text-[var(--accent-amber-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition group-hover:bg-amber-300/20 sm:mt-6 sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm md:mt-auto">
           {side.ctaLabel}
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 sm:h-4 sm:w-4" />
         </span>
       </div>
     </Link>
@@ -136,7 +137,7 @@ function WhatWeDo() {
       </div>
 
       {/* two sides */}
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 md:grid-cols-2 md:gap-8">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-4 sm:gap-6 sm:px-6 md:gap-8">
         {SIDES.map((side) => (
           <SideCard key={side.key} side={side} />
         ))}
