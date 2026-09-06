@@ -295,7 +295,7 @@ function GalleryAlbumPage() {
                     className="block h-auto w-full cursor-pointer"
                     loading="lazy"
                     decoding="async"
-                    fetchPriority={idx < 6 ? "high" : "auto"}
+                    fetchpriority={idx < 6 ? "high" : "auto"}
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                     onClick={() => openLightbox(idx)}
                   />
