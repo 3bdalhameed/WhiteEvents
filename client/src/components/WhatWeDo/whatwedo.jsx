@@ -38,14 +38,18 @@ const SIDES = [
     ],
     img: weddingsImg,
     alt: "Elegant wedding table setting styled by White",
-    ctaLabel: "VIEW OUR SERVICES",
-    to: "/services",
+    ctaLabel: "VIEW OUR WORK",
+    to: "/gallery",
   },
 ];
 
 function SideCard({ side }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-3xl bg-[var(--surface-1)] ring-1 ring-[var(--border-subtle)] shadow-[0_10px_40px_rgba(0,0,0,0.45)]">
+    <Link
+      to={side.to}
+      aria-label={`${side.title} — ${side.blurb}`}
+      className="group flex flex-col overflow-hidden rounded-3xl bg-[var(--surface-1)] ring-1 ring-[var(--border-subtle)] shadow-[0_10px_40px_rgba(0,0,0,0.45)] transition duration-300 hover:ring-amber-300/50 hover:shadow-[0_18px_60px_rgba(0,0,0,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60"
+    >
       {/* image */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--surface-1)]">
         <img
@@ -84,15 +88,13 @@ function SideCard({ side }) {
           ))}
         </ul>
 
-        <Link
-          to={side.to}
-          className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-amber-300/60 md:mt-auto bg-gradient-to-b from-amber-300/15 to-transparent px-5 py-2.5 text-sm font-semibold tracking-wide text-[var(--accent-amber-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:bg-amber-300/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/40"
-        >
+        {/* the whole card is the link, so this is presentational only */}
+        <span className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-amber-300/60 bg-gradient-to-b from-amber-300/15 to-transparent px-5 py-2.5 text-sm font-semibold tracking-wide text-[var(--accent-amber-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition group-hover:bg-amber-300/20 md:mt-auto">
           {side.ctaLabel}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-        </Link>
+        </span>
       </div>
-    </article>
+    </Link>
   );
 }
 
