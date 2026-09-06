@@ -2,8 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar1/navbar";
 import Main from "../components/Main/main";
 import Project from "../components/Project/beginning";
-import Portfolio from "../components/Portfolio/Portfolio";
-import Services from "../components/Services/services";
+import WhatWeDo from "../components/WhatWeDo/whatwedo";
 import ProjectsByWhite from "../components/ProjectsByWhite/projectsbywhite";
 import Feadback from "../components/Feedback/feedback";
 import Socialgallery from "../components/SocialGallery/socialgallery";
@@ -20,8 +19,7 @@ function Home() {
         <Navbar />
         <Main />
         <Project />
-        <Portfolio />
-        <Services />
+        <WhatWeDo />
         <ProjectsByWhite />
         <Feadback />
         <Socialgallery />
